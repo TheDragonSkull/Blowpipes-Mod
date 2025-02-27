@@ -1,0 +1,11 @@
+{
+  "providers": [
+
+    {
+      "type": "ttf",
+      "file": "blowpipemod:upheaval.ttf",
+      "oversample": 5.0
+
+    }
+  ]
+}

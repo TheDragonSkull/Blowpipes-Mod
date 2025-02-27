@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "Y": {
+      "item": "blowpipemod:dart_base"
+    },
+    "X": {
+      "item": "minecraft:leather"
+    }
+  },
+  "pattern": [
+    "XXX",
+    "XYX",
+    "XXX"
+  ],
+  "result": {
+    "count": 1,
+    "item": "blowpipemod:dart_pouch"
+  },
+  "show_notification": true
+}

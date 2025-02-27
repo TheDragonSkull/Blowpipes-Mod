@@ -1,0 +1,22 @@
+{
+  "item.blowpipemod.blowpipe": "Classic Blowpipe",
+  "item.blowpipemod.dart_base": "Normal Dart",
+  "item.blowpipemod.poison_dart": "Poison Dart",
+  "item.blowpipemod.powder_dart": "Black Powder Dart",
+  "item.blowpipemod.lure_dart": "Lure Dart",
+
+  "item.blowpipemod.dart_pouch": "Dart Pouch",
+
+  "enchantment.blowpipemod.blow_power": "§5Blow Power§5",
+  "enchantment.blowpipemod.focus": "§5Focus§5",
+
+  "key.categories.blowpipemod": "Blowpipes Mod",
+  "key.blowpipemod.reload_key": "Reload",
+  "key.blowpipemod.open_dart_pouch_key": "Open Dart Pouch",
+  "key.blowpipemod.next_dart_key": "Next Dart",
+  "key.blowpipemod.prev_dart_key": "Previous Dart",
+
+  "container.dart_pouch": "Dart Pouch",
+
+  "curios.identifier.dart_pouch": "Dart Pouch"
+}

@@ -1,0 +1,32 @@
+{
+  "blowpipe_empty": {
+    "subtitle": "sounds.blowpipemod.blowpipe_empty",
+    "sounds": [
+      "blowpipemod:blowpipe_empty"
+    ]
+  },
+  "blowpipe_shot": {
+    "subtitle": "sounds.blowpipemod.blowpipe_shot",
+    "sounds": [
+      "blowpipemod:blowpipe_shot"
+    ]
+  },
+  "dart_hit": {
+    "subtitle": "sounds.blowpipemod.dart_hit",
+    "sounds": [
+      "blowpipemod:dart_hit"
+    ]
+  },
+  "bomb_fuse": {
+    "subtitle": "sounds.blowpipemod.bomb_fuse",
+    "sounds": [
+      "blowpipemod:bomb_fuse"
+    ]
+  },
+  "blowpipe_rat": {
+    "subtitle": "sounds.blowpipemod.blowpipe_rat",
+    "sounds": [
+      "blowpipemod:blowpipe_rat"
+    ]
+  }
+}

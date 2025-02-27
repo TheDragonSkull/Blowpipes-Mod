@@ -1,0 +1,19 @@
+{
+  "display": {
+    "icon": {
+      "item": "blowpipemod:dart_base"
+    },
+    "title": "Pied Piper of Hamelin",
+    "description": "The rats will dance!",
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": true
+  },
+  "parent": "blowpipemod:blowpipemod",
+  "criteria": {
+    "blowpipe_sound": {
+      "trigger": "blowpipemod:blowpipe_hamelin"
+    }
+  }
+}

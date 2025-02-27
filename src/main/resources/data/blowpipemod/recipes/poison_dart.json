@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "X": {
+      "item": "minecraft:spider_eye"
+    },
+    "Y": {
+      "item": "blowpipemod:dart_base"
+    },
+    "#": {
+      "item": "minecraft:feather"
+    }
+  },
+  "pattern": [
+    "X",
+    "Y",
+    "#"
+  ],
+  "result": {
+    "count": 1,
+    "item": "blowpipemod:poison_dart"
+  },
+  "show_notification": true
+}

@@ -1,0 +1,15 @@
+{
+  "parent": "minecraft:item/handheld",
+  "loader": "forge:separate_transforms",
+  "base": {
+    "parent": "blowpipemod:item/powder_dart_3d"
+  },
+  "perspectives": {
+    "gui": {
+      "parent": "blowpipemod:item/powder_dart_2d"
+    },
+    "fixed": {
+      "parent": "blowpipemod:item/powder_dart_2d"
+    }
+  }
+}

@@ -1,0 +1,40 @@
+
+modLoader="javafml"
+loaderVersion="[47,)"
+license="MIT"
+
+[[mods]]
+modId="${mod_id}"
+version="${mod_version}"
+displayName="${mod_name}"
+description='''${mod_description}'''
+logoFile = "logo.png"
+authors="${mod_authors}"
+
+[[dependencies.blowpipemod]]
+    modId="forge"
+    mandatory=true
+    versionRange="${forge_version_range}"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.blowpipemod]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="${minecraft_version_range}"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.blowpipemod]]
+    modId="moonlight"
+    mandatory=true
+    versionRange="[moonlight-1.20-2.13.58-forge,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.blowpipemod]]
+    modId="curios"
+    mandatory=true
+    versionRange="[5.11.1+1.20.1,)"
+    ordering="NONE"
+    side="BOTH"

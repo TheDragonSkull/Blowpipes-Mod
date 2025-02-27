@@ -1,0 +1,42 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "blowpipemod:item/blowpipes/wood2"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "loaded": 0
+      },
+      "model": "blowpipemod:item/blowpipe_empty"
+    },
+    {
+      "predicate": {
+        "loaded": 1,
+        "dart_type": 1.0
+      },
+      "model": "blowpipemod:item/blowpipe_loaded_normal"
+    },
+    {
+      "predicate": {
+        "loaded": 1,
+        "dart_type": 2.0
+      },
+      "model": "blowpipemod:item/blowpipe_loaded_poison"
+    },
+    {
+      "predicate": {
+        "loaded": 1,
+        "dart_type": 3.0
+      },
+      "model": "blowpipemod:item/blowpipe_loaded_powder"
+    },
+    {
+      "predicate": {
+        "loaded": 1,
+        "dart_type": 4.0
+      },
+      "model": "blowpipemod:item/blowpipe_loaded_lure"
+    }
+  ]
+}
