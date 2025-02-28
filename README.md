@@ -1,9 +1,8 @@
 
 ![blowpipes_mod_banner_v2](https://github.com/user-attachments/assets/ebd13295-9dd3-4501-9377-106058e14b72)<br><br>
+
 [![CurseForge Versions](https://cf.way2muchnoise.eu/versions/1209549.svg)](https://www.curseforge.com/minecraft/mc-mods/thedragons-blowpipes)
-[![CurseForge Downloads](https://cf.way2muchnoise.eu/short_1209549.svg)](https://www.curseforge.com/minecraft/mc-mods/thedragons-blowpipes)  
-
-
+[![CurseForge Downloads](https://cf.way2muchnoise.eu/short_1209549_downloads.svg)](https://www.curseforge.com/minecraft/mc-mods/thedragons-blowpipes)  
 
 
 ---
