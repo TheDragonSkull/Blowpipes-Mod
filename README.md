@@ -1,4 +1,6 @@
-[![CurseForge](https://img.shields.io/badge/Download-CurseForge-orange?style=for-the-badge&logo=curseforge)](https://www.curseforge.com/minecraft/mc-mods/tu-mod)
+
+![blowpipes_mod_banner_v2](https://github.com/user-attachments/assets/ebd13295-9dd3-4501-9377-106058e14b72)<br><br>
+
 
 ---
 
