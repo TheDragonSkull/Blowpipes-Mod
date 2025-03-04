@@ -30,6 +30,9 @@ This mod introduces a blowpipe with a unique reloading system and various types 
 - Dart Pouch - Store up to 6 stacks of darts and reload quickly by selecting a slot.
 - Enchantment Support - Upgrade your blowpipe to increase range, damage and to make the weapon more versatile.
 
+ You can comment your ideas and maybe i'll end up including them in the mod.     
+ If you find bugs please report so I can try to fix them.
+
 ---
  
 
