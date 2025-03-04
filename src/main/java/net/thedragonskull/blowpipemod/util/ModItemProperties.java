@@ -12,9 +12,7 @@ public class ModItemProperties {
     }
 
     private static void blowpipeStates(Item item) {
-        ItemProperties.register(item, new ResourceLocation("loaded"), (stack, world, entity, seed) -> {
-            return BlowpipeUtil.isLoaded(stack) ? 1.0F : 0.0F;
-        });
+        ItemProperties.register(item, new ResourceLocation("loaded"), (stack, world, entity, seed) -> BlowpipeUtil.isLoaded(stack) ? 1.0F : 0.0F);
 
         ItemProperties.register(item, new ResourceLocation("dart_type"), (stack, world, entity, seed) -> {
             if (stack.getTag() != null) {
