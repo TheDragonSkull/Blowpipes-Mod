@@ -79,6 +79,26 @@ public class DartPouchUtil {
         return darts;
     }
 
+    //Adds a dart to the pouch
+    public static boolean addDartToPouch(ItemStack pouchStack, ItemStack dart) {
+        if (pouchStack.isEmpty() || dart.isEmpty()) return false;
+
+        return pouchStack.getCapability(ForgeCapabilities.ITEM_HANDLER).map(cap -> {
+            if (cap instanceof ItemStackHandler handler) {
+                for (int i = 0; i < handler.getSlots(); i++) {
+                    ItemStack storedDart = handler.getStackInSlot(i);
+
+                    if (ItemStack.isSameItem(storedDart, dart) && storedDart.getCount() < storedDart.getMaxStackSize()) {
+                        storedDart.grow(1);
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }).orElse(false);
+    }
+
+
     //List of accepted darts
     public static boolean isDart(ItemStack stack) {
         return stack.is(ModItems.DART_BASE.get()) ||
