@@ -5,6 +5,8 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -57,17 +59,23 @@ public class C2SReloadBlowpipePacket {
 
                     if (tag.contains("Dart")) {
                         ItemStack dart = ItemStack.of(tag.getCompound("Dart"));
+                        dart.setCount(1);
 
-                        if (!dart.isEmpty()) {
-                            dart.setCount(1);
+                        ItemStack pouchStack = DartPouchUtil.findDartPouch(player);
+
+                        if (!pouchStack.isEmpty() && DartPouchUtil.addDartToPouch(pouchStack, dart)) {
+                        } else {
 
                             if (!player.getInventory().add(dart)) {
                                 player.drop(dart, false);
                             }
+
                         }
                     }
 
                     mainHand.getOrCreateTag().putBoolean("loaded", false);
+                    player.level().playSound(null, player.getX(), player.getY(), player.getZ(),
+                            SoundEvents.BRUSH_GENERIC, SoundSource.PLAYERS, 1.0F, 1.0F);
                     player.displayClientMessage(Component.literal("¡Blowpipe unloaded! ❌").withStyle(ChatFormatting.RED), true);
                     return;
                 }
