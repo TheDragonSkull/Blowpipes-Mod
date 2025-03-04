@@ -17,6 +17,7 @@ import net.thedragonskull.blowpipemod.entity.custom.AbstractDart;
 import net.thedragonskull.blowpipemod.item.ModItems;
 import net.thedragonskull.blowpipemod.item.custom.BlowPipe;
 import net.thedragonskull.blowpipemod.item.custom.DartPouchItem;
+import net.thedragonskull.blowpipemod.util.BlowpipeUtil;
 import net.thedragonskull.blowpipemod.util.DartPouchUtil;
 
 import static net.thedragonskull.blowpipemod.util.DartPouchUtil.findDartPouch;
@@ -46,7 +47,28 @@ public class C2SReloadBlowpipePacket {
                 ItemStack mainHand = player.getMainHandItem();
                 ItemStack offHand = player.getOffhandItem();
 
-                if (!(mainHand.getItem() instanceof BlowPipe blowpipe) || mainHand.getOrCreateTag().getBoolean("loaded")) {
+                if (!(mainHand.getItem() instanceof BlowPipe blowpipe)) {
+                    return;
+                }
+
+                CompoundTag tag = mainHand.getOrCreateTag();
+                boolean isLoaded = tag.getBoolean("loaded");
+                if (isLoaded) {
+
+                    if (tag.contains("Dart")) {
+                        ItemStack dart = ItemStack.of(tag.getCompound("Dart"));
+
+                        if (!dart.isEmpty()) {
+                            dart.setCount(1);
+
+                            if (!player.getInventory().add(dart)) {
+                                player.drop(dart, false);
+                            }
+                        }
+                    }
+
+                    mainHand.getOrCreateTag().putBoolean("loaded", false);
+                    player.displayClientMessage(Component.literal("¡Blowpipe unloaded! ❌").withStyle(ChatFormatting.RED), true);
                     return;
                 }
 
@@ -54,7 +76,7 @@ public class C2SReloadBlowpipePacket {
 
                 if (!selectedDart.isEmpty()) {
 
-                    blowpipe.loadBlowpipe(mainHand, selectedDart, player);
+                    BlowpipeUtil.loadBlowpipe(mainHand, selectedDart, player);
                     mainHand.getOrCreateTag().putBoolean("loaded", true);
 
                     player.displayClientMessage(Component.literal("¡Blowpipe loaded! ✅").withStyle(ChatFormatting.GREEN), true);
