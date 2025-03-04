@@ -12,7 +12,6 @@ import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
@@ -35,7 +34,7 @@ import net.thedragonskull.blowpipemod.network.C2SHamelinTriggerPacket;
 import net.thedragonskull.blowpipemod.network.PacketHandler;
 import net.thedragonskull.blowpipemod.sound.BlowpipeSoundInstance;
 import net.thedragonskull.blowpipemod.sound.ModSounds;
-import net.thedragonskull.blowpipemod.trigger.ModTriggers;
+import net.thedragonskull.blowpipemod.util.BlowpipeUtil;
 
 import java.util.List;
 import java.util.function.Predicate;
@@ -43,11 +42,6 @@ import java.util.function.Predicate;
 public class BlowPipe extends ProjectileWeaponItem implements IFirstPersonAnimationProvider {
     private static final int DEFAULT_PROJECTILE_RANGE = 15;
     private static final int USE_DURATION = 72000;
-
-    private static final float DART_TYPE_BASE = 1.0F;
-    private static final float DART_TYPE_POISON = 2.0F;
-    private static final float DART_TYPE_POWDER = 3.0F;
-    private static final float DART_TYPE_LURE = 4.0F;
 
     public static BlowpipeSoundInstance activeRatSound = null;
 
@@ -95,68 +89,10 @@ public class BlowPipe extends ProjectileWeaponItem implements IFirstPersonAnimat
         }
     }
 
-
-    /**
-     * Verifies if the blowpipe is loaded
-     */
-    public static boolean isLoaded(ItemStack stack) {
-        CompoundTag compoundtag = stack.getTag();
-        return compoundtag != null && compoundtag.getBoolean("loaded");
-    }
-
-    /**
-     * Sets the state of the blowpipe as loaded with a dart type
-     */
-    public static void setLoaded(ItemStack stack, boolean loaded, ItemStack dart) {
-        CompoundTag compoundtag = stack.getOrCreateTag();
-        compoundtag.putBoolean("loaded", loaded);
-
-        if (loaded && dart != null && !dart.isEmpty()) {
-            CompoundTag dartTag = new CompoundTag();
-            dart.save(dartTag);
-            compoundtag.put("Dart", dartTag);
-
-            float dartType = BlowPipe.getDartType(dart);
-            compoundtag.putFloat("dart_type", dartType);
-        } else {
-            compoundtag.remove("Dart");
-            compoundtag.remove("dart_type");
-        }
-    }
-
-
-    public static float getDartType(ItemStack stack) {
-        if (stack.is(ModItems.DART_BASE.get())) {
-            return DART_TYPE_BASE;
-        } else if (stack.is(ModItems.POISON_DART.get())) {
-            return DART_TYPE_POISON;
-        } else if (stack.is(ModItems.POWDER_DART.get())) {
-            return DART_TYPE_POWDER;
-        } else if (stack.is(ModItems.LURE_DART.get())) {
-            return DART_TYPE_LURE;
-        }
-        return 0.0F;
-    }
-
-    /**
-     * Load the blowpipe with a dart
-     */
-    public void loadBlowpipe(ItemStack blowpipe, ItemStack dart, Player player) {
-        if (isLoaded(blowpipe)) {
-            return;
-        }
-
-        setLoaded(blowpipe, true, dart);
-        dart.shrink(1);
-
-        player.level().playSound(null, player.getX(), player.getY(), player.getZ(),
-                SoundEvents.CROSSBOW_LOADING_END, SoundSource.PLAYERS, 1.0F, 1.0F);
-    }
-
     @Override
     public void appendHoverText(ItemStack stack, Level level, List<Component> tooltip, TooltipFlag flag) {
         super.appendHoverText(stack, level, tooltip, flag);
-        if (isLoaded(stack)) {
+        if (BlowpipeUtil.isLoaded(stack)) {
             tooltip.add(Component.literal("Loaded ✅").withStyle(ChatFormatting.GREEN));
 
             CompoundTag tag = stack.getTag();
@@ -191,7 +127,7 @@ public class BlowPipe extends ProjectileWeaponItem implements IFirstPersonAnimat
         if (livingEntity instanceof Player player) {
             if (player.isUsingItem() && player.getUseItemRemainingTicks() > 0 && player.getUsedItemHand() == InteractionHand.MAIN_HAND) {
                 if (Minecraft.getInstance().options.keyAttack.isDown() && !player.getCooldowns().isOnCooldown(this)) {
-                    if (!isLoaded(stack)) {
+                    if (!BlowpipeUtil.isLoaded(stack)) {
                         if (level.isClientSide) {
 
                             if (activeRatSound != null && !activeRatSound.isStopped()) {
@@ -221,14 +157,6 @@ public class BlowPipe extends ProjectileWeaponItem implements IFirstPersonAnimat
                     }
                 }
             }
-        }
-    }
-
-    @Override
-    public void releaseUsing(ItemStack pStack, Level pLevel, LivingEntity pLivingEntity, int pTimeCharged) {
-        super.releaseUsing(pStack, pLevel, pLivingEntity, pTimeCharged);
-        if (activeRatSound != null) {
-            activeRatSound = null;
         }
     }
 
@@ -272,4 +200,11 @@ public class BlowPipe extends ProjectileWeaponItem implements IFirstPersonAnimat
         }
     }
 
+    @Override
+    public void releaseUsing(ItemStack pStack, Level pLevel, LivingEntity pLivingEntity, int pTimeCharged) {
+        super.releaseUsing(pStack, pLevel, pLivingEntity, pTimeCharged);
+        if (activeRatSound != null) {
+            activeRatSound = null;
+        }
+    }
 }
