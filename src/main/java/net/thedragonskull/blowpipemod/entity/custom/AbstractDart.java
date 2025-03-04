@@ -3,6 +3,7 @@ package net.thedragonskull.blowpipemod.entity.custom;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
@@ -12,10 +13,10 @@ import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec2;
 import net.thedragonskull.blowpipemod.enchantment.ModEnchantments;
 import net.thedragonskull.blowpipemod.sound.ModSounds;
+import net.thedragonskull.blowpipemod.util.DartPouchUtil;
 import org.jetbrains.annotations.NotNull;
 
 public abstract class AbstractDart extends AbstractArrow {
-    private float rotation;
     public Vec2 groundedOffset = new Vec2(0, 0);
 
     public AbstractDart(EntityType<? extends AbstractDart> entityType, Level level) {
@@ -78,13 +79,36 @@ public abstract class AbstractDart extends AbstractArrow {
     }
 
     @Override
-    public void setSoundEvent(SoundEvent pSoundEvent) {
+    public void setSoundEvent(@NotNull SoundEvent pSoundEvent) {
         super.setSoundEvent(pSoundEvent);
     }
 
     protected abstract float getDamage();
 
     @Override
-    protected abstract ItemStack getPickupItem();
+    protected abstract @NotNull ItemStack getPickupItem();
+
+
+    @Override
+    public void playerTouch(@NotNull Player player) {
+        if (!this.level().isClientSide && this.isAlive() && this.isGrounded()) {
+            ItemStack dartStack = this.getPickupItem();
+            boolean addedToPouch;
+
+            if (!dartStack.isEmpty()) {
+                ItemStack pouchStack = DartPouchUtil.findDartPouch(player);
+                addedToPouch = DartPouchUtil.addDartToPouch(pouchStack, dartStack);
+
+                if (!addedToPouch) {
+                    if (!player.addItem(dartStack)) {
+                        this.spawnAtLocation(dartStack, 0.1F);
+                    }
+                }
+
+                player.take(this, 1);
+                this.discard();
+            }
+        }
+    }
 
 }

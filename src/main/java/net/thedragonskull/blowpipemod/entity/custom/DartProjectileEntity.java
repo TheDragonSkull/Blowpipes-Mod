@@ -7,6 +7,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.thedragonskull.blowpipemod.entity.ModEntities;
 import net.thedragonskull.blowpipemod.item.ModItems;
+import org.jetbrains.annotations.NotNull;
 
 public class DartProjectileEntity extends AbstractDart {
 
@@ -24,12 +25,7 @@ public class DartProjectileEntity extends AbstractDart {
     }
 
     @Override
-    protected ItemStack getPickupItem() {
+    protected @NotNull ItemStack getPickupItem() {
         return ModItems.DART_BASE.get().getDefaultInstance();
     }
-
-
-
-
-
 }
