@@ -24,6 +24,7 @@ import net.thedragonskull.blowpipemod.util.DartPouchUtil;
 
 import static net.thedragonskull.blowpipemod.util.DartPouchUtil.findDartPouch;
 import static net.thedragonskull.blowpipemod.util.DartPouchUtil.isDart;
+import static net.thedragonskull.blowpipemod.util.ModMessageUtil.sendMessage;
 
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Supplier;
@@ -76,7 +77,7 @@ public class C2SReloadBlowpipePacket {
                     mainHand.getOrCreateTag().putBoolean("loaded", false);
                     player.level().playSound(null, player.getX(), player.getY(), player.getZ(),
                             SoundEvents.BRUSH_GENERIC, SoundSource.PLAYERS, 1.0F, 1.0F);
-                    player.displayClientMessage(Component.literal("¡Blowpipe unloaded! ❌").withStyle(ChatFormatting.RED), true);
+                    sendMessage(player, "¡Blowpipe unloaded! ❌", ChatFormatting.RED);
                     return;
                 }
 
@@ -87,10 +88,10 @@ public class C2SReloadBlowpipePacket {
                     BlowpipeUtil.loadBlowpipe(mainHand, selectedDart, player);
                     mainHand.getOrCreateTag().putBoolean("loaded", true);
 
-                    player.displayClientMessage(Component.literal("¡Blowpipe loaded! ✅").withStyle(ChatFormatting.GREEN), true);
+                    sendMessage(player, "Blowpipe loaded! ✅", ChatFormatting.GREEN);
                 } else {
                     System.out.println("[DEBUG] No se encontró ningún dardo disponible para recargar.");
-                    player.displayClientMessage(Component.literal("¡No dart selected! ❌").withStyle(ChatFormatting.DARK_RED), true);
+                    sendMessage(player, "¡No dart selected! ❌", ChatFormatting.DARK_RED);
                 }
             }
         });
