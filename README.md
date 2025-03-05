@@ -25,7 +25,7 @@ This mod introduces a blowpipe with a unique reloading system and various types 
 ⭐ Features:
 
 
-- Blowpipe - A new weapon with it's own mechanics.
+- Blowpipe - A new weapon with its own mechanics.
 - Darts - Different types with unique effects.
 - Dart Pouch - Store up to 6 stacks of darts and reload quickly by selecting a slot.
 - Enchantment Support - Upgrade your blowpipe to increase range, damage and to make the weapon more versatile.
