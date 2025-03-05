@@ -62,13 +62,13 @@ public class PowderDartProjectileEntity extends AbstractDart{
 
     private void playImpactSound() {
         if (!this.isExtinguished) {
-            this.level().playSound(
-                    null,
+            this.level().playLocalSound(
                     this.getX(), this.getY(), this.getZ(),
                     ModSounds.BOMB_FUSE.get(),
-                    SoundSource.PLAYERS,
+                    SoundSource.BLOCKS,
                     0.5F,
-                    1.0F
+                    1.0F,
+                    false
             );
         }
     }
@@ -151,7 +151,5 @@ public class PowderDartProjectileEntity extends AbstractDart{
             );
         }
     }
-
-
 
 }
