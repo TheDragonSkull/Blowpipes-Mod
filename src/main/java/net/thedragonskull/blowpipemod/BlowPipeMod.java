@@ -1,6 +1,8 @@
 package net.thedragonskull.blowpipemod;
 
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.item.Items;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
@@ -52,7 +54,10 @@ public class BlowPipeMod {
 
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
         if (event.getTabKey() == CreativeModeTabs.COMBAT) {
-            event.accept(ModItems.BLOWPIPE);
+            event.getEntries().putAfter(Items.TRIDENT.getDefaultInstance(),
+                    ModItems.BLOWPIPE.get().asItem().getDefaultInstance(),
+                    CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+
             event.accept(ModItems.DART_BASE);
             event.accept(ModItems.POISON_DART);
             event.accept(ModItems.POWDER_DART);
