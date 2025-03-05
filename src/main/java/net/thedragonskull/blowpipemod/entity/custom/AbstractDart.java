@@ -2,12 +2,15 @@ package net.thedragonskull.blowpipemod.entity.custom;
 
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec2;
@@ -88,7 +91,6 @@ public abstract class AbstractDart extends AbstractArrow {
     @Override
     protected abstract @NotNull ItemStack getPickupItem();
 
-
     @Override
     public void playerTouch(@NotNull Player player) {
         if (!this.level().isClientSide && this.isAlive() && this.isGrounded()) {
@@ -111,4 +113,17 @@ public abstract class AbstractDart extends AbstractArrow {
         }
     }
 
+    @Override
+    public boolean hurt(DamageSource pSource, float pAmount) {
+        return super.hurt(pSource, pAmount);
+    }
+
+    @Override
+    protected void onInsideBlock(BlockState pState) {
+        super.onInsideBlock(pState);
+
+        if (pState.getBlock() == Blocks.LAVA) {
+            discard();
+        }
+    }
 }
