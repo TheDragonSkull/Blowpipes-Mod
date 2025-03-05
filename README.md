@@ -34,7 +34,6 @@ This mod introduces a blowpipe with a unique reloading system and various types 
  If you find bugs please report so I can try to fix them.
 
 ---
- 
 
 📷 Screenshots:
 
@@ -43,6 +42,14 @@ This mod introduces a blowpipe with a unique reloading system and various types 
 ![image](https://github.com/user-attachments/assets/d2dcb388-f027-411e-98d3-7cebb39ffbdd)
 
 ![image](https://github.com/user-attachments/assets/52bba24f-8772-41fa-ba08-6b9cdcb51e0e)
+
+---
+
+🖋 Dependencies:
+
+**Forge**
+
+- [Minecraft Forge](https://files.minecraftforge.net/net/minecraftforge/forge/), [Curios Api](https://modrinth.com/mod/curios) and [Moonliht Lib](https://modrinth.com/mod/moonlight) are required
 
 ---
 
