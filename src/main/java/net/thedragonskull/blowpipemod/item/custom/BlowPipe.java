@@ -2,17 +2,21 @@ package net.thedragonskull.blowpipemod.item.custom;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
+import net.mehvahdjukaar.moonlight.api.client.util.RotHlpr;
 import net.mehvahdjukaar.moonlight.api.item.IFirstPersonAnimationProvider;
-import net.minecraft.ChatFormatting;
-import net.minecraft.client.CameraType;
+import net.mehvahdjukaar.moonlight.api.item.IThirdPersonSpecialItemRenderer;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.ArmedModel;
+import net.minecraft.client.model.EntityModel;
+import net.minecraft.client.model.HeadedModel;
+import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.entity.layers.CustomHeadLayer;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
-import net.minecraft.network.chat.Component;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
@@ -20,9 +24,9 @@ import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ProjectileWeaponItem;
-import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
@@ -36,10 +40,9 @@ import net.thedragonskull.blowpipemod.sound.BlowpipeSoundInstance;
 import net.thedragonskull.blowpipemod.sound.ModSounds;
 import net.thedragonskull.blowpipemod.util.BlowpipeUtil;
 
-import java.util.List;
 import java.util.function.Predicate;
 
-public class BlowPipe extends ProjectileWeaponItem implements IFirstPersonAnimationProvider {
+public class BlowPipe extends ProjectileWeaponItem implements IFirstPersonAnimationProvider ,IThirdPersonSpecialItemRenderer {
     private static final int DEFAULT_PROJECTILE_RANGE = 15;
     private static final int USE_DURATION = 72000;
 
@@ -56,7 +59,7 @@ public class BlowPipe extends ProjectileWeaponItem implements IFirstPersonAnimat
 
     @Override
     public UseAnim getUseAnimation(ItemStack pStack) {
-        return UseAnim.NONE;
+        return UseAnim.SPYGLASS;
     }
 
     @Override
@@ -70,7 +73,7 @@ public class BlowPipe extends ProjectileWeaponItem implements IFirstPersonAnimat
     }
 
     /**
-     * Animate blowpipe in first person
+     * Animate blowpipe item in first person
      */
     @Override
     public void animateItemFirstPerson(Player entity, ItemStack stack, InteractionHand hand, HumanoidArm arm, PoseStack poseStack, float partialTicks, float pitch, float attackAnim, float handHeight) {
@@ -89,30 +92,63 @@ public class BlowPipe extends ProjectileWeaponItem implements IFirstPersonAnimat
         }
     }
 
+    /**
+     * Animate blowpipe item in third person
+     */
     @Override
-    public void appendHoverText(ItemStack stack, Level level, List<Component> tooltip, TooltipFlag flag) {
-        super.appendHoverText(stack, level, tooltip, flag);
-        if (BlowpipeUtil.isLoaded(stack)) {
-            tooltip.add(Component.literal("Loaded ✅").withStyle(ChatFormatting.GREEN));
+    public <T extends Player, M extends EntityModel<T> & ArmedModel & HeadedModel> void renderThirdPersonItem(
+            M parentModel, LivingEntity entity, ItemStack stack, HumanoidArm humanoidArm,
+            PoseStack poseStack, MultiBufferSource bufferSource, int light) {
 
-            CompoundTag tag = stack.getTag();
-            if (tag != null && tag.contains("Dart", Tag.TAG_COMPOUND)) {
-                CompoundTag dartTag = tag.getCompound("Dart");
-                ItemStack dartStack = ItemStack.of(dartTag);
-                if (!dartStack.isEmpty()) {
-                    tooltip.add(Component.literal("Type: " + dartStack.getHoverName().getString()).withStyle(ChatFormatting.GOLD));
-                }
+        if (!stack.isEmpty()) {
+            boolean leftHand = humanoidArm == HumanoidArm.LEFT;
+            ItemDisplayContext transform;
+
+            poseStack.pushPose();
+
+            if (entity.getUseItem() == stack) {
+                ModelPart head = parentModel.getHead();
+
+                float oldRot = head.xRot;
+                head.xRot = getMaxHeadXRot(Mth.wrapDegrees(oldRot));
+                head.translateAndRotate(poseStack);
+                head.xRot = oldRot;
+
+                CustomHeadLayer.translateToHead(poseStack, false);
+
+                poseStack.translate(0, -4.25 / 16f, -8.5 / 16f);
+                poseStack.mulPose(Axis.XP.rotationDegrees(-90));
+                poseStack.scale(1.5F,1.5F,1.5F);
+
+                transform = ItemDisplayContext.HEAD;
+            } else {
+                parentModel.translateToHand(humanoidArm, poseStack);
+                poseStack.mulPose(RotHlpr.XN90);
+                poseStack.mulPose(RotHlpr.Y180);
+                poseStack.translate((leftHand ? -1 : 1) / 16.0F, 0.125D, -0.625D);
+
+                transform = ItemDisplayContext.THIRD_PERSON_RIGHT_HAND;
             }
-        } else {
-            tooltip.add(Component.literal("Empty ❌").withStyle(ChatFormatting.RED));
+
+            Minecraft.getInstance().getEntityRenderDispatcher().getItemInHandRenderer().renderItem(
+                    entity, stack, transform, leftHand, poseStack, bufferSource, light
+            );
+
+            poseStack.popPose();
         }
     }
+
+    private float getMaxHeadXRot(float xRot) {
+        return Mth.clamp(xRot, (-(float) Math.PI / 2.5F), ((float) Math.PI / 2F));
+    }
+
+
 
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
-        if (hand == InteractionHand.MAIN_HAND && Minecraft.getInstance().options.getCameraType() == CameraType.FIRST_PERSON) {
+        if (hand == InteractionHand.MAIN_HAND) {
             player.startUsingItem(hand);
             return InteractionResultHolder.consume(stack);
         }
