@@ -33,6 +33,13 @@ public class ModItems {
     public static final RegistryObject<Item> DART_POUCH = ITEMS.register("dart_pouch",
             () -> new DartPouchItem(new Item.Properties().stacksTo(1)));
 
+
+
+    //MISC
+
+    public static final RegistryObject<Item> RAT_ADV = ITEMS.register("rat_adv",
+            () -> new Item(new Item.Properties()));
+
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
     }
