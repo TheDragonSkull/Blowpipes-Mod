@@ -59,7 +59,10 @@ public class BlowPipe extends ProjectileWeaponItem implements IFirstPersonAnimat
 
     @Override
     public UseAnim getUseAnimation(ItemStack pStack) {
-        return UseAnim.SPYGLASS;
+        if (!Minecraft.getInstance().options.getCameraType().isFirstPerson()) {
+            return UseAnim.SPYGLASS;
+        } else
+            return UseAnim.NONE;
     }
 
     @Override
@@ -141,10 +144,7 @@ public class BlowPipe extends ProjectileWeaponItem implements IFirstPersonAnimat
     private float getMaxHeadXRot(float xRot) {
         return Mth.clamp(xRot, (-(float) Math.PI / 2.5F), ((float) Math.PI / 2F));
     }
-
-
-
-
+    
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
