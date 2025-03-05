@@ -4,8 +4,8 @@
 [![CurseForge Versions](https://cf.way2muchnoise.eu/versions/1209549.svg)](https://www.curseforge.com/minecraft/mc-mods/thedragons-blowpipes)
 [![CurseForge Downloads](https://cf.way2muchnoise.eu/short_1209549_downloads.svg)](https://www.curseforge.com/minecraft/mc-mods/thedragons-blowpipes)  
 
-![Modrinth Versions](https://img.shields.io/modrinth/game-versions/9nM4QfnH?label=Avaliable%20for)
-![Modrinth Downloads](https://img.shields.io/modrinth/dt/9nM4QfnH)
+[![Modrinth Versions](https://img.shields.io/modrinth/game-versions/9nM4QfnH?label=Avaliable%20for)](https://modrinth.com/mod/thedragons-blowpipes) 
+[![Modrinth Downloads](https://img.shields.io/modrinth/dt/9nM4QfnH)](https://modrinth.com/mod/thedragons-blowpipes)
 
 
 
@@ -29,6 +29,9 @@ This mod introduces a blowpipe with a unique reloading system and various types 
 - Darts - Different types with unique effects.
 - Dart Pouch - Store up to 6 stacks of darts and reload quickly by selecting a slot.
 - Enchantment Support - Upgrade your blowpipe to increase range, damage and to make the weapon more versatile.
+
+ You can comment your ideas and maybe i'll end up including them in the mod.     
+ If you find bugs please report so I can try to fix them.
 
 ---
  
