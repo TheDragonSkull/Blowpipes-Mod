@@ -7,10 +7,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.thedragonskull.blowpipemod.BlowPipeMod;
-import net.thedragonskull.blowpipemod.entity.custom.DartProjectileEntity;
-import net.thedragonskull.blowpipemod.entity.custom.LureDartProjectileEntity;
-import net.thedragonskull.blowpipemod.entity.custom.PoisonDartProjectileEntity;
-import net.thedragonskull.blowpipemod.entity.custom.PowderDartProjectileEntity;
+import net.thedragonskull.blowpipemod.entity.custom.*;
 
 public class ModEntities {
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES =
@@ -21,6 +18,12 @@ public class ModEntities {
                     () -> EntityType.Builder.<DartProjectileEntity>of(DartProjectileEntity::new, MobCategory.MISC)
                             .sized(0.2F, 0.2F)
                             .build("dart"));
+
+    public static final RegistryObject<EntityType<IronHeadDartProjectileEntity>> IRON_HEAD_DART =
+            ENTITY_TYPES.register("iron_head_dart",
+                    () -> EntityType.Builder.<IronHeadDartProjectileEntity>of(IronHeadDartProjectileEntity::new, MobCategory.MISC)
+                            .sized(0.2F, 0.2F)
+                            .build("iron_head_dart"));
 
     public static final RegistryObject<EntityType<PoisonDartProjectileEntity>> POISON_DART =
             ENTITY_TYPES.register("poison_dart",

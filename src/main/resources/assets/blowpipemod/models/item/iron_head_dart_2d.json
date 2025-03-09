@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "blowpipemod:item/darts/2d/iron_head_dart_2d"
+  }
+}

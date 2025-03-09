@@ -12,6 +12,7 @@ public class BlowpipeUtil {
     private static final float DART_TYPE_POISON = 2.0F;
     private static final float DART_TYPE_POWDER = 3.0F;
     private static final float DART_TYPE_LURE = 4.0F;
+    private static final float DART_TYPE_IRON_HEAD = 5.0F;
 
     public static float getDartType(ItemStack stack) {
         if (stack.is(ModItems.DART_BASE.get())) {
@@ -22,6 +23,8 @@ public class BlowpipeUtil {
             return DART_TYPE_POWDER;
         } else if (stack.is(ModItems.LURE_DART.get())) {
             return DART_TYPE_LURE;
+        } else if (stack.is(ModItems.IRON_HEAD_DART.get())) {
+            return DART_TYPE_IRON_HEAD;
         }
         return 0.0F;
     }

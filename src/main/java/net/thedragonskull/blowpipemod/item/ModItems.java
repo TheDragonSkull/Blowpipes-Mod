@@ -21,6 +21,9 @@ public class ModItems {
     public static final RegistryObject<Item> DART_BASE = ITEMS.register("dart_base",
             () -> new DartItem(new Item.Properties().stacksTo(16)));
 
+    public static final RegistryObject<Item> IRON_HEAD_DART = ITEMS.register("iron_head_dart",
+            () -> new DartItem(new Item.Properties().stacksTo(16)));
+
     public static final RegistryObject<Item> POISON_DART = ITEMS.register("poison_dart",
             () -> new DartItem(new Item.Properties().stacksTo(16)));
 

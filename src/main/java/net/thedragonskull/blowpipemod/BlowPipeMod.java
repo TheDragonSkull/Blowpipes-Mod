@@ -59,6 +59,7 @@ public class BlowPipeMod {
                     CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
 
             event.accept(ModItems.DART_BASE);
+            event.accept(ModItems.IRON_HEAD_DART);
             event.accept(ModItems.POISON_DART);
             event.accept(ModItems.POWDER_DART);
             event.accept(ModItems.LURE_DART);

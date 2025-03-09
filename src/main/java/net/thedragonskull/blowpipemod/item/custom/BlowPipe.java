@@ -211,6 +211,8 @@ public class BlowPipe extends ProjectileWeaponItem implements IFirstPersonAnimat
                 dartProjectile = new PowderDartProjectileEntity(level, player);
             } else if (dartStack.is(ModItems.LURE_DART.get())) {
                 dartProjectile = new LureDartProjectileEntity(level, player);
+            } else if (dartStack.is(ModItems.IRON_HEAD_DART.get())) {
+                dartProjectile = new IronHeadDartProjectileEntity(level, player);
             } else {
                 dartProjectile = new DartProjectileEntity(level, player);
             }
