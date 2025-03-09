@@ -3,31 +3,18 @@ package net.thedragonskull.blowpipemod.network;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.network.NetworkEvent;
-import net.thedragonskull.blowpipemod.client.gui.SelectedDartOverlay;
-import net.thedragonskull.blowpipemod.client.handler.ClientForgeHandler;
-import net.thedragonskull.blowpipemod.entity.custom.AbstractDart;
-import net.thedragonskull.blowpipemod.item.ModItems;
 import net.thedragonskull.blowpipemod.item.custom.BlowPipe;
-import net.thedragonskull.blowpipemod.item.custom.DartPouchItem;
 import net.thedragonskull.blowpipemod.util.BlowpipeUtil;
 import net.thedragonskull.blowpipemod.util.DartPouchUtil;
 
-import static net.thedragonskull.blowpipemod.util.DartPouchUtil.findDartPouch;
-import static net.thedragonskull.blowpipemod.util.DartPouchUtil.isDart;
-import static net.thedragonskull.blowpipemod.util.ModMessageUtil.sendMessage;
-
-import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Supplier;
+
+import static net.thedragonskull.blowpipemod.util.ModMessageUtil.sendMessage;
 
 public class C2SReloadBlowpipePacket {
     public static ItemStack darts;

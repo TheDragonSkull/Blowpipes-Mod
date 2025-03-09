@@ -6,6 +6,7 @@ import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.items.ItemStackHandler;
 import net.thedragonskull.blowpipemod.client.gui.SelectedDartOverlay;
 import net.thedragonskull.blowpipemod.item.ModItems;
+import net.thedragonskull.blowpipemod.item.custom.DartItem;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.type.inventory.ICurioStacksHandler;
 
@@ -101,10 +102,7 @@ public class DartPouchUtil {
 
     //List of accepted darts
     public static boolean isDart(ItemStack stack) {
-        return stack.is(ModItems.DART_BASE.get()) ||
-                stack.is(ModItems.POISON_DART.get()) ||
-                stack.is(ModItems.POWDER_DART.get()) ||
-                stack.is(ModItems.LURE_DART.get());
+        return stack.getItem() instanceof DartItem;
     }
 
 }
