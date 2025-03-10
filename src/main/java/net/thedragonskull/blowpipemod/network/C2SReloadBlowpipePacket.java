@@ -53,7 +53,6 @@ public class C2SReloadBlowpipePacket {
 
                         if (!pouchStack.isEmpty() && DartPouchUtil.addDartToPouch(pouchStack, dart)) {
                         } else {
-
                             if (!player.getInventory().add(dart)) {
                                 player.drop(dart, false);
                             }
@@ -65,6 +64,8 @@ public class C2SReloadBlowpipePacket {
                     player.level().playSound(null, player.getX(), player.getY(), player.getZ(),
                             SoundEvents.BRUSH_GENERIC, SoundSource.PLAYERS, 1.0F, 1.0F);
                     sendMessage(player, "¡Blowpipe unloaded! ❌", ChatFormatting.RED);
+                    tag.remove("Dart");
+                    tag.remove("dart_type"); // También elimina el tipo de dardo
                     return;
                 }
 
