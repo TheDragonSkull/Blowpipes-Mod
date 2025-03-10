@@ -43,6 +43,12 @@ public class ModEntities {
                             .sized(0.2F, 0.2F)
                             .build("lure_dart"));
 
+    public static final RegistryObject<EntityType<RazorDartProjectileEntity>> RAZOR_DART =
+            ENTITY_TYPES.register("razor_dart",
+                    () -> EntityType.Builder.<RazorDartProjectileEntity>of(RazorDartProjectileEntity::new, MobCategory.MISC)
+                            .sized(0.2F, 0.2F)
+                            .build("razor_dart"));
+
 
     public static void register(IEventBus eventBus) {
         ENTITY_TYPES.register(eventBus);

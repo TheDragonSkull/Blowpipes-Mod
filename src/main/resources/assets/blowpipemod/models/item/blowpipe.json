@@ -44,6 +44,13 @@
         "dart_type": 5.0
       },
       "model": "blowpipemod:item/blowpipe_loaded_iron_head"
+    },
+    {
+      "predicate": {
+        "loaded": 1,
+        "dart_type": 6.0
+      },
+      "model": "blowpipemod:item/blowpipe_loaded_razor"
     }
   ]
 }

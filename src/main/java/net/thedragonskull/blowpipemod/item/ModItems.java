@@ -33,6 +33,11 @@ public class ModItems {
     public static final RegistryObject<Item> LURE_DART = ITEMS.register("lure_dart",
             () -> new DartItem(new Item.Properties().stacksTo(16)));
 
+    public static final RegistryObject<Item> RAZOR_DART = ITEMS.register("razor_dart",
+            () -> new DartItem(new Item.Properties().stacksTo(16)));
+
+
+
     public static final RegistryObject<Item> DART_POUCH = ITEMS.register("dart_pouch",
             () -> new DartPouchItem(new Item.Properties().stacksTo(1)));
 

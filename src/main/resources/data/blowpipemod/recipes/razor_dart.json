@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "X": {
+      "item": "minecraft:iron_nugget"
+    },
+    "Y": {
+      "item": "blowpipemod:iron_head_dart"
+    },
+    "#": {
+      "item": "minecraft:feather"
+    }
+  },
+  "pattern": [
+    " XX",
+    " YX",
+    "#  "
+  ],
+  "result": {
+    "count": 1,
+    "item": "blowpipemod:razor_dart"
+  },
+  "show_notification": true
+}

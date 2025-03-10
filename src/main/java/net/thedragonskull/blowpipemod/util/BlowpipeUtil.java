@@ -13,6 +13,7 @@ public class BlowpipeUtil {
     private static final float DART_TYPE_POWDER = 3.0F;
     private static final float DART_TYPE_LURE = 4.0F;
     private static final float DART_TYPE_IRON_HEAD = 5.0F;
+    private static final float DART_TYPE_RAZOR = 6.0F;
 
     public static float getDartType(ItemStack stack) {
         if (stack.is(ModItems.DART_BASE.get())) {
@@ -25,8 +26,21 @@ public class BlowpipeUtil {
             return DART_TYPE_LURE;
         } else if (stack.is(ModItems.IRON_HEAD_DART.get())) {
             return DART_TYPE_IRON_HEAD;
+        } else if (stack.is(ModItems.RAZOR_DART.get())) {
+            return DART_TYPE_RAZOR;
         }
         return 0.0F;
+    }
+
+    /**
+     * Gets the currently loaded dart in the blowpipe
+     */
+    public static ItemStack getLoadedDart(ItemStack stack) {
+        CompoundTag compoundTag = stack.getTag();
+        if (compoundTag != null && compoundTag.contains("Dart")) {
+            return ItemStack.of(compoundTag.getCompound("Dart"));
+        }
+        return ItemStack.EMPTY;
     }
 
     /**

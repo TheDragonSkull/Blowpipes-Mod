@@ -63,6 +63,7 @@ public class BlowPipeMod {
             event.accept(ModItems.POISON_DART);
             event.accept(ModItems.POWDER_DART);
             event.accept(ModItems.LURE_DART);
+            event.accept(ModItems.RAZOR_DART);
 
             event.accept(ModItems.DART_POUCH);
         }

@@ -37,6 +37,7 @@ public class ClientModHandler {
             EntityRenderers.register(ModEntities.POWDER_DART.get(), PowderDartProjectileRenderer::new);
             EntityRenderers.register(ModEntities.LURE_DART.get(), LureDartProjectileRenderer::new);
             EntityRenderers.register(ModEntities.IRON_HEAD_DART.get(), IronHeadDartProjectileRenderer::new);
+            EntityRenderers.register(ModEntities.RAZOR_DART.get(), RazorDartProjectileRenderer::new);
 
             MenuScreens.register(ModMenuTypes.DART_POUCH_MENU.get(), DartPouchScreen::new);
         });
