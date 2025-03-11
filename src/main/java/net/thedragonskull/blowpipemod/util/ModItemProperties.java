@@ -9,6 +9,7 @@ public class ModItemProperties {
 
     public static void addCustomItemProperties() {
         blowpipeStates(ModItems.BLOWPIPE.get());
+        blowpipeStates(ModItems.BAMBOO_BLOWPIPE.get());
     }
 
     private static void blowpipeStates(Item item) {

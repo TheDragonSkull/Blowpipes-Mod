@@ -18,6 +18,12 @@ public class ModItems {
     public static final RegistryObject<Item> BLOWPIPE = ITEMS.register("blowpipe",
             () -> new BlowPipe(new Item.Properties().stacksTo(1)));
 
+    public static final RegistryObject<Item> BAMBOO_BLOWPIPE = ITEMS.register("bamboo_blowpipe",
+            () -> new BlowPipe(new Item.Properties().stacksTo(1)));
+
+
+
+
     public static final RegistryObject<Item> DART_BASE = ITEMS.register("dart_base",
             () -> new DartItem(new Item.Properties().stacksTo(16)));
 

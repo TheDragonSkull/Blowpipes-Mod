@@ -62,6 +62,9 @@ public class BlowPipeMod {
             event.getEntries().putAfter(Items.TRIDENT.getDefaultInstance(),
                     ModItems.BLOWPIPE.get().asItem().getDefaultInstance(),
                     CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.getEntries().putAfter(ModItems.BLOWPIPE.get().getDefaultInstance(),
+                    ModItems.BAMBOO_BLOWPIPE.get().asItem().getDefaultInstance(),
+                    CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
 
             event.accept(ModItems.DART_BASE);
             event.accept(ModItems.IRON_HEAD_DART);

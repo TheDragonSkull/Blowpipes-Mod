@@ -15,6 +15,7 @@ import net.thedragonskull.blowpipemod.BlowPipeMod;
 import net.thedragonskull.blowpipemod.client.Keybindings;
 import net.thedragonskull.blowpipemod.enchantment.ModEnchantments;
 import net.thedragonskull.blowpipemod.item.ModItems;
+import net.thedragonskull.blowpipemod.item.custom.BlowPipe;
 import net.thedragonskull.blowpipemod.network.C2SOpenPouchMenuPacket;
 import net.thedragonskull.blowpipemod.network.C2SReloadBlowpipePacket;
 import net.thedragonskull.blowpipemod.network.PacketHandler;
@@ -63,7 +64,7 @@ public class ClientForgeHandler {
 
     @SubscribeEvent
     public static void onComputerFovModifierEvent(ComputeFovModifierEvent event) {
-        if(event.getPlayer().isUsingItem() && event.getPlayer().getUseItem().getItem() == ModItems.BLOWPIPE.get()) {
+        if(event.getPlayer().isUsingItem() && event.getPlayer().getUseItem().getItem() instanceof BlowPipe) {
             ItemStack itemStack = event.getPlayer().getItemBySlot(EquipmentSlot.MAINHAND);
             int blowPowerLevel = EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.FOCUS.get(), itemStack);
 
