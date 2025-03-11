@@ -21,6 +21,9 @@ public class ModItems {
     public static final RegistryObject<Item> BAMBOO_BLOWPIPE = ITEMS.register("bamboo_blowpipe",
             () -> new BlowPipe(new Item.Properties().stacksTo(1)));
 
+    public static final RegistryObject<Item> DARK_BAMBOO_BLOWPIPE = ITEMS.register("dark_bamboo_blowpipe",
+            () -> new BlowPipe(new Item.Properties().stacksTo(1)));
+
 
 
 

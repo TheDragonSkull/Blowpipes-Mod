@@ -1,0 +1,56 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "blowpipemod:item/blowpipes/dark_bamboo/dark_bamboo"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "loaded": 0
+      },
+      "model": "blowpipemod:item/dbamboo_blowpipe_empty"
+    },
+    {
+      "predicate": {
+        "loaded": 1,
+        "dart_type": 1.0
+      },
+      "model": "blowpipemod:item/dbamboo_blowpipe_loaded_normal"
+    },
+    {
+      "predicate": {
+        "loaded": 1,
+        "dart_type": 2.0
+      },
+      "model": "blowpipemod:item/dbamboo_blowpipe_loaded_poison"
+    },
+    {
+      "predicate": {
+        "loaded": 1,
+        "dart_type": 3.0
+      },
+      "model": "blowpipemod:item/dbamboo_blowpipe_loaded_powder"
+    },
+    {
+      "predicate": {
+        "loaded": 1,
+        "dart_type": 4.0
+      },
+      "model": "blowpipemod:item/dbamboo_blowpipe_loaded_lure"
+    },
+    {
+      "predicate": {
+        "loaded": 1,
+        "dart_type": 5.0
+      },
+      "model": "blowpipemod:item/dbamboo_blowpipe_loaded_iron_head"
+    },
+    {
+      "predicate": {
+        "loaded": 1,
+        "dart_type": 6.0
+      },
+      "model": "blowpipemod:item/dbamboo_blowpipe_loaded_razor"
+    }
+  ]
+}

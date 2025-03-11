@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "X": {
+      "item": "blowpipemod:bamboo_blowpipe"
+    },
+    "Y": {
+      "item": "minecraft:echo_shard"
+    }
+  },
+  "pattern": [
+    "YYY",
+    "YXY",
+    "YYY"
+  ],
+  "result": {
+    "count": 1,
+    "item": "blowpipemod:dark_bamboo_blowpipe"
+  },
+  "show_notification": true
+}
