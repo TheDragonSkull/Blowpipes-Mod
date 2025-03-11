@@ -14,7 +14,6 @@ import net.minecraftforge.fml.common.Mod;
 import net.thedragonskull.blowpipemod.BlowPipeMod;
 import net.thedragonskull.blowpipemod.client.Keybindings;
 import net.thedragonskull.blowpipemod.enchantment.ModEnchantments;
-import net.thedragonskull.blowpipemod.item.ModItems;
 import net.thedragonskull.blowpipemod.item.custom.BlowPipe;
 import net.thedragonskull.blowpipemod.network.C2SOpenPouchMenuPacket;
 import net.thedragonskull.blowpipemod.network.C2SReloadBlowpipePacket;

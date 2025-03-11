@@ -11,8 +11,6 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.thedragonskull.blowpipemod.BlowPipeMod;
 import net.thedragonskull.blowpipemod.client.Keybindings;
 import net.thedragonskull.blowpipemod.client.gui.SelectedDartOverlay;
-import net.thedragonskull.blowpipemod.entity.client.DartPouchModel;
-import net.thedragonskull.blowpipemod.entity.client.DartPouchRenderer;
 import net.thedragonskull.blowpipemod.client.screen.DartPouchScreen;
 import net.thedragonskull.blowpipemod.entity.ModEntities;
 import net.thedragonskull.blowpipemod.entity.client.*;
