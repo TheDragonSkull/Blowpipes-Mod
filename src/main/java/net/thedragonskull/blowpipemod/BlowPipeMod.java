@@ -14,11 +14,13 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.thedragonskull.blowpipemod.config.BlowPipeModCommonConfigs;
+import net.thedragonskull.blowpipemod.effect.ModEffects;
 import net.thedragonskull.blowpipemod.enchantment.ModEnchantments;
 import net.thedragonskull.blowpipemod.entity.ModEntities;
 import net.thedragonskull.blowpipemod.item.ModItems;
 import net.thedragonskull.blowpipemod.menu.ModMenuTypes;
 import net.thedragonskull.blowpipemod.particle.ModParticles;
+import net.thedragonskull.blowpipemod.potion.ModPotions;
 import net.thedragonskull.blowpipemod.sound.ModSounds;
 import net.thedragonskull.blowpipemod.trigger.ModTriggers;
 
@@ -37,6 +39,9 @@ public class BlowPipeMod {
         ModEntities.register(modEventBus);
         ModParticles.register(modEventBus);
         ModEnchantments.register(modEventBus);
+
+        ModEffects.register(modEventBus);
+        ModPotions.register(modEventBus);
 
         ModTriggers.register();
 

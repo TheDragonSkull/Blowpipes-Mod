@@ -18,6 +18,13 @@
   "key.blowpipemod.next_dart_key": "Next Dart",
   "key.blowpipemod.prev_dart_key": "Previous Dart",
 
+  "effect.blowpipemod.thedragon_bleed": "Bleed",
+
+  "item.minecraft.potion.effect.thedragon_bleed_potion": "Bleed Potion",
+  "item.minecraft.splash_potion.effect.thedragon_bleed_potion": "Bleed Splash Potion",
+  "item.minecraft.lingering_potion.effect.thedragon_bleed_potion": "Bleed Lingering Potion",
+  "item.minecraft.tipped_arrow.effect.thedragon_bleed_potion": "Bleed Arrow",
+
   "container.dart_pouch": "Dart Pouch",
 
   "curios.identifier.dart_pouch": "Dart Pouch"
