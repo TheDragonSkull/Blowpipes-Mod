@@ -86,9 +86,6 @@ minecraft {
         client {
             // Comma-separated list of namespaces to load gametests from. Empty = all namespaces.
             property 'forge.enabledGameTestNamespaces', mod_id
-
-            property 'mixin.env.remapRefMap', 'true'
-            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
         }
 
         server {
@@ -143,6 +140,12 @@ dependencies {
     compileOnly(fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}:api"))
     runtimeOnly(fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}"))
 
+}
+
+mixin {
+    // MixinGradle Settings
+    add sourceSets.main, 'blowpipemod.mixin-refmap.json'
+    config('blowpipemod.mixin.json')
 }
 
 
