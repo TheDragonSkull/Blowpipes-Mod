@@ -6,11 +6,14 @@
       "item": "blowpipemod:dart_base"
     },
     "X": {
-      "item": "minecraft:leather"
+      "item": "minecraft:rabbit_hide"
+    },
+    "#": {
+      "item": "minecraft:string"
     }
   },
   "pattern": [
-    "XXX",
+    "X#X",
     "XYX",
     "XXX"
   ],
