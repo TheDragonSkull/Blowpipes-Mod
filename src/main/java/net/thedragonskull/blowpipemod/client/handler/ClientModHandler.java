@@ -8,6 +8,7 @@ import net.minecraftforge.client.event.*;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.minecraftforge.registries.RegistryObject;
 import net.thedragonskull.blowpipemod.BlowPipeMod;
 import net.thedragonskull.blowpipemod.client.Keybindings;
 import net.thedragonskull.blowpipemod.client.gui.SelectedDartOverlay;
@@ -15,6 +16,7 @@ import net.thedragonskull.blowpipemod.client.screen.DartPouchScreen;
 import net.thedragonskull.blowpipemod.entity.ModEntities;
 import net.thedragonskull.blowpipemod.entity.client.*;
 import net.thedragonskull.blowpipemod.item.ModItems;
+import net.thedragonskull.blowpipemod.item.custom.DartPouchItem;
 import net.thedragonskull.blowpipemod.menu.ModMenuTypes;
 import net.thedragonskull.blowpipemod.particle.ModParticles;
 import net.thedragonskull.blowpipemod.particle.custom.LureGlintParticles;
@@ -49,7 +51,12 @@ public class ClientModHandler {
 
     @SubscribeEvent
     public static void registerCurioRenderers(EntityRenderersEvent.AddLayers event) {
-        CuriosRendererRegistry.register(ModItems.DART_POUCH.get(), () -> new DartPouchRenderer(event.getEntityModels().bakeLayer(DartPouchModel.LAYER_LOCATION)));
+        DartPouchRenderer renderer = new DartPouchRenderer(event.getEntityModels().bakeLayer(DartPouchModel.LAYER_LOCATION));
+
+        ModItems.ITEMS.getEntries().stream()
+                .map(RegistryObject::get)
+                .filter(item -> item instanceof DartPouchItem)
+                .forEach(item -> CuriosRendererRegistry.register(item, () -> renderer));
     }
 
     @SubscribeEvent

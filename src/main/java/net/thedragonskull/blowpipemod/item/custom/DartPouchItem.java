@@ -11,6 +11,7 @@ import net.minecraft.world.*;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -34,8 +35,11 @@ import java.util.List;
 import java.util.Optional;
 
 public class DartPouchItem extends Item implements ICurioItem {
-    public DartPouchItem(Properties pProperties) {
-        super(pProperties);
+    private final DyeColor color; // Guardamos el color
+
+    public DartPouchItem(@Nullable DyeColor color, Properties properties) {
+        super(properties);
+        this.color = color;
     }
 
     @Override
@@ -142,5 +146,8 @@ public class DartPouchItem extends Item implements ICurioItem {
         }
     }
 
+    public DyeColor getColor() {
+        return color;
+    }
 
 }

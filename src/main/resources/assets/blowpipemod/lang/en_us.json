@@ -11,6 +11,23 @@
   "item.blowpipemod.razor_dart": "Razor Tip Dart",
 
   "item.blowpipemod.dart_pouch": "Dart Pouch",
+  "item.blowpipemod.dart_pouch_white": "Dart Pouch (White)",
+  "item.blowpipemod.dart_pouch_orange": "Dart Pouch (Orange)",
+  "item.blowpipemod.dart_pouch_magenta": "Dart Pouch (Magenta)",
+  "item.blowpipemod.dart_pouch_light_blue": "Dart Pouch (Light Blue)",
+  "item.blowpipemod.dart_pouch_yellow": "Dart Pouch (Yellow)",
+  "item.blowpipemod.dart_pouch_lime": "Dart Pouch (Lime)",
+  "item.blowpipemod.dart_pouch_pink": "Dart Pouch (Pink)",
+  "item.blowpipemod.dart_pouch_gray": "Dart Pouch (Gray)",
+  "item.blowpipemod.dart_pouch_light_gray": "Dart Pouch (Light Gray)",
+  "item.blowpipemod.dart_pouch_cyan": "Dart Pouch (Cyan)",
+  "item.blowpipemod.dart_pouch_purple": "Dart Pouch (Purple)",
+  "item.blowpipemod.dart_pouch_blue": "Dart Pouch (Blue)",
+  "item.blowpipemod.dart_pouch_brown": "Dart Pouch (Brown)",
+  "item.blowpipemod.dart_pouch_green": "Dart Pouch (Green)",
+  "item.blowpipemod.dart_pouch_red": "Dart Pouch (Red)",
+  "item.blowpipemod.dart_pouch_black": "Dart Pouch (Black)",
+
 
   "enchantment.blowpipemod.blow_power": "§5Blow Power§5",
   "enchantment.blowpipemod.focus": "§5Focus§5",

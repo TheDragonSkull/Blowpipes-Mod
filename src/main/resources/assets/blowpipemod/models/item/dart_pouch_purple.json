@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "blowpipemod:item/colored_pouches/dart_pouch_purple"
+  }
+}

@@ -12,11 +12,15 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.thedragonskull.blowpipemod.BlowPipeMod;
+import net.thedragonskull.blowpipemod.item.custom.DartPouchItem;
+import net.thedragonskull.blowpipemod.util.DartPouchColors;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.client.ICurioRenderer;
 
 public class DartPouchRenderer implements ICurioRenderer {
-    private static final ResourceLocation TEXTURE = new ResourceLocation(BlowPipeMod.MOD_ID, "textures/entity/dart_pouch.png");
+    private static final ResourceLocation BASE_TEXTURE = new ResourceLocation(BlowPipeMod.MOD_ID, "textures/entity/dart_pouch_bw.png");
+    private static final ResourceLocation OVERLAY_TEXTURE = new ResourceLocation(BlowPipeMod.MOD_ID, "textures/entity/dart_pouch_dart.png");
+
     private final ModelPart pouch;
 
     public DartPouchRenderer(ModelPart root) {
@@ -34,9 +38,30 @@ public class DartPouchRenderer implements ICurioRenderer {
         matrixStack.translate(0.0F, -0.2F, 0.0F);
         matrixStack.scale(1.0F, 1.0F, 1.0F);
 
-        VertexConsumer vertexConsumer = renderTypeBuffer.getBuffer(RenderType.entityTranslucent(TEXTURE));
-        pouch.render(matrixStack, vertexConsumer, light, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
+        if (stack.getItem() instanceof DartPouchItem) {
+
+            int dyeColor = getDyeColor(stack);
+            float red = (dyeColor >> 16 & 255) / 255.0F;
+            float green = (dyeColor >> 8 & 255) / 255.0F;
+            float blue = (dyeColor & 255) / 255.0F;
+
+            VertexConsumer baseTexture = renderTypeBuffer.getBuffer(RenderType.entityTranslucent(BASE_TEXTURE));
+            pouch.render(matrixStack, baseTexture, light, OverlayTexture.NO_OVERLAY, red, green, blue, 1.0F);
+        }
+
+
+            VertexConsumer overlayTexture = renderTypeBuffer.getBuffer(RenderType.entityTranslucent(OVERLAY_TEXTURE));
+            pouch.render(matrixStack, overlayTexture, light, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
+
 
         matrixStack.popPose();
     }
+
+    private int getDyeColor(ItemStack stack) {
+        if (stack.getItem() instanceof DartPouchItem pouchItem) {
+            return DartPouchColors.getCustomColor(pouchItem.getColor());
+        }
+        return 0xFFFFFF;
+    }
+
 }

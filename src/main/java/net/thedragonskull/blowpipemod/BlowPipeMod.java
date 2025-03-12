@@ -2,6 +2,7 @@ package net.thedragonskull.blowpipemod;
 
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
@@ -77,6 +78,10 @@ public class BlowPipeMod {
             event.accept(ModItems.RAZOR_DART);
 
             event.accept(ModItems.DART_POUCH);
+
+            for (DyeColor color : DyeColor.values()) {
+                event.accept(ModItems.COLORED_DART_POUCHES.get(color));
+            }
         }
     }
 

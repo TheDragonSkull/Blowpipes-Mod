@@ -1,14 +1,18 @@
 package net.thedragonskull.blowpipemod.item;
 
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.thedragonskull.blowpipemod.BlowPipeMod;
-import net.thedragonskull.blowpipemod.item.custom.DartItem;
 import net.thedragonskull.blowpipemod.item.custom.BlowPipe;
+import net.thedragonskull.blowpipemod.item.custom.DartItem;
 import net.thedragonskull.blowpipemod.item.custom.DartPouchItem;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class ModItems {
 
@@ -47,9 +51,18 @@ public class ModItems {
 
 
 
-    public static final RegistryObject<Item> DART_POUCH = ITEMS.register("dart_pouch",
-            () -> new DartPouchItem(new Item.Properties().stacksTo(1)));
 
+    public static final RegistryObject<Item> DART_POUCH = ITEMS.register("dart_pouch",
+            () -> new DartPouchItem(null, new Item.Properties().stacksTo(1)));
+
+    public static final Map<DyeColor, RegistryObject<Item>> COLORED_DART_POUCHES = new HashMap<>();
+
+    static {
+        for (DyeColor color : DyeColor.values()) {
+            COLORED_DART_POUCHES.put(color, ITEMS.register("dart_pouch_" + color.getName(),
+                    () -> new DartPouchItem(color, new Item.Properties().stacksTo(1))));
+        }
+    }
 
 
     //MISC
