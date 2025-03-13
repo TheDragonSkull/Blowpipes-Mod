@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "blowpipemod:block/dart_table/dart_table_bottom",
+    "east": "blowpipemod:block/dart_table/dart_table_front",
+    "north": "blowpipemod:block/dart_table/dart_table_side",
+    "south": "blowpipemod:block/dart_table/dart_table_side",
+    "up": "blowpipemod:block/dart_table/dart_table_top",
+    "west": "blowpipemod:block/dart_table/dart_table_front",
+    "particle": "blowpipemod:block/dart_table/dart_table_front"
+  }
+}

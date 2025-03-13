@@ -4,6 +4,7 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
@@ -14,6 +15,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.thedragonskull.blowpipemod.block.ModBlocks;
 import net.thedragonskull.blowpipemod.config.BlowPipeModCommonConfigs;
 import net.thedragonskull.blowpipemod.effect.ModEffects;
 import net.thedragonskull.blowpipemod.enchantment.ModEnchantments;
@@ -24,6 +26,7 @@ import net.thedragonskull.blowpipemod.particle.ModParticles;
 import net.thedragonskull.blowpipemod.potion.ModPotions;
 import net.thedragonskull.blowpipemod.sound.ModSounds;
 import net.thedragonskull.blowpipemod.trigger.ModTriggers;
+import net.thedragonskull.blowpipemod.villager.ModVillagers;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(BlowPipeMod.MOD_ID)
@@ -36,10 +39,12 @@ public class BlowPipeMod {
         modEventBus.addListener(this::commonSetup);
 
         ModItems.register(modEventBus);
+        ModBlocks.register(modEventBus);
         ModSounds.register(modEventBus);
         ModEntities.register(modEventBus);
         ModParticles.register(modEventBus);
         ModEnchantments.register(modEventBus);
+        ModVillagers.register(modEventBus);
 
         ModEffects.register(modEventBus);
         ModPotions.register(modEventBus);
@@ -82,6 +87,12 @@ public class BlowPipeMod {
             for (DyeColor color : DyeColor.values()) {
                 event.accept(ModItems.COLORED_DART_POUCHES.get(color));
             }
+        }
+
+        if (event.getTabKey() == CreativeModeTabs.FUNCTIONAL_BLOCKS) {
+            event.getEntries().putAfter(Blocks.SMITHING_TABLE.asItem().getDefaultInstance(),
+                    ModBlocks.DART_TABLE.get().asItem().getDefaultInstance(),
+                    CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
         }
     }
 
