@@ -28,6 +28,10 @@
   "item.blowpipemod.dart_pouch_red": "Dart Pouch (Red)",
   "item.blowpipemod.dart_pouch_black": "Dart Pouch (Black)",
 
+  "block.blowpipemod.dart_table": "Dart Table",
+
+  "entity.minecraft.villager.blowpipemod.hunter": "Hunter",
+
 
   "enchantment.blowpipemod.blow_power": "§5Blow Power§5",
   "enchantment.blowpipemod.focus": "§5Focus§5",

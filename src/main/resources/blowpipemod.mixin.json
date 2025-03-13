@@ -8,5 +8,8 @@
   },
   "mixins": [
     "VillagerOfferCapMixin"
+  ],
+  "client": [
+    "HunterRendererMixin"
   ]
 }
