@@ -1,11 +1,11 @@
 package net.thedragonskull.blowpipemod.mixin;
 
 import com.google.common.collect.Sets;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.npc.Villager;
+import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.entity.npc.VillagerTrades;
 import net.minecraft.world.item.trading.MerchantOffer;
 import net.minecraft.world.item.trading.MerchantOffers;
@@ -25,15 +25,16 @@ public abstract class VillagerOfferCapMixin extends Entity {
 
 
     /**
-     * @author
-     * @reason
+     * @author TheDragonSkull
+     * @reason Remove Hunter offer cap
      */
     @Overwrite
     protected void addOffersFromItemListings(MerchantOffers pGivenMerchantOffers, VillagerTrades.ItemListing[] pNewTrades, int pMaxNumbers) {
         AbstractVillager villager = (AbstractVillager) (Object) this;
         Villager actualVillager = (Villager) villager;
+        VillagerProfession villagerProfession = actualVillager.getVillagerData().getProfession();
 
-        if (actualVillager.getVillagerData().getProfession() == ModVillagers.HUNTER.get()) {
+        if (villagerProfession == ModVillagers.HUNTER.get()) {
 
             for (VillagerTrades.ItemListing itemListing : pNewTrades) {
                 MerchantOffer merchantOffer = itemListing.getOffer(villager, this.random);
