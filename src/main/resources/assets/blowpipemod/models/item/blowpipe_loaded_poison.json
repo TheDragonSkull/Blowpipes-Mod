@@ -6,7 +6,7 @@
 		"4": "blowpipemod:item/blowpipes/wood2",
 		"5": "blowpipemod:item/darts/oak_log",
 		"7": "blowpipemod:item/darts/tela",
-		"8": "blowpipemod:item/poison_dart_feather"
+		"8": "blowpipemod:item/darts/poison_dart_feather"
 	},
 	"elements": [
 		{
