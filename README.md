@@ -4,7 +4,7 @@
 [![CurseForge Versions](https://cf.way2muchnoise.eu/versions/1209549.svg)](https://www.curseforge.com/minecraft/mc-mods/thedragons-blowpipes)
 [![CurseForge Downloads](https://cf.way2muchnoise.eu/short_1209549_downloads.svg)](https://www.curseforge.com/minecraft/mc-mods/thedragons-blowpipes)  
 
-[![Modrinth Versions](https://img.shields.io/modrinth/game-versions/9nM4QfnH?label=Avaliable%20for)](https://modrinth.com/mod/thedragons-blowpipes) 
+[![Modrinth Versions](https://img.shields.io/modrinth/game-versions/9nM4QfnH?label=Avaliable%20for&color=82ff80)](https://modrinth.com/mod/thedragons-blowpipes) 
 [![Modrinth Downloads](https://img.shields.io/modrinth/dt/9nM4QfnH?logo=modrinth&color=82ff80)](https://modrinth.com/mod/thedragons-blowpipes)
 
 
