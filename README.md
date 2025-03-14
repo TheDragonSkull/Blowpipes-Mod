@@ -43,6 +43,9 @@ This mod introduces a blowpipe with a unique reloading system and various types 
 
 ![image](https://github.com/user-attachments/assets/52bba24f-8772-41fa-ba08-6b9cdcb51e0e)
 
+![hunter tent (1)](https://github.com/user-attachments/assets/bb75f3af-306f-4545-bdd2-6de64266c82d)
+
+
 ---
 
 🖋 Dependencies:
