@@ -20,6 +20,7 @@ import net.thedragonskull.blowpipemod.config.BlowPipeModCommonConfigs;
 import net.thedragonskull.blowpipemod.effect.ModEffects;
 import net.thedragonskull.blowpipemod.enchantment.ModEnchantments;
 import net.thedragonskull.blowpipemod.entity.ModEntities;
+import net.thedragonskull.blowpipemod.item.ModCreativeModeTabs;
 import net.thedragonskull.blowpipemod.item.ModItems;
 import net.thedragonskull.blowpipemod.menu.ModMenuTypes;
 import net.thedragonskull.blowpipemod.particle.ModParticles;
@@ -50,6 +51,7 @@ public class BlowPipeMod {
         ModPotions.register(modEventBus);
 
         ModTriggers.register();
+        ModCreativeModeTabs.register(modEventBus);
 
         ModMenuTypes.MENU_TYPES.register(modEventBus);
 
@@ -65,15 +67,10 @@ public class BlowPipeMod {
 
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
         if (event.getTabKey() == CreativeModeTabs.COMBAT) {
-            event.getEntries().putAfter(Items.TRIDENT.getDefaultInstance(),
-                    ModItems.BLOWPIPE.get().asItem().getDefaultInstance(),
-                    CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-            event.getEntries().putAfter(ModItems.BLOWPIPE.get().getDefaultInstance(),
-                    ModItems.BAMBOO_BLOWPIPE.get().asItem().getDefaultInstance(),
-                    CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-            event.getEntries().putAfter(ModItems.BAMBOO_BLOWPIPE.get().getDefaultInstance(),
-                    ModItems.DARK_BAMBOO_BLOWPIPE.get().asItem().getDefaultInstance(),
-                    CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+
+            event.accept(ModItems.BLOWPIPE);
+            event.accept(ModItems.BAMBOO_BLOWPIPE);
+            event.accept(ModItems.DARK_BAMBOO_BLOWPIPE);
 
             event.accept(ModItems.DART_BASE);
             event.accept(ModItems.IRON_HEAD_DART);
@@ -81,6 +78,13 @@ public class BlowPipeMod {
             event.accept(ModItems.POWDER_DART);
             event.accept(ModItems.LURE_DART);
             event.accept(ModItems.RAZOR_DART);
+        }
+
+        if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
+
+            event.getEntries().putAfter(Items.ELYTRA.getDefaultInstance(),
+                    ModItems.RANGE_GOGGLES.get().getDefaultInstance(),
+                    CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
 
             event.accept(ModItems.DART_POUCH);
 
