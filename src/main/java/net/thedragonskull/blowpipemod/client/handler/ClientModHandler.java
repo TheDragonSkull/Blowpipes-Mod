@@ -70,6 +70,7 @@ public class ClientModHandler {
     public static void onRegisterGuiOverlays(RegisterGuiOverlaysEvent event) {
         event.registerAboveAll("selected_dart", SelectedDartOverlay.SELECTED_DART);
         event.registerAboveAll("scope", GogglesScopeOverlay.SCOPE_OVERLAY);
+        event.registerAboveAll("scope_info", GogglesScopeOverlay.SCOPE_INFO);
     }
 
     @SubscribeEvent
