@@ -151,11 +151,14 @@ public class GogglesScopeOverlay {
         float entityHeight = entity.getBbHeight();
         float entityWidth = entity.getBbWidth();
 
-        float maxEntityHeight = 2.0F;
+        // Tomar el mayor tamaño entre altura y ancho para un mejor escalado
+        float maxSize = Math.max(entityHeight, entityWidth);
 
-        float scale = (size / maxEntityHeight) * (maxEntityHeight / entityHeight);
+        // Escalar basado en el tamaño máximo de la entidad
+        float scale = size / maxSize;
 
-        scale = Math.min(scale, size / entityWidth * 0.8F);
+        // Limitar el escalado para evitar exageraciones en algunos mobs
+        scale = Math.min(scale, size * 0.8F / entityWidth);
 
         InventoryScreen.renderEntityInInventoryFollowsAngle(guiGraphics, x, y, (int) scale, 1, 0, entity);
     }
