@@ -20,7 +20,7 @@ import net.thedragonskull.blowpipemod.util.RangeGogglesUtil;
 
 public class GogglesScopeOverlay {
     public static final ResourceLocation SCOPE = new ResourceLocation(BlowPipeMod.MOD_ID,
-            "textures/gui/scope.png");
+            "textures/gui/scope_v2.png");
     public static final ResourceLocation SCOUTER = new ResourceLocation(BlowPipeMod.MOD_ID,
             "textures/gui/scope_indicator.png");
 
@@ -122,7 +122,7 @@ public class GogglesScopeOverlay {
                         int scouter_y = 0;
 
                         guiGraphics.blit(SCOUTER, scouter_x - 5, scouter_y - 15, 0, 0, scouterSize, scouterSize, scouterSize, scouterSize);
-                        renderEntityInGUI(guiGraphics, scouter_x, scouter_y + 150, 40, livingEntity);
+                        renderEntityInGUI(guiGraphics, scouter_x + 70, scouter_y + 58, 25, livingEntity);
 
                         guiGraphics.pose().pushPose();
                         float scale = 0.6f;
