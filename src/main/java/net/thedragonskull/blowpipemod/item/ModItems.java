@@ -10,6 +10,7 @@ import net.thedragonskull.blowpipemod.BlowPipeMod;
 import net.thedragonskull.blowpipemod.item.custom.BlowPipe;
 import net.thedragonskull.blowpipemod.item.custom.DartItem;
 import net.thedragonskull.blowpipemod.item.custom.DartPouchItem;
+import net.thedragonskull.blowpipemod.item.custom.RangeGoggles;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -49,6 +50,10 @@ public class ModItems {
     public static final RegistryObject<Item> RAZOR_DART = ITEMS.register("razor_dart",
             () -> new DartItem(new Item.Properties().stacksTo(16)));
 
+
+
+    public static final RegistryObject<Item> RANGE_GOGGLES = ITEMS.register("range_goggles",
+            () -> new RangeGoggles(new Item.Properties().stacksTo(1)));
 
 
 

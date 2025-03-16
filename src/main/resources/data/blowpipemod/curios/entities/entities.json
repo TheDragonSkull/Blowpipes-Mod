@@ -1,4 +1,4 @@
 {
   "entities": ["player"],
-  "slots": ["dart_pouch"]
+  "slots": ["01_range_goggles", "dart_pouch"]
 }

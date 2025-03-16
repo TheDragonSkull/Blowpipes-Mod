@@ -9,6 +9,7 @@
   "item.blowpipemod.powder_dart": "Black Powder Dart",
   "item.blowpipemod.lure_dart": "Lure Dart",
   "item.blowpipemod.razor_dart": "Razor Tip Dart",
+  "item.blowpipemod.range_goggles": "Rangefinder Binoculars",
 
   "item.blowpipemod.dart_pouch": "Dart Pouch",
   "item.blowpipemod.dart_pouch_white": "Dart Pouch (White)",
@@ -32,6 +33,7 @@
 
   "entity.minecraft.villager.blowpipemod.hunter": "Hunter",
 
+  "creativetab.blowpipe_tab": "Blowpipes Mod",
 
   "enchantment.blowpipemod.blow_power": "§5Blow Power§5",
   "enchantment.blowpipemod.focus": "§5Focus§5",
@@ -51,5 +53,6 @@
 
   "container.dart_pouch": "Dart Pouch",
 
-  "curios.identifier.dart_pouch": "Dart Pouch"
+  "curios.identifier.01_range_goggles": "Rangefinder Binoculars Slot",
+  "curios.identifier.dart_pouch": "Dart Pouch Slot"
 }

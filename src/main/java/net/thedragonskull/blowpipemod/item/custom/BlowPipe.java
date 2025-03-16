@@ -86,7 +86,7 @@ public class BlowPipe extends ProjectileWeaponItem implements IFirstPersonAnimat
             float f12 = Mth.clamp(timeLeft / 5.0F, 0.0F, 1.0F);
 
             //Translation
-            poseStack.translate(-0.625D, 0.25D, -0.35D + f12 * 0.55D);
+            poseStack.translate(-0.63D, 0.25D, -0.35D + f12 * 0.55D);
 
             //Rotation
             poseStack.mulPose(Axis.XP.rotationDegrees(-90));

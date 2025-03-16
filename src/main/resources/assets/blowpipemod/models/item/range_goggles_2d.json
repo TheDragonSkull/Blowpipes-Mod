@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "blowpipemod:item/goggles/range_goggles_2d"
+  }
+}

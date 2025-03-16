@@ -162,6 +162,17 @@ public class CommonEvents {
                     )
             );
 
+            // Level 5
+            trades.get(5).add((pTrader, pRandom) ->
+                    new MerchantOffer(
+                            new ItemStack(Items.EMERALD, 30), //TODO: change for monster trophy
+                            new ItemStack(ModItems.RANGE_GOGGLES.get(), 1),
+                            10,
+                            50,
+                            0.5f
+                    )
+            );
+
         }
 
     }
