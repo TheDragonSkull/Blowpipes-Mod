@@ -167,7 +167,7 @@ public class CommonEvents {
                     new MerchantOffer(
                             new ItemStack(Items.EMERALD, 30), //TODO: change for monster trophy
                             new ItemStack(ModItems.RANGE_GOGGLES.get(), 1),
-                            10,
+                            1,
                             50,
                             0.5f
                     )
@@ -180,7 +180,7 @@ public class CommonEvents {
     @SubscribeEvent
     public static void addCustomWanderingTrades(WandererTradesEvent event) {
         List<VillagerTrades.ItemListing> genericTrades = event.getGenericTrades();
-        List<VillagerTrades.ItemListing> rareTrades = event.getRareTrades(); //TODO: goggles lvl 5
+        List<VillagerTrades.ItemListing> rareTrades = event.getRareTrades();
         
         genericTrades.add((pTrader, pRandom) -> new MerchantOffer(
                 new ItemStack(Items.EMERALD, 6),
@@ -208,6 +208,18 @@ public class CommonEvents {
                     3, 2, 0.2f
             );
         });
+
+        rareTrades.add((pTrader, pRandom) -> {
+            ItemStack goggles = new ItemStack(ModItems.RANGE_GOGGLES.get());
+
+            return new MerchantOffer(
+                    new ItemStack(Items.EMERALD, 48),
+                    new ItemStack(goggles.getItem()),
+                    1, 50, 0.5f
+            );
+        });
+
+
     }
 
 
