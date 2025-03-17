@@ -19,6 +19,7 @@ public class CommonModEvents {
         event.enqueueWork(() -> {
             event.enqueueWork(PacketHandler::register);
 
+            // Bleed potion brewing recipe
             BrewingRecipeRegistry.addRecipe(new BrewingRecipeUtil(
                     Potions.AWKWARD,
                     Items.PRISMARINE_SHARD,
