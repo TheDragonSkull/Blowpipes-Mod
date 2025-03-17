@@ -40,4 +40,11 @@ public class Keybindings {
             InputConstants.getKey(InputConstants.KEY_LEFT,-1),
             BLOWPIPE_MOD
     );
+
+    public final KeyMapping nightVision = new KeyMapping(
+            "key." + BlowPipeMod.MOD_ID + ".night_vision",
+            KeyConflictContext.IN_GAME,
+            InputConstants.getKey(InputConstants.KEY_N,-1),
+            BLOWPIPE_MOD
+    );
 }

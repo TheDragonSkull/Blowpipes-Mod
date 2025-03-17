@@ -28,5 +28,17 @@
     "sounds": [
       "blowpipemod:blowpipe_rat"
     ]
+  },
+  "night_vision": {
+    "subtitle": "sounds.blowpipemod.night_vision",
+    "sounds": [
+      "blowpipemod:night_vision"
+    ]
+  },
+  "switch": {
+    "subtitle": "sounds.blowpipemod.switch",
+    "sounds": [
+      "blowpipemod:switch"
+    ]
   }
 }

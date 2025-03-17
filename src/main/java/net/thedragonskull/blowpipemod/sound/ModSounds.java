@@ -31,6 +31,12 @@ public class ModSounds {
     public static final RegistryObject<SoundEvent> BLOWPIPE_RAT =
             registerSoundEvents("blowpipe_rat");
 
+    public static final RegistryObject<SoundEvent> NIGHT_VISION =
+            registerSoundEvents("night_vision");
+
+    public static final RegistryObject<SoundEvent> SWITCH =
+            registerSoundEvents("switch");
+
     public static void register(IEventBus eventBus) {
         SOUND_EVENTS.register(eventBus);
     }

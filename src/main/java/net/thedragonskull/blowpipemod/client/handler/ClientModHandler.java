@@ -79,6 +79,7 @@ public class ClientModHandler {
         event.register(Keybindings.INSTANCE.openDartPouchKey);
         event.register(Keybindings.INSTANCE.nextDart);
         event.register(Keybindings.INSTANCE.prevDart);
+        event.register(Keybindings.INSTANCE.nightVision);
     }
 
     @SubscribeEvent

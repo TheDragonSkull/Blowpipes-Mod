@@ -16,6 +16,7 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.client.gui.overlay.IGuiOverlay;
 import net.thedragonskull.blowpipemod.BlowPipeMod;
+import net.thedragonskull.blowpipemod.client.handler.ClientForgeHandler;
 import net.thedragonskull.blowpipemod.util.RangeGogglesUtil;
 
 public class GogglesScopeOverlay {
@@ -77,7 +78,8 @@ public class GogglesScopeOverlay {
         if (player != null && RangeGogglesUtil.hasGogglesEquipped(player) && mc.options.getCameraType().isFirstPerson()) {
 
             // Ray tracing & target render
-            double maxDistance = 40.0;
+            double maxDistance = ClientForgeHandler.isZooming ? 80.0 : 40.0;
+
             Vec3 eyePosition = player.getEyePosition(partialTick);
             Vec3 lookVector = player.getViewVector(partialTick).scale(maxDistance);
             Vec3 targetPosition = eyePosition.add(lookVector);
@@ -128,11 +130,10 @@ public class GogglesScopeOverlay {
                         float scale = 0.6f;
                         guiGraphics.pose().scale(scale, scale, scale);
 
-                        float scaleFactor = scale;
-                        int adj_x = (int) ((scouter_x - 4) / scaleFactor);
-                        int adj_y1 = (int) ((scouter_y + 25) / scaleFactor);
-                        int adj_y2 = (int) ((scouter_y + 35) / scaleFactor);
-                        int adj_y3 = (int) ((scouter_y + 44) / scaleFactor);
+                        int adj_x = (int) ((scouter_x - 4) / scale);
+                        int adj_y1 = (int) ((scouter_y + 25) / scale);
+                        int adj_y2 = (int) ((scouter_y + 35) / scale);
+                        int adj_y3 = (int) ((scouter_y + 44) / scale);
 
                         guiGraphics.drawString(mc.font, Component.literal(mobName), adj_x, adj_y1, 0xFFFFFF, false);
                         guiGraphics.drawString(mc.font, Component.literal("Health: " + health + "/" + maxHealth), adj_x, adj_y2, 0xFFFFFF, false);
@@ -151,13 +152,8 @@ public class GogglesScopeOverlay {
         float entityHeight = entity.getBbHeight();
         float entityWidth = entity.getBbWidth();
 
-        // Tomar el mayor tamaño entre altura y ancho para un mejor escalado
         float maxSize = Math.max(entityHeight, entityWidth);
-
-        // Escalar basado en el tamaño máximo de la entidad
         float scale = size / maxSize;
-
-        // Limitar el escalado para evitar exageraciones en algunos mobs
         scale = Math.min(scale, size * 0.8F / entityWidth);
 
         InventoryScreen.renderEntityInInventoryFollowsAngle(guiGraphics, x, y, (int) scale, 1, 0, entity);
