@@ -9,4 +9,8 @@ public class FocusEnchantment extends Enchantment {
         super(pRarity, pCategory, pApplicableSlots);
     }
 
+    @Override
+    public boolean isCurse() {
+        return true;
+    }
 }

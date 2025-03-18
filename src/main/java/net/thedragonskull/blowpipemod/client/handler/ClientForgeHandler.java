@@ -135,7 +135,7 @@ public class ClientForgeHandler {
                     deltaTicks *= deltaTicks;
                 }
 
-                fovModifier *= 1f - deltaTicks * 0.5f;
+                fovModifier *= 0.75f - deltaTicks * 0.5f;
                 event.setNewFovModifier(fovModifier);
             }
         }
