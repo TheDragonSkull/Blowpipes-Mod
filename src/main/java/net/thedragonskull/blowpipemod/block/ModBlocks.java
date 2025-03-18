@@ -10,6 +10,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.thedragonskull.blowpipemod.BlowPipeMod;
+import net.thedragonskull.blowpipemod.block.custom.BlowpipeGroundStandBlock;
 import net.thedragonskull.blowpipemod.item.ModItems;
 
 import java.util.function.Supplier;
@@ -23,6 +24,8 @@ public class ModBlocks {
     public static final RegistryObject<Block> DART_TABLE = registerBlock("dart_table",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.BAMBOO_PLANKS)));
 
+    public static final RegistryObject<Block> BLOWPIPE_GROUND_STAND = registerBlock("blowpipe_ground_stand",
+            () -> new BlowpipeGroundStandBlock(BlockBehaviour.Properties.copy(Blocks.SPRUCE_WOOD).noOcclusion()));
 
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
@@ -31,7 +34,7 @@ public class ModBlocks {
         return toReturn;
     }
 
-    private static <T extends Block>RegistryObject<Item> registerBlockItem(String name, RegistryObject<T> block) {
+    private static <T extends Block> RegistryObject<Item> registerBlockItem(String name, RegistryObject<T> block) {
         return ModItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
     }
 

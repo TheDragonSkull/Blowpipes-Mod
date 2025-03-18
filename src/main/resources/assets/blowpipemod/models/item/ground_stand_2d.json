@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "blowpipemod:block/ground_stand/ground_stand_2d"
+  }
+}

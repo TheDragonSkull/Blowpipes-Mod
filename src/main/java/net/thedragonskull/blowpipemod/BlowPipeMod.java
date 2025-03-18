@@ -16,6 +16,7 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.thedragonskull.blowpipemod.block.ModBlocks;
+import net.thedragonskull.blowpipemod.block.entity.ModBlockEntities;
 import net.thedragonskull.blowpipemod.config.BlowPipeModCommonConfigs;
 import net.thedragonskull.blowpipemod.effect.ModEffects;
 import net.thedragonskull.blowpipemod.enchantment.ModEnchantments;
@@ -41,6 +42,7 @@ public class BlowPipeMod {
 
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
+        ModBlockEntities.register(modEventBus);
         ModSounds.register(modEventBus);
         ModEntities.register(modEventBus);
         ModParticles.register(modEventBus);
@@ -96,6 +98,9 @@ public class BlowPipeMod {
         if (event.getTabKey() == CreativeModeTabs.FUNCTIONAL_BLOCKS) {
             event.getEntries().putAfter(Blocks.SMITHING_TABLE.asItem().getDefaultInstance(),
                     ModBlocks.DART_TABLE.get().asItem().getDefaultInstance(),
+                    CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.getEntries().putAfter(ModBlocks.DART_TABLE.get().asItem().getDefaultInstance(),
+                    ModBlocks.BLOWPIPE_GROUND_STAND.get().asItem().getDefaultInstance(),
                     CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
         }
     }

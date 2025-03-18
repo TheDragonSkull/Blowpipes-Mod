@@ -40,6 +40,7 @@ public class ModCreativeModeTabs {
                         pOutput.accept(ModItems.RANGE_GOGGLES.get());
 
                         pOutput.accept(ModBlocks.DART_TABLE.get());
+                        pOutput.accept(ModBlocks.BLOWPIPE_GROUND_STAND.get());
 
                     })
                     .build());

@@ -1,4 +1,4 @@
-package net.thedragonskull.blowpipemod.client.handler;
+package net.thedragonskull.blowpipemod.event;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
@@ -10,6 +10,8 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.registries.RegistryObject;
 import net.thedragonskull.blowpipemod.BlowPipeMod;
+import net.thedragonskull.blowpipemod.block.entity.ModBlockEntities;
+import net.thedragonskull.blowpipemod.block.entity.renderer.BlowpipeGroundStandBlockEntityRenderer;
 import net.thedragonskull.blowpipemod.client.Keybindings;
 import net.thedragonskull.blowpipemod.client.gui.GogglesScopeOverlay;
 import net.thedragonskull.blowpipemod.client.gui.SelectedDartOverlay;
@@ -27,7 +29,7 @@ import net.thedragonskull.blowpipemod.util.ModItemProperties;
 import top.theillusivec4.curios.api.client.CuriosRendererRegistry;
 
 @Mod.EventBusSubscriber(modid = BlowPipeMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-public class ClientModHandler {
+public class ClientModEvents {
 
     @SubscribeEvent
     public static void clientSetup(FMLClientSetupEvent event) {
@@ -49,6 +51,11 @@ public class ClientModHandler {
     public static void onRegisterLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(DartProjectileModel.LAYER_LOCATION, DartProjectileModel::createBodyLayer);
         event.registerLayerDefinition(DartPouchModel.LAYER_LOCATION, DartPouchModel::createBodyLayer);
+    }
+
+    @SubscribeEvent
+    public static void registerBER(EntityRenderersEvent.RegisterRenderers event) {
+        event.registerBlockEntityRenderer(ModBlockEntities.BLOWPIPE_GROUND_STAND_BE.get(), BlowpipeGroundStandBlockEntityRenderer::new);
     }
 
     @SubscribeEvent
