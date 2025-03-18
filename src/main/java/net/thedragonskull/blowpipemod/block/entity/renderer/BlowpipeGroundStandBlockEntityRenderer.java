@@ -18,7 +18,6 @@ import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.block.state.BlockState;
 import net.thedragonskull.blowpipemod.block.custom.BlowpipeGroundStandBlock;
 import net.thedragonskull.blowpipemod.block.entity.BlowpipeGroundStandBlockEntity;
-import net.thedragonskull.blowpipemod.item.ModItems;
 
 public class BlowpipeGroundStandBlockEntityRenderer implements BlockEntityRenderer<BlowpipeGroundStandBlockEntity> {
 
@@ -40,22 +39,25 @@ public class BlowpipeGroundStandBlockEntityRenderer implements BlockEntityRender
 
         pPoseStack.pushPose();
 
+        pPoseStack.translate(0.5f, 0.65f, 0.5f);
+        pPoseStack.mulPose(Axis.XP.rotationDegrees(90));
+
         switch (direction) {
             case NORTH -> {
-                pPoseStack.translate(0.92f, 0.243f, 0.5f);
                 pPoseStack.mulPose(Axis.ZP.rotationDegrees(90));
-            }
-            case SOUTH -> {
-                pPoseStack.translate(0.5f, 0.243f, 0.086f);
-                pPoseStack.mulPose(Axis.XP.rotationDegrees(90));
+                pPoseStack.translate(0.0f, 0.59f, 0.407f);
+                pPoseStack.mulPose(Axis.XP.rotationDegrees(180));
             }
             case EAST -> {
-                pPoseStack.translate(0.92f, 0.243f, 0.5f);
+                pPoseStack.translate(0.0f, -0.59f, 0.407f);
+            }
+            case SOUTH -> {
                 pPoseStack.mulPose(Axis.ZP.rotationDegrees(90));
+                pPoseStack.translate(0.0f, -0.59f, 0.407f);
             }
             case WEST -> {
-                pPoseStack.translate(0.5f, 0.243f, 0.075f);
-                pPoseStack.mulPose(Axis.XP.rotationDegrees(90));
+                pPoseStack.translate(0.0f, 0.59f, 0.407f);
+                pPoseStack.mulPose(Axis.XP.rotationDegrees(180));
             }
         }
 

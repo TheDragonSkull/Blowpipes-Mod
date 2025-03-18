@@ -43,7 +43,7 @@ public class BlowpipeGroundStandBlockEntity extends BlockEntity {
         if (level == null)
             return;
 
-            // Put blowpipe in stand
+            // Put blowpipe
         if (itemHandler.getStackInSlot(0).isEmpty() && isBlowpipe(heldItem)) {
             ItemStack stack = heldItem.copy();
             stack.setCount(1);
@@ -59,7 +59,7 @@ public class BlowpipeGroundStandBlockEntity extends BlockEntity {
             level.playSound(null, this.getBlockPos(),
                     SoundEvents.BAMBOO_WOOD_BUTTON_CLICK_OFF, SoundSource.BLOCKS);
 
-            // Change blowpipe
+            // Replace blowpipe
         } else if (!itemHandler.getStackInSlot(0).isEmpty() && heldItem.getItem() instanceof BlowPipe) {
             player.getInventory().setItem(selectedSlot, itemHandler.getStackInSlot(0));
             ItemStack stack = heldItem.copy();
@@ -103,13 +103,6 @@ public class BlowpipeGroundStandBlockEntity extends BlockEntity {
     protected void saveAdditional(CompoundTag pTag) {
         pTag.put("StoredBlowpipe", itemHandler.serializeNBT());
         super.saveAdditional(pTag);
-    }
-
-    private void syncWithClient() {
-        if (level != null && !level.isClientSide) {
-            level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), 3);
-            setChanged();
-        }
     }
 
     @Nullable
