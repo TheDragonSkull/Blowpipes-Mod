@@ -41,6 +41,7 @@ public class ModCreativeModeTabs {
 
                         pOutput.accept(ModBlocks.DART_TABLE.get());
                         pOutput.accept(ModBlocks.BLOWPIPE_GROUND_STAND.get());
+                        pOutput.accept(ModBlocks.BLOWPIPE_WALL_STAND.get());
 
                     })
                     .build());

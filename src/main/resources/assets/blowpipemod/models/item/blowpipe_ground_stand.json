@@ -1,15 +1,3 @@
 {
-  "parent": "minecraft:item/handheld",
-  "loader": "forge:separate_transforms",
-  "base": {
-    "parent": "blowpipemod:block/blowpipe_ground_stand"
-  },
-  "perspectives": {
-    "gui": {
-      "parent": "blowpipemod:item/ground_stand_2d"
-    },
-    "fixed": {
-      "parent": "blowpipemod:item/ground_stand_2d"
-    }
-  }
+  "parent": "blowpipemod:block/blowpipe_ground_stand"
 }

@@ -11,6 +11,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.thedragonskull.blowpipemod.BlowPipeMod;
 import net.thedragonskull.blowpipemod.block.custom.BlowpipeGroundStandBlock;
+import net.thedragonskull.blowpipemod.block.custom.BlowpipeWallStandBlock;
 import net.thedragonskull.blowpipemod.item.ModItems;
 
 import java.util.function.Supplier;
@@ -26,6 +27,9 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> BLOWPIPE_GROUND_STAND = registerBlock("blowpipe_ground_stand",
             () -> new BlowpipeGroundStandBlock(BlockBehaviour.Properties.copy(Blocks.SPRUCE_WOOD).noOcclusion()));
+
+    public static final RegistryObject<Block> BLOWPIPE_WALL_STAND = registerBlock("blowpipe_wall_stand",
+            () -> new BlowpipeWallStandBlock(BlockBehaviour.Properties.copy(Blocks.DARK_OAK_WOOD).noOcclusion()));
 
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
