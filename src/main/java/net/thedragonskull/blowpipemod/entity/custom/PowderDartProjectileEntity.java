@@ -1,5 +1,7 @@
 package net.thedragonskull.blowpipemod.entity.custom;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
@@ -17,11 +19,15 @@ import net.minecraft.world.phys.EntityHitResult;
 import net.thedragonskull.blowpipemod.entity.ModEntities;
 import net.thedragonskull.blowpipemod.item.ModItems;
 import net.thedragonskull.blowpipemod.sound.ModSounds;
+import org.jetbrains.annotations.Nullable;
 
 public class PowderDartProjectileEntity extends AbstractDart{
     private int ticksSinceImpact = 0;
     private boolean isEmbedded = false;
     private boolean isExtinguished = false;
+
+    @Nullable
+    private SimpleSoundInstance fuseSoundInstance;
 
     public PowderDartProjectileEntity(EntityType<? extends PowderDartProjectileEntity> entityType, Level level) {
         super(entityType, level);
@@ -61,15 +67,16 @@ public class PowderDartProjectileEntity extends AbstractDart{
     }
 
     private void playImpactSound() {
-        if (!this.isExtinguished) {
-            this.level().playLocalSound(
-                    this.getX(), this.getY(), this.getZ(),
+        if (!this.isExtinguished && this.fuseSoundInstance == null) {
+            this.fuseSoundInstance = SimpleSoundInstance.forUI(
                     ModSounds.BOMB_FUSE.get(),
-                    SoundSource.BLOCKS,
-                    0.5F,
                     1.0F,
-                    false
+                    0.2F
             );
+
+            System.out.println("playing sound");
+
+            Minecraft.getInstance().getSoundManager().play(this.fuseSoundInstance);
         }
     }
 
@@ -83,6 +90,13 @@ public class PowderDartProjectileEntity extends AbstractDart{
     @Override
     public void tick() {
         super.tick();
+
+        if (this.isEmbedded && !this.isExtinguished) {
+            BlockState state = this.level().getBlockState(this.blockPosition());
+            if (state.getBlock() == Blocks.WATER) {
+                extinguishDart();
+            }
+        }
 
         if (this.isEmbedded && ticksSinceImpact == 0) {
             playImpactSound();
@@ -149,6 +163,11 @@ public class PowderDartProjectileEntity extends AbstractDart{
                     1.0F,
                     1.0F
             );
+        }
+
+        if (this.fuseSoundInstance != null) {
+            Minecraft.getInstance().getSoundManager().stop(this.fuseSoundInstance);
+            this.fuseSoundInstance = null;
         }
     }
 
