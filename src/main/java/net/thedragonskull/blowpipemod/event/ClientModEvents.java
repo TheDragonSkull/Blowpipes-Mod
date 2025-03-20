@@ -13,6 +13,7 @@ import net.thedragonskull.blowpipemod.BlowPipeMod;
 import net.thedragonskull.blowpipemod.block.entity.ModBlockEntities;
 import net.thedragonskull.blowpipemod.block.entity.renderer.BlowpipeGroundStandBlockEntityRenderer;
 import net.thedragonskull.blowpipemod.block.entity.renderer.BlowpipeWallStandBlockEntityRenderer;
+import net.thedragonskull.blowpipemod.block.entity.renderer.DartStandBlockEntityRenderer;
 import net.thedragonskull.blowpipemod.client.Keybindings;
 import net.thedragonskull.blowpipemod.client.gui.GogglesScopeOverlay;
 import net.thedragonskull.blowpipemod.client.gui.SelectedDartOverlay;
@@ -58,6 +59,7 @@ public class ClientModEvents {
     public static void registerBER(EntityRenderersEvent.RegisterRenderers event) {
         event.registerBlockEntityRenderer(ModBlockEntities.BLOWPIPE_GROUND_STAND_BE.get(), BlowpipeGroundStandBlockEntityRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.BLOWPIPE_WALL_STAND_BE.get(), BlowpipeWallStandBlockEntityRenderer::new);
+        event.registerBlockEntityRenderer(ModBlockEntities.DART_STAND_BE.get(), DartStandBlockEntityRenderer::new);
     }
 
     @SubscribeEvent

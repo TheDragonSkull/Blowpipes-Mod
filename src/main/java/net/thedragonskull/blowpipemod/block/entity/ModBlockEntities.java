@@ -23,6 +23,11 @@ public class ModBlockEntities {
                     BlockEntityType.Builder.of(BlowpipeWallStandBlockEntity::new,
                             ModBlocks.BLOWPIPE_WALL_STAND.get()).build(null));
 
+    public static final RegistryObject<BlockEntityType<DartStandBlockEntity>> DART_STAND_BE =
+            BLOCK_ENTITIES.register("dart_stand_be", () ->
+                    BlockEntityType.Builder.of(DartStandBlockEntity::new,
+                            ModBlocks.DART_STAND.get()).build(null));
+
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITIES.register(eventBus);
     }

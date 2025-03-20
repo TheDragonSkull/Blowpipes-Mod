@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "blowpipemod:block/dart_stand" },
+    "facing=east": { "model": "blowpipemod:block/dart_stand", "y": 90 },
+    "facing=south": { "model": "blowpipemod:block/dart_stand", "y": 180 },
+    "facing=west": { "model": "blowpipemod:block/dart_stand", "y": 270 }
+  }
+}

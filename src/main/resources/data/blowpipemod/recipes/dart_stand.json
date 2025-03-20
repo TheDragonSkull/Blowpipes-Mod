@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "Y": {
+      "item": "minecraft:stripped_spruce_wood"
+    },
+    "#": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "pattern": [
+    "# #",
+    "YYY"
+  ],
+  "result": {
+    "count": 1,
+    "item": "blowpipemod:dart_stand"
+  },
+  "show_notification": true
+}

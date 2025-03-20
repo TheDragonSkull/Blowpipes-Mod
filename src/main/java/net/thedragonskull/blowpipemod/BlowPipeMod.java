@@ -105,6 +105,9 @@ public class BlowPipeMod {
             event.getEntries().putAfter(ModBlocks.BLOWPIPE_GROUND_STAND.get().asItem().getDefaultInstance(),
                     ModBlocks.BLOWPIPE_WALL_STAND.get().asItem().getDefaultInstance(),
                     CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.getEntries().putAfter(ModBlocks.BLOWPIPE_WALL_STAND.get().asItem().getDefaultInstance(),
+                    ModBlocks.DART_STAND.get().asItem().getDefaultInstance(),
+                    CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
         }
     }
 
