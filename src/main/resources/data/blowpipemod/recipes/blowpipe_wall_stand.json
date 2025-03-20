@@ -7,16 +7,19 @@
     },
     "Y": {
       "item": "minecraft:stripped_spruce_wood"
+    },
+    "#": {
+      "item": "minecraft:iron_ingot"
     }
   },
   "pattern": [
-    "X X",
-    " X ",
-    "YYY"
+    "XYX",
+    "# #",
+    "XYX"
   ],
   "result": {
     "count": 1,
-    "item": "blowpipemod:blowpipe_ground_stand"
+    "item": "blowpipemod:blowpipe_wall_stand"
   },
   "show_notification": true
 }
