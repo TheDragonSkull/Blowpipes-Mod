@@ -16,7 +16,7 @@ import org.jetbrains.annotations.NotNull;
 
 
 public class DartProjectileRenderer extends EntityRenderer<DartProjectileEntity> {
-    private DartProjectileModel model;
+    private final DartProjectileModel model;
 
     public DartProjectileRenderer(EntityRendererProvider.Context pContext) {
         super(pContext);
@@ -30,7 +30,7 @@ public class DartProjectileRenderer extends EntityRenderer<DartProjectileEntity>
         if(!pEntity.isGrounded()) {
             poseStack.mulPose(Axis.YP.rotationDegrees(180 + Mth.lerp(partialTicks, pEntity.yRotO, pEntity.getYRot())));
             float pitch = Mth.lerp(partialTicks, pEntity.xRotO, pEntity.getXRot());
-            poseStack.mulPose(Axis.XP.rotationDegrees(pitch)); // Quitamos el negativo
+            poseStack.mulPose(Axis.XP.rotationDegrees(pitch));
             poseStack.translate(0, -1.5f, 0.05);
 
 

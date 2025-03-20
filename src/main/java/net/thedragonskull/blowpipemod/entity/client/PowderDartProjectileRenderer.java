@@ -11,7 +11,6 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.thedragonskull.blowpipemod.entity.custom.PoisonDartProjectileEntity;
 import net.thedragonskull.blowpipemod.entity.custom.PowderDartProjectileEntity;
 import net.thedragonskull.blowpipemod.item.ModItems;
 
@@ -31,7 +30,7 @@ public class PowderDartProjectileRenderer extends EntityRenderer<PowderDartProje
         if(!pEntity.isGrounded()) {
             poseStack.mulPose(Axis.YP.rotationDegrees(180 + Mth.lerp(partialTicks, pEntity.yRotO, pEntity.getYRot())));
             float pitch = Mth.lerp(partialTicks, pEntity.xRotO, pEntity.getXRot());
-            poseStack.mulPose(Axis.XP.rotationDegrees(pitch)); // Quitamos el negativo
+            poseStack.mulPose(Axis.XP.rotationDegrees(pitch));
             poseStack.translate(0, -0.4f, 0.2);
 
 
