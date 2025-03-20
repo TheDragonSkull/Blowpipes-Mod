@@ -60,14 +60,18 @@ public class LureDartProjectileEntity extends AbstractDart{
             //Detect nearby monsters
             List<Monster> nearbyMonsters = this.level().getEntitiesOfClass(
                     Monster.class,
-                    mob.getBoundingBox().inflate(5),
+                    mob.getBoundingBox().inflate(15),
                     monster -> monster != mob && monster.isAlive()
             );
 
             //Make the mob attack new mob target
             for (Monster monster : nearbyMonsters) {
-                if (monster.getTarget() != mob) {
+                if (monster.getType() != EntityType.WARDEN && monster.getTarget() != mob) {
                     monster.setTarget(mob);
+                }
+
+                if (monster.getType() == EntityType.WARDEN && mob.hasEffect(MobEffects.GLOWING)) {
+                    monster.setTarget(null);
                 }
             }
         }
@@ -120,7 +124,8 @@ public class LureDartProjectileEntity extends AbstractDart{
         double detectionRange = 5.0D;
 
         this.level().getEntities(this, this.getBoundingBox().inflate(detectionRange), entity -> {
-            return entity instanceof Monster;
+            return entity instanceof Monster &&
+                    !(entity.getType().equals(EntityType.GIANT) || entity.getType().equals(EntityType.WARDEN));
         }).forEach(entity -> {
             if (entity instanceof Mob mob) {
                 mob.getNavigation().moveTo(this.getX(), this.getY(), this.getZ(), 1.0D);
