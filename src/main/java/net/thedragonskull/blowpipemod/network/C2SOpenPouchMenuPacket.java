@@ -30,7 +30,7 @@ public class C2SOpenPouchMenuPacket {
             if (player == null) return;
 
             ItemStack pouchStack = findDartPouch(player);
-            if (pouchStack.isEmpty()) return; // Si no tiene el pouch, no hacemos nada
+            if (pouchStack.isEmpty()) return;
 
             pouchStack.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(cap -> {
                 if (cap instanceof ItemStackHandler pouchInventory) {

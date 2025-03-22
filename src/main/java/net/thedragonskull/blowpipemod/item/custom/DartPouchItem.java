@@ -35,7 +35,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class DartPouchItem extends Item implements ICurioItem {
-    private final DyeColor color; // Guardamos el color
+    private final DyeColor color;
 
     public DartPouchItem(@Nullable DyeColor color, Properties properties) {
         super(properties);

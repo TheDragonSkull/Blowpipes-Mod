@@ -65,7 +65,7 @@ public class C2SReloadBlowpipePacket {
                             SoundEvents.BRUSH_GENERIC, SoundSource.PLAYERS, 1.0F, 1.0F);
                     sendMessage(player, "¡Blowpipe unloaded! ❌", ChatFormatting.RED);
                     tag.remove("Dart");
-                    tag.remove("dart_type"); // También elimina el tipo de dardo
+                    tag.remove("dart_type");
                     return;
                 }
 
