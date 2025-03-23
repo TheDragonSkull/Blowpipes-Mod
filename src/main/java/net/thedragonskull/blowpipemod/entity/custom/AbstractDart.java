@@ -35,6 +35,7 @@ public abstract class AbstractDart extends AbstractArrow {
         Entity entity = result.getEntity();
 
         float damage = this.getDamage();
+        Entity owner = this.getOwner();
 
         if (this.getOwner() instanceof LivingEntity shooter) {
             ItemStack itemStack = shooter.getItemBySlot(EquipmentSlot.MAINHAND);
@@ -43,10 +44,14 @@ public abstract class AbstractDart extends AbstractArrow {
             damage += blowPowerLevel;
         }
 
-        entity.hurt(this.damageSources().generic(), damage);
+        if (owner == null) {
+            entity.hurt(this.damageSources().arrow(this, null), damage);
+        } else {
+            entity.hurt(this.damageSources().arrow(this, owner), damage);
+        }
 
-        if (entity instanceof Mob mob && this.getOwner() instanceof LivingEntity owner) {
-            mob.setLastHurtByMob(owner);
+        if (entity instanceof Mob mob && owner instanceof LivingEntity entity1) {
+            mob.setLastHurtByMob(entity1);
         }
 
             if (!this.level().isClientSide) {
