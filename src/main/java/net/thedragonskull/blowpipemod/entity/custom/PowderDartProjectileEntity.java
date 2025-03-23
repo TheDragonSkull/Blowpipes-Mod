@@ -9,6 +9,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.PrimedTnt;
+import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -83,8 +84,16 @@ public class PowderDartProjectileEntity extends AbstractDart{
     @Override
     protected void onHitEntity(EntityHitResult result) {
         super.onHitEntity(result);
-        explode();
-        result.getEntity().setSecondsOnFire(5);
+
+        if (!this.isExtinguished && !result.getEntity().isUnderWater()) {
+            if (result.getEntity() instanceof Creeper creeper) {
+                creeper.ignite();
+            } else {
+                explode();
+                result.getEntity().setSecondsOnFire(5);
+            }
+        }
+
     }
 
     @Override
