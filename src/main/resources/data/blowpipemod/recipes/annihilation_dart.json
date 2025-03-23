@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "X": {
+      "item": "minecraft:nether_star"
+    },
+    "Y": {
+      "item": "blowpipemod:netherite_rod"
+    },
+    "#": {
+      "item": "minecraft:wither_rose"
+    }
+  },
+  "pattern": [
+    "X",
+    "Y",
+    "#"
+  ],
+  "result": {
+    "count": 1,
+    "item": "blowpipemod:annihilation_dart"
+  },
+  "show_notification": true
+}

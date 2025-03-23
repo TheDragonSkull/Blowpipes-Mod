@@ -49,6 +49,19 @@ public class ModEntities {
                             .sized(0.2F, 0.2F)
                             .build("razor_dart"));
 
+    public static final RegistryObject<EntityType<AnnihilationDartProjectileEntity>> ANNIHILATION_DART =
+            ENTITY_TYPES.register("annihilation_dart",
+                    () -> EntityType.Builder.<AnnihilationDartProjectileEntity>of(AnnihilationDartProjectileEntity::new, MobCategory.MISC)
+                            .sized(0.2F, 0.2F)
+                            .build("annihilation_dart"));
+
+    public static final RegistryObject<EntityType<OblivionDartProjectileEntity>> OBLIVION_DART =
+            ENTITY_TYPES.register("oblivion_dart",
+                    () -> EntityType.Builder.<OblivionDartProjectileEntity>of(OblivionDartProjectileEntity::new, MobCategory.MISC)
+                            .sized(0.2F, 0.2F)
+                            .build("oblivion_dart"));
+
+
 
     public static void register(IEventBus eventBus) {
         ENTITY_TYPES.register(eventBus);

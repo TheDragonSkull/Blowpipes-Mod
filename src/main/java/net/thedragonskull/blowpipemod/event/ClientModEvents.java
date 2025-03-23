@@ -44,6 +44,8 @@ public class ClientModEvents {
             EntityRenderers.register(ModEntities.LURE_DART.get(), LureDartProjectileRenderer::new);
             EntityRenderers.register(ModEntities.IRON_HEAD_DART.get(), IronHeadDartProjectileRenderer::new);
             EntityRenderers.register(ModEntities.RAZOR_DART.get(), RazorDartProjectileRenderer::new);
+            EntityRenderers.register(ModEntities.ANNIHILATION_DART.get(), AnnihilationDartProjectileRenderer::new);
+            EntityRenderers.register(ModEntities.OBLIVION_DART.get(), OblivionDartProjectileRenderer::new);
 
             MenuScreens.register(ModMenuTypes.DART_POUCH_MENU.get(), DartPouchScreen::new);
         });
@@ -55,11 +57,13 @@ public class ClientModEvents {
         event.registerLayerDefinition(DartPouchModel.LAYER_LOCATION, DartPouchModel::createBodyLayer);
     }
 
+
     @SubscribeEvent
     public static void registerBER(EntityRenderersEvent.RegisterRenderers event) {
         event.registerBlockEntityRenderer(ModBlockEntities.BLOWPIPE_GROUND_STAND_BE.get(), BlowpipeGroundStandBlockEntityRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.BLOWPIPE_WALL_STAND_BE.get(), BlowpipeWallStandBlockEntityRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.DART_STAND_BE.get(), DartStandBlockEntityRenderer::new);
+
     }
 
     @SubscribeEvent

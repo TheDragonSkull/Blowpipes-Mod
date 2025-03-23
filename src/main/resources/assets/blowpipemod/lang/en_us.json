@@ -9,6 +9,11 @@
   "item.blowpipemod.powder_dart": "Black Powder Dart",
   "item.blowpipemod.lure_dart": "Lure Dart",
   "item.blowpipemod.razor_dart": "Razor Tip Dart",
+  "item.blowpipemod.annihilation_dart": "§bAnnihilation Dart§b",
+  "item.blowpipemod.oblivion_dart": "§dOblivion Dart§d",
+
+  "item.blowpipemod.netherite_rod": "Netherite Rod",
+
   "item.blowpipemod.range_goggles": "Rangefinder Binoculars",
 
   "item.blowpipemod.dart_pouch": "Dart Pouch",
@@ -28,6 +33,7 @@
   "item.blowpipemod.dart_pouch_green": "Dart Pouch (Green)",
   "item.blowpipemod.dart_pouch_red": "Dart Pouch (Red)",
   "item.blowpipemod.dart_pouch_black": "Dart Pouch (Black)",
+
 
   "block.blowpipemod.dart_table": "Dart Table",
   "block.blowpipemod.blowpipe_ground_stand": "Blowpipe Ground Stand",

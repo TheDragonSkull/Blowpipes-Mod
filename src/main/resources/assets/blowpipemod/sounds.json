@@ -40,5 +40,11 @@
     "sounds": [
       "blowpipemod:switch"
     ]
+  },
+  "boom": {
+    "subtitle": "sounds.blowpipemod.boom",
+    "sounds": [
+      "blowpipemod:boom"
+    ]
   }
 }

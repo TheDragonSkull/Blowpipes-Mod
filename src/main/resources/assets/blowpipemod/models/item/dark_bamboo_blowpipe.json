@@ -51,6 +51,20 @@
         "dart_type": 6.0
       },
       "model": "blowpipemod:item/dbamboo_blowpipe_loaded_razor"
+    },
+    {
+      "predicate": {
+        "loaded": 1,
+        "dart_type": 7.0
+      },
+      "model": "blowpipemod:item/dbamboo_blowpipe_loaded_annihilation"
+    },
+    {
+      "predicate": {
+        "loaded": 1,
+        "dart_type": 8.0
+      },
+      "model": "blowpipemod:item/dbamboo_blowpipe_loaded_annihilation"
     }
   ]
 }

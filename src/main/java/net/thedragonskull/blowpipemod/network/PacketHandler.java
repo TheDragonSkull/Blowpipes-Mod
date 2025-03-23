@@ -36,6 +36,18 @@ public class PacketHandler {
                 .consumerMainThread(C2SHamelinTriggerPacket::handle)
                 .add();
 
+        INSTANCE.messageBuilder(C2SAnnihilationDartParticlesPacket.class, NetworkDirection.PLAY_TO_SERVER.ordinal() + 3)
+                .encoder(C2SAnnihilationDartParticlesPacket::encode)
+                .decoder(C2SAnnihilationDartParticlesPacket::new)
+                .consumerMainThread(C2SAnnihilationDartParticlesPacket::handle)
+                .add();
+
+        INSTANCE.messageBuilder(C2SOblivionDartParticlesPacket.class, NetworkDirection.PLAY_TO_SERVER.ordinal() + 4)
+                .encoder(C2SOblivionDartParticlesPacket::encode)
+                .decoder(C2SOblivionDartParticlesPacket::new)
+                .consumerMainThread(C2SOblivionDartParticlesPacket::handle)
+                .add();
+
     }
 
 

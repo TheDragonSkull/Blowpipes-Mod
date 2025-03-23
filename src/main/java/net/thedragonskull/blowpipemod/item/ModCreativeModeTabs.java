@@ -36,6 +36,10 @@ public class ModCreativeModeTabs {
                         pOutput.accept(ModItems.POWDER_DART.get());
                         pOutput.accept(ModItems.LURE_DART.get());
                         pOutput.accept(ModItems.RAZOR_DART.get());
+                        pOutput.accept(ModItems.ANNIHILATION_DART.get());
+                        pOutput.accept(ModItems.OBLIVION_DART.get());
+
+                        pOutput.accept(ModItems.NETHERITE_ROD.get());
 
                         pOutput.accept(ModItems.RANGE_GOGGLES.get());
 

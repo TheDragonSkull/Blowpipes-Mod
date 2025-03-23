@@ -19,6 +19,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.thedragonskull.blowpipemod.block.custom.BlowpipeWallStandBlock;
 import net.thedragonskull.blowpipemod.block.custom.DartStandBlock;
 import net.thedragonskull.blowpipemod.block.entity.DartStandBlockEntity;
+import net.thedragonskull.blowpipemod.item.ModItems;
 import org.joml.Quaternionf;
 
 public class DartStandBlockEntityRenderer implements BlockEntityRenderer<DartStandBlockEntity> {
@@ -56,7 +57,12 @@ public class DartStandBlockEntityRenderer implements BlockEntityRenderer<DartSta
         pPoseStack.mulPose(Axis.YP.rotationDegrees(90));
         pPoseStack.mulPose(Axis.XP.rotationDegrees(180));
 
-        pPoseStack.translate(0.0F, -0.00325F, 0.15F);
+        if (pBlockEntity.getStoredDart().getItem() == ModItems.ANNIHILATION_DART.get() ||
+                pBlockEntity.getStoredDart().getItem() == ModItems.OBLIVION_DART.get()) {
+            pPoseStack.translate(0.0F, -0.00325F, 0.135F);
+        } else {
+            pPoseStack.translate(0.0F, -0.00325F, 0.15F);
+        }
 
 
         itemRenderer.renderStatic(itemStack, ItemDisplayContext.HEAD, getLightLevel(pBlockEntity.getLevel(), pBlockEntity.getBlockPos()),

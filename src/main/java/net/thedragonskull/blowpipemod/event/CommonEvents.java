@@ -173,6 +173,17 @@ public class CommonEvents {
                     )
             );
 
+            trades.get(5).add((pTrader, pRandom) ->
+                    new MerchantOffer(
+                            new ItemStack(ModItems.ANNIHILATION_DART.get(), 1),
+                            new ItemStack(Items.DRAGON_BREATH, 1),
+                            new ItemStack(ModItems.OBLIVION_DART.get(), 1),
+                            1,
+                            100,
+                            0.5f
+                    )
+            );
+
         }
 
     }

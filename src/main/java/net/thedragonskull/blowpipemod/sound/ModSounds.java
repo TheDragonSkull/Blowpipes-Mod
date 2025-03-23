@@ -37,6 +37,9 @@ public class ModSounds {
     public static final RegistryObject<SoundEvent> SWITCH =
             registerSoundEvents("switch");
 
+    public static final RegistryObject<SoundEvent> BOOM =
+            registerSoundEvents("boom");
+
     public static void register(IEventBus eventBus) {
         SOUND_EVENTS.register(eventBus);
     }

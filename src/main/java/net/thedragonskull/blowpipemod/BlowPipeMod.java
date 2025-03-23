@@ -80,6 +80,8 @@ public class BlowPipeMod {
             event.accept(ModItems.POWDER_DART);
             event.accept(ModItems.LURE_DART);
             event.accept(ModItems.RAZOR_DART);
+            event.accept(ModItems.ANNIHILATION_DART);
+            event.accept(ModItems.OBLIVION_DART);
         }
 
         if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
@@ -107,6 +109,12 @@ public class BlowPipeMod {
                     CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
             event.getEntries().putAfter(ModBlocks.BLOWPIPE_WALL_STAND.get().asItem().getDefaultInstance(),
                     ModBlocks.DART_STAND.get().asItem().getDefaultInstance(),
+                    CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+        }
+
+        if (event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
+            event.getEntries().putAfter(Items.BLAZE_ROD.asItem().getDefaultInstance(),
+                    ModItems.NETHERITE_ROD.get().asItem().getDefaultInstance(),
                     CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
         }
     }

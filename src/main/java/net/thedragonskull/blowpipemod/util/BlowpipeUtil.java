@@ -14,6 +14,8 @@ public class BlowpipeUtil {
     private static final float DART_TYPE_LURE = 4.0F;
     private static final float DART_TYPE_IRON_HEAD = 5.0F;
     private static final float DART_TYPE_RAZOR = 6.0F;
+    private static final float DART_TYPE_ANNIHILATION = 7.0F;
+    private static final float DART_TYPE_OBLIVION = 8.0F;
 
     public static float getDartType(ItemStack stack) {
         if (stack.is(ModItems.DART_BASE.get())) {
@@ -28,6 +30,10 @@ public class BlowpipeUtil {
             return DART_TYPE_IRON_HEAD;
         } else if (stack.is(ModItems.RAZOR_DART.get())) {
             return DART_TYPE_RAZOR;
+        } else if (stack.is(ModItems.ANNIHILATION_DART.get())) {
+            return DART_TYPE_ANNIHILATION;
+        } else if (stack.is(ModItems.OBLIVION_DART.get())) {
+            return DART_TYPE_OBLIVION;
         }
         return 0.0F;
     }
@@ -80,7 +86,9 @@ public class BlowpipeUtil {
         }
 
         BlowpipeUtil.setLoaded(blowpipe, true, dart);
-        dart.shrink(1);
+
+        if (!player.isCreative())
+            dart.shrink(1);
 
         player.level().playSound(null, player.getX(), player.getY(), player.getZ(),
                 SoundEvents.CROSSBOW_LOADING_END, SoundSource.PLAYERS, 1.0F, 1.0F);

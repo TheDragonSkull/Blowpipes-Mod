@@ -2,6 +2,7 @@ package net.thedragonskull.blowpipemod.item;
 
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -49,6 +50,22 @@ public class ModItems {
 
     public static final RegistryObject<Item> RAZOR_DART = ITEMS.register("razor_dart",
             () -> new DartItem(new Item.Properties().stacksTo(16)));
+
+    public static final RegistryObject<Item> ANNIHILATION_DART = ITEMS.register("annihilation_dart",
+            () -> new DartItem(new Item.Properties().stacksTo(16)));
+
+    public static final RegistryObject<Item> OBLIVION_DART = ITEMS.register("oblivion_dart",
+            () -> new DartItem(new Item.Properties().stacksTo(16)) {
+                @Override
+                public boolean isFoil(ItemStack pStack) {
+                    return true;
+                }
+            });
+
+
+
+    public static final RegistryObject<Item> NETHERITE_ROD = ITEMS.register("netherite_rod",
+            () -> new Item(new Item.Properties()));
 
 
 

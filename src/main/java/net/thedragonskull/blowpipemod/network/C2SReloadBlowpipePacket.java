@@ -53,7 +53,7 @@ public class C2SReloadBlowpipePacket {
 
                         if (!pouchStack.isEmpty() && DartPouchUtil.addDartToPouch(pouchStack, dart)) {
                         } else {
-                            if (!player.getInventory().add(dart)) {
+                            if (!player.isCreative() && !player.getInventory().add(dart)) {
                                 player.drop(dart, false);
                             }
 
