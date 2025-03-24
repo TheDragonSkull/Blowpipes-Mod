@@ -1,0 +1,19 @@
+{
+  "display": {
+    "icon": {
+      "item": "blowpipemod:powder_dart"
+    },
+    "title": "Two can play at that game",
+    "description": "Ignite a charged creeper with a black powder dart",
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "blowpipemod:blowpipe_craft_dart",
+  "criteria": {
+    "ignite_charged_creeper": {
+      "trigger": "blowpipemod:blowpipe_charged_creeper"
+    }
+  }
+}

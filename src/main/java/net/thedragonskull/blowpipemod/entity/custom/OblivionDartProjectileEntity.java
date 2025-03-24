@@ -2,12 +2,14 @@ package net.thedragonskull.blowpipemod.entity.custom;
 
 
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.boss.EnderDragonPart;
 import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
+import net.minecraft.world.entity.boss.wither.WitherBoss;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
@@ -17,6 +19,7 @@ import net.thedragonskull.blowpipemod.item.ModItems;
 import net.thedragonskull.blowpipemod.network.C2SOblivionDartParticlesPacket;
 import net.thedragonskull.blowpipemod.network.PacketHandler;
 import net.thedragonskull.blowpipemod.sound.ModSounds;
+import net.thedragonskull.blowpipemod.trigger.ModTriggers;
 
 public class OblivionDartProjectileEntity extends AbstractDart{
 
@@ -48,6 +51,14 @@ public class OblivionDartProjectileEntity extends AbstractDart{
         }
 
         if (entity instanceof LivingEntity livingEntity) {
+
+            if (entity instanceof WitherBoss wither) {
+                if (wither.getInvulnerableTicks() > 0) {
+                    if (this.getOwner() instanceof ServerPlayer player) {
+                        ModTriggers.EVAPORATE_WITHER.trigger(player);
+                    }
+                }
+            }
 
             if (entity instanceof EnderDragon) {
                 entity.kill();

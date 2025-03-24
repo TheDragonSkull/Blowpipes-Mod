@@ -1,0 +1,22 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:spyglass"
+    },
+    "title": "He shoots, he scores",
+    "description": "Kill a monster with the binoculars night vision at 30+ blocks at night",
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "blowpipemod:blowpipe_trade_goggles",
+  "criteria": {
+    "night_snipe": {
+      "trigger": "blowpipemod:blowpipe_night_snipe"
+    }
+  },
+  "rewards": {
+    "experience": 50
+  }
+}

@@ -4,6 +4,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.EntityType;
@@ -20,6 +21,7 @@ import net.minecraft.world.phys.EntityHitResult;
 import net.thedragonskull.blowpipemod.entity.ModEntities;
 import net.thedragonskull.blowpipemod.item.ModItems;
 import net.thedragonskull.blowpipemod.sound.ModSounds;
+import net.thedragonskull.blowpipemod.trigger.ModTriggers;
 import org.jetbrains.annotations.Nullable;
 
 public class PowderDartProjectileEntity extends AbstractDart{
@@ -87,13 +89,16 @@ public class PowderDartProjectileEntity extends AbstractDart{
 
         if (!this.isExtinguished && !result.getEntity().isUnderWater()) {
             if (result.getEntity() instanceof Creeper creeper) {
+                if (creeper.isPowered() && this.getOwner() instanceof ServerPlayer serverPlayer) {
+                    ModTriggers.CHARGED_CREEPER.trigger(serverPlayer);
+                }
+
                 creeper.ignite();
             } else {
                 explode();
                 result.getEntity().setSecondsOnFire(5);
             }
         }
-
     }
 
     @Override

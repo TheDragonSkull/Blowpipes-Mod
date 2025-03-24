@@ -1,5 +1,6 @@
 package net.thedragonskull.blowpipemod.entity.custom;
 
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
@@ -16,6 +17,7 @@ import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec2;
 import net.thedragonskull.blowpipemod.enchantment.ModEnchantments;
 import net.thedragonskull.blowpipemod.sound.ModSounds;
+import net.thedragonskull.blowpipemod.trigger.ModTriggers;
 import net.thedragonskull.blowpipemod.util.DartPouchUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -33,6 +35,11 @@ public abstract class AbstractDart extends AbstractArrow {
     @Override
     protected void onHitEntity(EntityHitResult result) {
         Entity entity = result.getEntity();
+
+        if (entity instanceof Mob monster && this.getOwner() instanceof ServerPlayer player) {
+            double distance = player.distanceTo(monster);
+            ModTriggers.NIGHT_SNIPE.trigger(player, monster, distance);
+        }
 
         float damage = this.getDamage();
         Entity owner = this.getOwner();

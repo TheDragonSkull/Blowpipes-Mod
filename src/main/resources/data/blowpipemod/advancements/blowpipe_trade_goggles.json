@@ -1,0 +1,29 @@
+{
+  "display": {
+    "icon": {
+      "item": "blowpipemod:range_goggles"
+    },
+    "title": "Advanced technology",
+    "description": "Get the binoculars from the Hunter",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": true
+  },
+  "parent": "blowpipemod:blowpipemod",
+  "criteria": {
+    "trade_goggles": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "blowpipemod:range_goggles"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,19 @@
+{
+  "display": {
+    "icon": {
+      "item": "blowpipemod:oblivion_dart"
+    },
+    "title": "Myth Buster",
+    "description": "Evaporate a wither in his invulnerable phase with the oblivion dart",
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "blowpipemod:blowpipe_craft_dart",
+  "criteria": {
+    "evaporate_wither": {
+      "trigger": "blowpipemod:blowpipe_evaporate_wither"
+    }
+  }
+}

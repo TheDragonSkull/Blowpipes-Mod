@@ -1,0 +1,27 @@
+{
+  "display": {
+    "icon": {
+      "item": "blowpipemod:dart_base"
+    },
+    "title": "Small but sharp",
+    "description": "Craft a dart",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "blowpipemod:blowpipemod",
+  "criteria": {
+    "crafted_dart": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "blowpipemod:darts"
+          }
+        ]
+      }
+    }
+  },
+  "sends_telemetry_event": true
+}
