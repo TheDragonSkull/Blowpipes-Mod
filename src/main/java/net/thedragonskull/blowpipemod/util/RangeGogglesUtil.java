@@ -32,13 +32,5 @@ public class RangeGogglesUtil {
         return hasGogglesInCurioSlot(player) || hasGogglesInHeadSlot(player);
     }
 
-    // For preventing goggles to equip if they are already equipped in any slot
-    public static boolean canEquipGoggles(Player player, boolean isCurioSlot) {
-        if (isCurioSlot) {
-            return !hasGogglesInHeadSlot(player);
-        } else {
-            return !hasGogglesInCurioSlot(player);
-        }
-    }
 
 }
