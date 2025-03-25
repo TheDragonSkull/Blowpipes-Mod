@@ -15,6 +15,9 @@ public class ModEffects {
     public static final RegistryObject<MobEffect> BLEED_EFFECT = MOB_EFFECTS.register("thedragon_bleed",
             () -> new BleedEffect(MobEffectCategory.HARMFUL, 0x911d1d));
 
+    public static final RegistryObject<MobEffect> CHARMING_AURA_EFFECT = MOB_EFFECTS.register("thedragon_charming_aura",
+            () -> new CharmingAuraEffect(MobEffectCategory.NEUTRAL, 0xFFFFFF));
+
     public static void register(IEventBus eventBus) {
         MOB_EFFECTS.register(eventBus);
     }

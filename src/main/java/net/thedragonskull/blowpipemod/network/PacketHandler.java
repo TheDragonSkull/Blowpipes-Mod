@@ -10,7 +10,7 @@ import net.thedragonskull.blowpipemod.BlowPipeMod;
 
 public class PacketHandler {
     private static final String PROTOCOL_VERSION = "1";
-    private static final SimpleChannel INSTANCE = NetworkRegistry.newSimpleChannel(
+    public static final SimpleChannel INSTANCE = NetworkRegistry.newSimpleChannel(
             new ResourceLocation(BlowPipeMod.MOD_ID, "main"),
             () -> PROTOCOL_VERSION,
             PROTOCOL_VERSION::equals,
@@ -48,6 +48,12 @@ public class PacketHandler {
                 .consumerMainThread(C2SOblivionDartParticlesPacket::handle)
                 .add();
 
+        INSTANCE.messageBuilder(S2CCharmingAuraParticlesPacket.class, NetworkDirection.PLAY_TO_CLIENT.ordinal() + 6)
+                .encoder(S2CCharmingAuraParticlesPacket::encode)
+                .decoder(S2CCharmingAuraParticlesPacket::new)
+                .consumerMainThread(S2CCharmingAuraParticlesPacket::handle)
+                .add();
+
     }
 
 
@@ -60,7 +66,7 @@ public class PacketHandler {
         INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), msg);
     }
 
-    public static void sendToAllPlayer(Object msg, ServerPlayer player) {
+    public static void sendToAllPlayer(Object msg) {
         INSTANCE.send(PacketDistributor.ALL.noArg(), msg);
     }
 }

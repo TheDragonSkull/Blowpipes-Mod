@@ -55,11 +55,16 @@
   "key.blowpipemod.night_vision": "Toggle Binoculars Night Vision",
 
   "effect.blowpipemod.thedragon_bleed": "Bleed",
+  "effect.blowpipemod.thedragon_charming_aura": "Charming Aura",
 
-  "item.minecraft.potion.effect.thedragon_bleed_potion": "Bleed Potion",
-  "item.minecraft.splash_potion.effect.thedragon_bleed_potion": "Bleed Splash Potion",
-  "item.minecraft.lingering_potion.effect.thedragon_bleed_potion": "Bleed Lingering Potion",
-  "item.minecraft.tipped_arrow.effect.thedragon_bleed_potion": "Bleed Arrow",
+  "item.minecraft.potion.effect.thedragon_bleed_potion": "Potion of Bleeding",
+  "item.minecraft.splash_potion.effect.thedragon_bleed_potion": "Splash Potion of Bleeding",
+  "item.minecraft.lingering_potion.effect.thedragon_bleed_potion": "Lingering Potion of Bleeding",
+  "item.minecraft.tipped_arrow.effect.thedragon_bleed_potion": "Arrow of Bleeding",
+
+  "item.blowpipemod.charming_aura_potion.effect.empty": "Potion of Charming Aura",
+  "item.blowpipemod.charming_aura_splash_potion.effect.empty": "Splash Potion of Charming Aura",
+
 
   "container.dart_pouch": "Dart Pouch",
 

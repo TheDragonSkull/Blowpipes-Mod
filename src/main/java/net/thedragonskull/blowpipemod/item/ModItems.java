@@ -12,6 +12,8 @@ import net.thedragonskull.blowpipemod.item.custom.BlowPipe;
 import net.thedragonskull.blowpipemod.item.custom.DartItem;
 import net.thedragonskull.blowpipemod.item.custom.DartPouchItem;
 import net.thedragonskull.blowpipemod.item.custom.RangeGoggles;
+import net.thedragonskull.blowpipemod.potion.custom.CharmingAuraPotion;
+import net.thedragonskull.blowpipemod.potion.custom.CharmingAuraSplashPotion;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -63,10 +65,8 @@ public class ModItems {
             });
 
 
-
     public static final RegistryObject<Item> NETHERITE_ROD = ITEMS.register("netherite_rod",
             () -> new Item(new Item.Properties()));
-
 
 
     public static final RegistryObject<Item> RANGE_GOGGLES = ITEMS.register("range_goggles",
@@ -91,6 +91,15 @@ public class ModItems {
 
     public static final RegistryObject<Item> RAT_ADV = ITEMS.register("rat_adv",
             () -> new Item(new Item.Properties()));
+
+
+    public static final RegistryObject<Item> CHARMING_AURA_POTION = ITEMS.register("charming_aura_potion",
+            () -> new CharmingAuraPotion(new Item.Properties().stacksTo(1)));
+
+
+    public static final RegistryObject<Item> CHARMING_AURA_SPLASH_POTION = ITEMS.register("charming_aura_splash_potion",
+            () -> new CharmingAuraSplashPotion(new Item.Properties().stacksTo(1)));
+
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
