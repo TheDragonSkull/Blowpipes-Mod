@@ -48,10 +48,16 @@ public class PacketHandler {
                 .consumerMainThread(C2SOblivionDartParticlesPacket::handle)
                 .add();
 
-        INSTANCE.messageBuilder(S2CCharmingAuraParticlesPacket.class, NetworkDirection.PLAY_TO_CLIENT.ordinal() + 6)
+        INSTANCE.messageBuilder(S2CCharmingAuraParticlesPacket.class, NetworkDirection.PLAY_TO_CLIENT.ordinal() + 5)
                 .encoder(S2CCharmingAuraParticlesPacket::encode)
                 .decoder(S2CCharmingAuraParticlesPacket::new)
                 .consumerMainThread(S2CCharmingAuraParticlesPacket::handle)
+                .add();
+
+        INSTANCE.messageBuilder(S2CLingeringCharmingAuraPacket.class, NetworkDirection.PLAY_TO_CLIENT.ordinal() + 6)
+                .encoder(S2CLingeringCharmingAuraPacket::encode)
+                .decoder(S2CLingeringCharmingAuraPacket::new)
+                .consumerMainThread(S2CLingeringCharmingAuraPacket::handle)
                 .add();
 
     }

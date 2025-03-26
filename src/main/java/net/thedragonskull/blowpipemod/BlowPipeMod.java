@@ -124,6 +124,10 @@ public class BlowPipeMod {
             event.getEntries().putAfter(PotionUtils.setPotion(new ItemStack(Items.SPLASH_POTION), ModPotions.BLEED_POTION.get()),
                     new ItemStack(ModItems.CHARMING_AURA_SPLASH_POTION.get()),
                     CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+
+            event.getEntries().putAfter(PotionUtils.setPotion(new ItemStack(Items.LINGERING_POTION), ModPotions.BLEED_POTION.get()),
+                    new ItemStack(ModItems.CHARMING_AURA_LINGERING_POTION.get()),
+                    CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
         }
     }
 

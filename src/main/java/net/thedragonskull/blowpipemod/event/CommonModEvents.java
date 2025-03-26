@@ -1,7 +1,6 @@
 package net.thedragonskull.blowpipemod.event;
 
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.alchemy.PotionBrewing;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -38,6 +37,12 @@ public class CommonModEvents {
                     ModItems.CHARMING_AURA_POTION.get(),
                     Items.GUNPOWDER,
                     ModItems.CHARMING_AURA_SPLASH_POTION.get()));
+
+            // Charming aura lingering potion
+            BrewingRecipeRegistry.addRecipe(new BrewingRecipeUtil(
+                    ModItems.CHARMING_AURA_POTION.get(),
+                    Items.DRAGON_BREATH,
+                    ModItems.CHARMING_AURA_LINGERING_POTION.get()));
         });
     }
 

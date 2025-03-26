@@ -1,9 +1,11 @@
 package net.thedragonskull.blowpipemod.potion.custom;
 
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.AreaEffectCloud;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.ThrownPotion;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.EntityHitResult;
@@ -12,6 +14,8 @@ import net.thedragonskull.blowpipemod.effect.ModEffects;
 import net.thedragonskull.blowpipemod.item.ModItems;
 import net.thedragonskull.blowpipemod.network.PacketHandler;
 import net.thedragonskull.blowpipemod.network.S2CCharmingAuraParticlesPacket;
+import net.thedragonskull.blowpipemod.network.S2CLingeringCharmingAuraPacket;
+import net.thedragonskull.blowpipemod.particle.ModParticles;
 
 import java.util.List;
 
@@ -24,6 +28,7 @@ public class CustomThrownPotion extends ThrownPotion {
     @Override
     protected void onHit(HitResult pResult) {
         //super.onHit(pResult);
+        ItemStack itemstack = this.getItem();
 
         if (!this.level().isClientSide) {
             if (this.getItem().is(ModItems.CHARMING_AURA_SPLASH_POTION.get())) {
@@ -31,6 +36,9 @@ public class CustomThrownPotion extends ThrownPotion {
 
                 this.level().levelEvent(4000, this.blockPosition(), 0x11ff00);
                 this.discard();
+            } else {
+                this.makeAreaOfEffectCloud(itemstack);
+                discard();
             }
         }
     }
@@ -50,11 +58,30 @@ public class CustomThrownPotion extends ThrownPotion {
                                 200, 0, false,false, true);
                         livingentity.addEffect(charmingAuraEffect, entity);
 
-                        PacketHandler.sendToServer(new S2CCharmingAuraParticlesPacket(livingentity.getId()));
+                        PacketHandler.sendToAllPlayer(new S2CCharmingAuraParticlesPacket(livingentity.getId()));
                     }
                 }
             }
         }
     }
 
+    private void makeAreaOfEffectCloud(ItemStack pStack) {
+        AreaEffectCloud areaeffectcloud = new AreaEffectCloud(this.level(), this.getX(), this.getY(), this.getZ());
+        Entity entity = this.getOwner();
+        if (entity instanceof LivingEntity) {
+            areaeffectcloud.setOwner((LivingEntity)entity);
+        }
+
+        areaeffectcloud.setRadius(3.0F);
+        areaeffectcloud.setRadiusOnUse(-0.5F);
+        areaeffectcloud.setWaitTime(10);
+        areaeffectcloud.setRadiusPerTick(-areaeffectcloud.getRadius() / (float)areaeffectcloud.getDuration());
+
+        areaeffectcloud.addEffect(new MobEffectInstance(ModEffects.CHARMING_AURA_EFFECT.get(), 200, 0, false, false, true));
+        areaeffectcloud.setParticle(ModParticles.LURE_GLINT_PARTICLES.get());
+
+        this.level().addFreshEntity(areaeffectcloud);
+
+        PacketHandler.sendToServer(new S2CLingeringCharmingAuraPacket(this.getX(), this.getY(), this.getZ()));
+    }
 }

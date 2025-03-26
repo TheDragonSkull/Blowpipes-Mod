@@ -12,6 +12,7 @@ import net.thedragonskull.blowpipemod.item.custom.BlowPipe;
 import net.thedragonskull.blowpipemod.item.custom.DartItem;
 import net.thedragonskull.blowpipemod.item.custom.DartPouchItem;
 import net.thedragonskull.blowpipemod.item.custom.RangeGoggles;
+import net.thedragonskull.blowpipemod.potion.custom.CharmingAuraLingeringPotion;
 import net.thedragonskull.blowpipemod.potion.custom.CharmingAuraPotion;
 import net.thedragonskull.blowpipemod.potion.custom.CharmingAuraSplashPotion;
 
@@ -99,11 +100,14 @@ public class ModItems {
     public static final RegistryObject<Item> CHARMING_AURA_POTION = ITEMS.register("charming_aura_potion",
             () -> new CharmingAuraPotion(new Item.Properties().stacksTo(1)));
 
-    //TODO: lingering potion [/summon area_effect_cloud ~ ~ ~ {Particle:"blowpipemod:lure_glint_particles",Radius:2.5f,Duration:200}]
-
-
     public static final RegistryObject<Item> CHARMING_AURA_SPLASH_POTION = ITEMS.register("charming_aura_splash_potion",
             () -> new CharmingAuraSplashPotion(new Item.Properties().stacksTo(1)));
+
+    public static final RegistryObject<Item> CHARMING_AURA_LINGERING_POTION = ITEMS.register("charming_aura_lingering_potion",
+            () -> new CharmingAuraLingeringPotion(new Item.Properties().stacksTo(1)));
+
+    //TODO: lingering potion [/summon area_effect_cloud ~ ~ ~ {Particle:"blowpipemod:lure_glint_particles",Radius:2.5f,Duration:200}]
+
 
 
     public static void register(IEventBus eventBus) {
