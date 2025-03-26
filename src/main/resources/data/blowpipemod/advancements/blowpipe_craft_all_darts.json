@@ -1,0 +1,139 @@
+{
+  "display": {
+    "icon": {
+      "item": "blowpipemod:blowpipe"
+    },
+    "title": "---",
+    "description": "Craft every dart",
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "blowpipemod:blowpipe_craft_dart",
+  "criteria": {
+    "crafted_normal_dart": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "blowpipemod:dart_base"
+            ]
+          }
+        ]
+      }
+    },
+    "crafted_iron_head_dart": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "blowpipemod:iron_head_dart"
+            ]
+          }
+        ]
+      }
+    },
+    "crafted_poison_dart": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "blowpipemod:poison_dart"
+            ]
+          }
+        ]
+      }
+    },
+    "crafted_powder_dart": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "blowpipemod:powder_dart"
+            ]
+          }
+        ]
+      }
+    },
+    "crafted_lure_dart": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "blowpipemod:lure_dart"
+            ]
+          }
+        ]
+      }
+    },
+    "crafted_razor_dart": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "blowpipemod:razor_dart"
+            ]
+          }
+        ]
+      }
+    },
+    "crafted_annihilation_dart": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "blowpipemod:annihilation_dart"
+            ]
+          }
+        ]
+      }
+    },
+    "crafted_oblivion_dart": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "blowpipemod:oblivion_dart"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "crafted_normal_dart"
+    ],
+    [
+      "crafted_iron_head_dart"
+    ],
+    [
+      "crafted_poison_dart"
+    ],
+    [
+      "crafted_powder_dart"
+    ],
+    [
+      "crafted_lure_dart"
+    ],
+    [
+      "crafted_razor_dart"
+    ],
+    [
+      "crafted_annihilation_dart"
+    ],
+    [
+      "crafted_oblivion_dart"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

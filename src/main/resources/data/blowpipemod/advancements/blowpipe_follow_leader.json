@@ -1,0 +1,19 @@
+{
+  "display": {
+    "icon": {
+      "item": "blowpipemod:follow_leader_adv"
+    },
+    "title": "Follow the leader!",
+    "description": "Make at least 10 animals follow a player with the Charming Aura effect for 15 seconds",
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "blowpipemod:blowpipe_charming_potion",
+  "criteria": {
+    "follow_leader": {
+      "trigger": "blowpipemod:blowpipe_follow_leader"
+    }
+  }
+}

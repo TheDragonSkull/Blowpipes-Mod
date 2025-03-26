@@ -92,6 +92,9 @@ public class ModItems {
     public static final RegistryObject<Item> RAT_ADV = ITEMS.register("rat_adv",
             () -> new Item(new Item.Properties()));
 
+    public static final RegistryObject<Item> FOLLOW_LEADER_ADV = ITEMS.register("follow_leader_adv",
+            () -> new Item(new Item.Properties()));
+
 
     public static final RegistryObject<Item> CHARMING_AURA_POTION = ITEMS.register("charming_aura_potion",
             () -> new CharmingAuraPotion(new Item.Properties().stacksTo(1)));

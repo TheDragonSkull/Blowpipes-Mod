@@ -1,0 +1,19 @@
+{
+  "display": {
+    "icon": {
+      "item": "blowpipemod:razor_dart"
+    },
+    "title": "A cursed cocktail",
+    "description": "Make an enemy have Poison, Wither, and Bleed effects at the same time",
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "blowpipemod:blowpipe_craft_dart",
+  "criteria": {
+    "triple_effect": {
+      "trigger": "blowpipemod:blowpipe_triple_effect"
+    }
+  }
+}

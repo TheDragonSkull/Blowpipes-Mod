@@ -1,0 +1,19 @@
+{
+  "display": {
+    "icon": {
+      "item": "blowpipemod:lure_dart"
+    },
+    "title": "Curiosity blew up the cat",
+    "description": "Make a cat chase a creeper after shooting it with a lure dart",
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "blowpipemod:blowpipe_craft_dart",
+  "criteria": {
+    "cat_creeper": {
+      "trigger": "blowpipemod:blowpipe_cat_creeper"
+    }
+  }
+}

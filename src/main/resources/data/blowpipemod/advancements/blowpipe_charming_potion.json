@@ -1,0 +1,29 @@
+{
+  "display": {
+    "icon": {
+      "item": "blowpipemod:charming_aura_potion"
+    },
+    "title": "---",
+    "description": "---",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "blowpipemod:blowpipemod",
+  "criteria": {
+    "blowpipe_charming_potion": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "blowpipemod:charming_aura_potion"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "sends_telemetry_event": true
+}

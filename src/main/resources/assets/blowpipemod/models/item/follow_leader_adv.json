@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "blowpipemod:item/follow_leader_adv"
+  }
+}
