@@ -1,9 +1,9 @@
 {
   "display": {
     "icon": {
-      "item": "blowpipemod:blowpipe"
+      "item": "blowpipemod:iron_head_dart"
     },
-    "title": "---",
+    "title": "Dartastic!",
     "description": "Craft every dart",
     "frame": "challenge",
     "show_toast": true,

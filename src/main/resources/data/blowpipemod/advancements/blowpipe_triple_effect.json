@@ -3,7 +3,7 @@
     "icon": {
       "item": "blowpipemod:razor_dart"
     },
-    "title": "A cursed cocktail",
+    "title": "A deadly cocktail",
     "description": "Make an enemy have Poison, Wither, and Bleed effects at the same time",
     "frame": "challenge",
     "show_toast": true,
