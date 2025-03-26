@@ -1,9 +1,7 @@
 package net.thedragonskull.blowpipemod;
 
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraft.world.item.DyeColor;
-import net.minecraft.world.item.Items;
+import net.minecraft.world.item.*;
+import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
@@ -115,6 +113,16 @@ public class BlowPipeMod {
         if (event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
             event.getEntries().putAfter(Items.BLAZE_ROD.asItem().getDefaultInstance(),
                     ModItems.NETHERITE_ROD.get().asItem().getDefaultInstance(),
+                    CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+        }
+
+        if (event.getTabKey() == CreativeModeTabs.FOOD_AND_DRINKS) {
+            event.getEntries().putAfter(PotionUtils.setPotion(new ItemStack(Items.POTION), ModPotions.BLEED_POTION.get()),
+                    new ItemStack(ModItems.CHARMING_AURA_POTION.get()),
+                    CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+
+            event.getEntries().putAfter(PotionUtils.setPotion(new ItemStack(Items.SPLASH_POTION), ModPotions.BLEED_POTION.get()),
+                    new ItemStack(ModItems.CHARMING_AURA_SPLASH_POTION.get()),
                     CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
         }
     }

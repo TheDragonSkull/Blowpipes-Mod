@@ -20,7 +20,7 @@ import net.thedragonskull.blowpipemod.item.ModItems;
 import java.util.List;
 
 public class CharmingAuraPotion extends PotionItem {
-    private static final int EFFECT_DURATION = 200;
+    private static final int EFFECT_DURATION = 600;
 
     public CharmingAuraPotion(Properties pProperties) {
         super(pProperties);
@@ -61,7 +61,7 @@ public class CharmingAuraPotion extends PotionItem {
 
     @Override
     public void appendHoverText(ItemStack itemstack, Level level, List<Component> list, TooltipFlag flag) {
-        list.add(Component.literal("§9Charming Aura (00:10)"));
+        list.add(Component.literal("§9Charming Aura (00:30)"));
     }
 
     public int getUseDuration(ItemStack pStack) {

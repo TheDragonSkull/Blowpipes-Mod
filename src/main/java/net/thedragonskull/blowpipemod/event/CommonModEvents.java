@@ -1,12 +1,14 @@
 package net.thedragonskull.blowpipemod.event;
 
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.alchemy.PotionBrewing;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.thedragonskull.blowpipemod.BlowPipeMod;
+import net.thedragonskull.blowpipemod.item.ModItems;
 import net.thedragonskull.blowpipemod.network.PacketHandler;
 import net.thedragonskull.blowpipemod.potion.ModPotions;
 import net.thedragonskull.blowpipemod.util.BrewingRecipeUtil;
@@ -19,11 +21,23 @@ public class CommonModEvents {
         event.enqueueWork(() -> {
             event.enqueueWork(PacketHandler::register);
 
-            // Bleed potion brewing recipe
+            // Bleed potion
             BrewingRecipeRegistry.addRecipe(new BrewingRecipeUtil(
                     Potions.AWKWARD,
                     Items.PRISMARINE_SHARD,
                     ModPotions.BLEED_POTION.get()));
+
+            // Charming aura potion
+            BrewingRecipeRegistry.addRecipe(new BrewingRecipeUtil(
+                    Potions.AWKWARD,
+                    Items.AMETHYST_SHARD,
+                    ModItems.CHARMING_AURA_POTION.get()));
+
+            // Charming aura splash potion
+            BrewingRecipeRegistry.addRecipe(new BrewingRecipeUtil(
+                    ModItems.CHARMING_AURA_POTION.get(),
+                    Items.GUNPOWDER,
+                    ModItems.CHARMING_AURA_SPLASH_POTION.get()));
         });
     }
 

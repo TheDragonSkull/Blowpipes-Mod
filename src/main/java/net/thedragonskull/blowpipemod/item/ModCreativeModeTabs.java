@@ -48,6 +48,9 @@ public class ModCreativeModeTabs {
                         pOutput.accept(ModBlocks.BLOWPIPE_WALL_STAND.get());
                         pOutput.accept(ModBlocks.DART_STAND.get());
 
+                        pOutput.accept(ModItems.CHARMING_AURA_POTION.get());
+                        pOutput.accept(ModItems.CHARMING_AURA_SPLASH_POTION.get());
+
                     })
                     .build());
 
