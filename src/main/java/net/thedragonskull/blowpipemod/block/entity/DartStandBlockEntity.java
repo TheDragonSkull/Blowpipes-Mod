@@ -49,7 +49,7 @@ public class DartStandBlockEntity extends BlockEntity {
             itemHandler.setStackInSlot(0, stack);
             heldItem.shrink(1);
             level.playSound(null, this.getBlockPos(),
-                    SoundEvents.BAMBOO_WOOD_BUTTON_CLICK_ON, SoundSource.BLOCKS, 1.0f, 2.0f); //todo cambiar sonido
+                    SoundEvents.BAMBOO_WOOD_BUTTON_CLICK_ON, SoundSource.BLOCKS, 1.0f, 2.0f);
 
             // Retrieve dart
         } else if (!itemHandler.getStackInSlot(0).isEmpty() && heldItem.isEmpty()) {

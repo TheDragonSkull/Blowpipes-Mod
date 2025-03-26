@@ -5,7 +5,6 @@ import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.thedragonskull.blowpipemod.network.PacketHandler;
 import net.thedragonskull.blowpipemod.network.S2CCharmingAuraParticlesPacket;
 
@@ -35,7 +34,6 @@ public class CharmingAuraEffect extends MobEffect {
         for (Mob mob : nearbyEntities) {
             if (mob.getTarget() == null || mob.getTarget() != pLivingEntity) {
                 mob.getNavigation().moveTo(pLivingEntity, 1.0D);
-                System.out.println(mob.getSpeed());
             }
 
         }
