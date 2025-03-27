@@ -80,6 +80,11 @@ public class BlowPipeMod {
             event.accept(ModItems.RAZOR_DART);
             event.accept(ModItems.ANNIHILATION_DART);
             event.accept(ModItems.OBLIVION_DART);
+
+
+            event.getEntries().putAfter(PotionUtils.setPotion(new ItemStack(Items.TIPPED_ARROW), ModPotions.BLEED_POTION.get()),
+                    new ItemStack(ModItems.CHARMING_AURA_ARROW.get()),
+                    CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
         }
 
         if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {

@@ -50,6 +50,8 @@ public class ModCreativeModeTabs {
 
                         pOutput.accept(ModItems.CHARMING_AURA_POTION.get());
                         pOutput.accept(ModItems.CHARMING_AURA_SPLASH_POTION.get());
+                        pOutput.accept(ModItems.CHARMING_AURA_LINGERING_POTION.get());
+                        pOutput.accept(ModItems.CHARMING_AURA_ARROW.get());
 
                     })
                     .build());

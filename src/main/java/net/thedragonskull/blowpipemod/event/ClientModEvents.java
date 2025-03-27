@@ -64,6 +64,7 @@ public class ClientModEvents {
         event.registerBlockEntityRenderer(ModBlockEntities.BLOWPIPE_WALL_STAND_BE.get(), BlowpipeWallStandBlockEntityRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.DART_STAND_BE.get(), DartStandBlockEntityRenderer::new);
 
+        event.registerEntityRenderer(ModEntities.CHARMING_AURA_ARROW_ENTITY.get(), CharmingAuraArrowRenderer::new);
     }
 
     @SubscribeEvent

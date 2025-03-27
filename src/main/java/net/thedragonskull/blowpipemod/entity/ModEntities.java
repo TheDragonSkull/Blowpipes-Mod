@@ -63,6 +63,16 @@ public class ModEntities {
 
 
 
+    public static final RegistryObject<EntityType<CharmingAuraArrowEntity>> CHARMING_AURA_ARROW_ENTITY =
+            ENTITY_TYPES.register("charming_aura_arrow_entity",
+                    () -> EntityType.Builder.<CharmingAuraArrowEntity>of(CharmingAuraArrowEntity::new, MobCategory.MISC)
+                            .sized(0.5F, 0.5F)
+                            .clientTrackingRange(4)
+                            .updateInterval(20)
+                            .build("charming_aura_arrow_entity"));
+
+
+
     public static void register(IEventBus eventBus) {
         ENTITY_TYPES.register(eventBus);
     }

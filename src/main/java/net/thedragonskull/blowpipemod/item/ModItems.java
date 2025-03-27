@@ -15,6 +15,7 @@ import net.thedragonskull.blowpipemod.item.custom.RangeGoggles;
 import net.thedragonskull.blowpipemod.potion.custom.CharmingAuraLingeringPotion;
 import net.thedragonskull.blowpipemod.potion.custom.CharmingAuraPotion;
 import net.thedragonskull.blowpipemod.potion.custom.CharmingAuraSplashPotion;
+import net.thedragonskull.blowpipemod.item.custom.CharmingAuraArrow;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -106,8 +107,8 @@ public class ModItems {
     public static final RegistryObject<Item> CHARMING_AURA_LINGERING_POTION = ITEMS.register("charming_aura_lingering_potion",
             () -> new CharmingAuraLingeringPotion(new Item.Properties().stacksTo(1)));
 
-    //TODO: lingering potion [/summon area_effect_cloud ~ ~ ~ {Particle:"blowpipemod:lure_glint_particles",Radius:2.5f,Duration:200}]
-
+    public static final RegistryObject<Item> CHARMING_AURA_ARROW = ITEMS.register("charming_aura_arrow",
+            () -> new CharmingAuraArrow(new Item.Properties()));
 
 
     public static void register(IEventBus eventBus) {
