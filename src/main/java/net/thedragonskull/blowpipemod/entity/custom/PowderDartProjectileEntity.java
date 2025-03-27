@@ -7,20 +7,19 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.PrimedTnt;
 import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.thedragonskull.blowpipemod.entity.ModEntities;
-import net.thedragonskull.blowpipemod.item.ModItems;
-import net.thedragonskull.blowpipemod.sound.ModSounds;
+import net.thedragonskull.blowpipemod.sound.FuseSoundInstance;
 import net.thedragonskull.blowpipemod.trigger.ModTriggers;
 import org.jetbrains.annotations.Nullable;
 
@@ -30,7 +29,7 @@ public class PowderDartProjectileEntity extends AbstractDart{
     private boolean isExtinguished = false;
 
     @Nullable
-    private SimpleSoundInstance fuseSoundInstance;
+    private FuseSoundInstance fuseSoundInstance;
 
     public PowderDartProjectileEntity(EntityType<? extends PowderDartProjectileEntity> entityType, Level level) {
         super(entityType, level);
@@ -51,6 +50,20 @@ public class PowderDartProjectileEntity extends AbstractDart{
     }
 
     @Override
+    public boolean hurt(DamageSource pSource, float pAmount) {
+        if (!isExtinguished && pSource.getMsgId().contains("explosion")) {
+            stopFuseSound();
+            this.discard();
+
+            if (!this.level().isClientSide) {
+                this.explode();
+            }
+        }
+        return super.hurt(pSource, pAmount);
+    }
+
+
+    @Override
     protected void onHitBlock(BlockHitResult result) {
         super.onHitBlock(result);
         this.isEmbedded = true;
@@ -60,6 +73,14 @@ public class PowderDartProjectileEntity extends AbstractDart{
 
         //Ignites TNT
         if (level.getBlockState(pos).is(Blocks.TNT)) {
+            level.playSound(
+                    null,
+                    pos,
+                    SoundEvents.TNT_PRIMED,
+                    SoundSource.BLOCKS,
+                    1.0F,
+                    1.0F
+            );
             level.setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
             PrimedTnt tntEntity = new PrimedTnt(level, pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, (LivingEntity) this.getOwner());
             level.addFreshEntity(tntEntity);
@@ -69,19 +90,21 @@ public class PowderDartProjectileEntity extends AbstractDart{
         }
     }
 
-    private void playImpactSound() {
+
+    private void playFuseSound() {
         if (!this.isExtinguished && this.fuseSoundInstance == null) {
-            this.fuseSoundInstance = SimpleSoundInstance.forUI(
-                    ModSounds.BOMB_FUSE.get(),
-                    1.0F,
-                    0.2F
-            );
-
-            System.out.println("playing sound");
-
+            this.fuseSoundInstance = new FuseSoundInstance(this);
             Minecraft.getInstance().getSoundManager().play(this.fuseSoundInstance);
         }
     }
+
+    private void stopFuseSound() {
+        if (this.fuseSoundInstance != null) {
+            Minecraft.getInstance().getSoundManager().stop(this.fuseSoundInstance);
+            this.fuseSoundInstance = null;
+        }
+    }
+
 
     @Override
     protected void onHitEntity(EntityHitResult result) {
@@ -113,7 +136,7 @@ public class PowderDartProjectileEntity extends AbstractDart{
         }
 
         if (this.isEmbedded && ticksSinceImpact == 0) {
-            playImpactSound();
+            playFuseSound();
         }
 
         if (this.isEmbedded && !this.isRemoved() && !this.isExtinguished) {
@@ -159,6 +182,11 @@ public class PowderDartProjectileEntity extends AbstractDart{
                 2.0F,
                 Level.ExplosionInteraction.TNT
         );
+
+        if (this.fuseSoundInstance != null) {
+            Minecraft.getInstance().getSoundManager().stop(this.fuseSoundInstance);
+            this.fuseSoundInstance = null;
+        }
 
         this.discard();
     }
