@@ -50,6 +50,8 @@ public class OblivionDartProjectileEntity extends AbstractDart{
             entity = dragonPart.parentMob;
         }
 
+
+
         if (entity instanceof LivingEntity livingEntity) {
 
             if (entity instanceof WitherBoss wither) {
@@ -57,6 +59,12 @@ public class OblivionDartProjectileEntity extends AbstractDart{
                     if (this.getOwner() instanceof ServerPlayer player) {
                         ModTriggers.EVAPORATE_WITHER.trigger(player);
                     }
+                }
+            }
+
+            if (livingEntity instanceof ServerPlayer player) {
+                if (this.getOwner() instanceof ServerPlayer shooter && shooter == player) {
+                    ModTriggers.OBLIVION_SUICIDE.trigger(player);
                 }
             }
 

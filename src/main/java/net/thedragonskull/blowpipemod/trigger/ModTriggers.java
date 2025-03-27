@@ -10,6 +10,7 @@ public class ModTriggers {
     public static final TripleEffectTrigger TRIPLE_EFFECT = new TripleEffectTrigger();
     public static final FollowLeaderTrigger FOLLOW_LEADER = new FollowLeaderTrigger();
     public static final CatCreeperTrigger CAT_CREEPER = new CatCreeperTrigger();
+    public static final OblivionSuicideTrigger OBLIVION_SUICIDE = new OblivionSuicideTrigger();
 
     public static void register() {
         CriteriaTriggers.register(BLOWPIPE_HAMELIN);
@@ -19,5 +20,6 @@ public class ModTriggers {
         CriteriaTriggers.register(TRIPLE_EFFECT);
         CriteriaTriggers.register(FOLLOW_LEADER);
         CriteriaTriggers.register(CAT_CREEPER);
+        CriteriaTriggers.register(OBLIVION_SUICIDE);
     }
 }

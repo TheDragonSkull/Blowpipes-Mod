@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:player_head"
+    },
+    "title": "Self-control is overrated",
+    "description": "\"Einstein said human stupidity is infinite… you just proved it.\"\nKill yourself with the Oblivion Dart.",
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "blowpipemod:blowpipe_evaporate_wither",
+  "criteria": {
+    "oblivion_suicide": {
+      "trigger": "blowpipemod:blowpipe_oblivion_suicide"
+    }
+  },
+  "rewards": {
+    "loot": [
+      "minecraft:blocks/player_head"
+    ]
+  }
+}
