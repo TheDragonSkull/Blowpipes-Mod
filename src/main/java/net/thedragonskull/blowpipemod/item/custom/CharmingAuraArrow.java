@@ -25,6 +25,6 @@ public class CharmingAuraArrow extends ArrowItem {
 
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltip, TooltipFlag pFlag) {
-        pTooltip.add(Component.literal("§9Charming Aura (00:05)"));
+        pTooltip.add(Component.literal("§9Charming Aura (00:02)"));
     }
 }
