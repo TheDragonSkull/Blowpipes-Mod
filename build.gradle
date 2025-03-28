@@ -16,6 +16,7 @@ base {
 
 // Mojang ships Java 17 to end users in 1.18+, so your mod should target Java 17.
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 
 println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), Arch: ${System.getProperty 'os.arch'}"
 minecraft {
@@ -123,8 +124,8 @@ repositories {
     }
 
     maven {
-        name = "Illusive Soulworks maven"
-        url = "https://maven.theillusivec4.top/"
+        name = "Curios"
+        url = uri("https://maven.theillusivec4.top/")
     }
 
 }
@@ -137,8 +138,8 @@ dependencies {
 
     implementation fg.deobf("curse.maven:selene-499980:6142466")
 
-    compileOnly(fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}:api"))
-    runtimeOnly(fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}"))
+    runtimeOnly "top.theillusivec4.curios:curios-neoforge:${version}"
+    compileOnly "top.theillusivec4.curios:curios-neoforge:${version}:api"
 
 }
 
