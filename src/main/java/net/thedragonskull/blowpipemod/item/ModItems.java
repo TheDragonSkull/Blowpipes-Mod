@@ -3,10 +3,9 @@ package net.thedragonskull.blowpipemod.item;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.registries.DeferredItem;
+import net.neoforged.neoforge.registries.DeferredRegister;
 import net.thedragonskull.blowpipemod.BlowPipeMod;
 import net.thedragonskull.blowpipemod.item.custom.BlowPipe;
 import net.thedragonskull.blowpipemod.item.custom.DartItem;
@@ -22,41 +21,41 @@ import java.util.Map;
 
 public class ModItems {
 
-    public static final DeferredRegister<Item> ITEMS =
-            DeferredRegister.create(ForgeRegistries.ITEMS, BlowPipeMod.MOD_ID);
+    public static final DeferredRegister.Items ITEMS =
+            DeferredRegister.createItems(BlowPipeMod.MOD_ID);
 
-    public static final RegistryObject<Item> BLOWPIPE = ITEMS.register("blowpipe",
+    public static final DeferredItem<Item> BLOWPIPE = ITEMS.register("blowpipe",
             () -> new BlowPipe(new Item.Properties().stacksTo(1)));
 
-    public static final RegistryObject<Item> BAMBOO_BLOWPIPE = ITEMS.register("bamboo_blowpipe",
+    public static final DeferredItem<Item> BAMBOO_BLOWPIPE = ITEMS.register("bamboo_blowpipe",
             () -> new BlowPipe(new Item.Properties().stacksTo(1)));
 
-    public static final RegistryObject<Item> DARK_BAMBOO_BLOWPIPE = ITEMS.register("dark_bamboo_blowpipe",
+    public static final DeferredItem<Item> DARK_BAMBOO_BLOWPIPE = ITEMS.register("dark_bamboo_blowpipe",
             () -> new BlowPipe(new Item.Properties().stacksTo(1)));
 
 
-    public static final RegistryObject<Item> DART_BASE = ITEMS.register("dart_base",
+    public static final DeferredItem<Item> DART_BASE = ITEMS.register("dart_base",
             () -> new DartItem(new Item.Properties().stacksTo(16)));
 
-    public static final RegistryObject<Item> IRON_HEAD_DART = ITEMS.register("iron_head_dart",
+    public static final DeferredItem<Item> IRON_HEAD_DART = ITEMS.register("iron_head_dart",
             () -> new DartItem(new Item.Properties().stacksTo(16)));
 
-    public static final RegistryObject<Item> POISON_DART = ITEMS.register("poison_dart",
+    public static final DeferredItem<Item> POISON_DART = ITEMS.register("poison_dart",
             () -> new DartItem(new Item.Properties().stacksTo(16)));
 
-    public static final RegistryObject<Item> POWDER_DART = ITEMS.register("powder_dart",
+    public static final DeferredItem<Item> POWDER_DART = ITEMS.register("powder_dart",
             () -> new DartItem(new Item.Properties().stacksTo(16)));
 
-    public static final RegistryObject<Item> LURE_DART = ITEMS.register("lure_dart",
+    public static final DeferredItem<Item> LURE_DART = ITEMS.register("lure_dart",
             () -> new DartItem(new Item.Properties().stacksTo(16)));
 
-    public static final RegistryObject<Item> RAZOR_DART = ITEMS.register("razor_dart",
+    public static final DeferredItem<Item> RAZOR_DART = ITEMS.register("razor_dart",
             () -> new DartItem(new Item.Properties().stacksTo(16)));
 
-    public static final RegistryObject<Item> ANNIHILATION_DART = ITEMS.register("annihilation_dart",
+    public static final DeferredItem<Item> ANNIHILATION_DART = ITEMS.register("annihilation_dart",
             () -> new DartItem(new Item.Properties().stacksTo(16)));
 
-    public static final RegistryObject<Item> OBLIVION_DART = ITEMS.register("oblivion_dart",
+    public static final DeferredItem<Item> OBLIVION_DART = ITEMS.register("oblivion_dart",
             () -> new DartItem(new Item.Properties().stacksTo(16)) {
                 @Override
                 public boolean isFoil(ItemStack pStack) {
@@ -65,19 +64,19 @@ public class ModItems {
             });
 
 
-    public static final RegistryObject<Item> NETHERITE_ROD = ITEMS.register("netherite_rod",
+    public static final DeferredItem<Item> NETHERITE_ROD = ITEMS.register("netherite_rod",
             () -> new Item(new Item.Properties()));
 
 
-    public static final RegistryObject<Item> RANGE_GOGGLES = ITEMS.register("range_goggles",
+    public static final DeferredItem<Item> RANGE_GOGGLES = ITEMS.register("range_goggles",
             () -> new RangeGoggles(new Item.Properties().stacksTo(1)));
 
 
 
-    public static final RegistryObject<Item> DART_POUCH = ITEMS.register("dart_pouch",
+    public static final DeferredItem<Item> DART_POUCH = ITEMS.register("dart_pouch",
             () -> new DartPouchItem(null, new Item.Properties().stacksTo(1)));
 
-    public static final Map<DyeColor, RegistryObject<Item>> COLORED_DART_POUCHES = new HashMap<>();
+    public static final Map<DyeColor, DeferredItem<Item>> COLORED_DART_POUCHES = new HashMap<>();
 
     static {
         for (DyeColor color : DyeColor.values()) {
@@ -89,22 +88,22 @@ public class ModItems {
 
     //MISC
 
-    public static final RegistryObject<Item> RAT_ADV = ITEMS.register("rat_adv",
+    public static final DeferredItem<Item> RAT_ADV = ITEMS.register("rat_adv",
             () -> new Item(new Item.Properties()));
 
-    public static final RegistryObject<Item> FOLLOW_LEADER_ADV = ITEMS.register("follow_leader_adv",
+    public static final DeferredItem<Item> FOLLOW_LEADER_ADV = ITEMS.register("follow_leader_adv",
             () -> new Item(new Item.Properties()));
 
-    public static final RegistryObject<Item> CHARMING_AURA_POTION = ITEMS.register("charming_aura_potion",
+    public static final DeferredItem<Item> CHARMING_AURA_POTION = ITEMS.register("charming_aura_potion",
             () -> new CharmingAuraPotion(new Item.Properties().stacksTo(1)));
 
-    public static final RegistryObject<Item> CHARMING_AURA_SPLASH_POTION = ITEMS.register("charming_aura_splash_potion",
+    public static final DeferredItem<Item> CHARMING_AURA_SPLASH_POTION = ITEMS.register("charming_aura_splash_potion",
             () -> new CharmingAuraSplashPotion(new Item.Properties().stacksTo(1)));
 
-    public static final RegistryObject<Item> CHARMING_AURA_LINGERING_POTION = ITEMS.register("charming_aura_lingering_potion",
+    public static final DeferredItem<Item> CHARMING_AURA_LINGERING_POTION = ITEMS.register("charming_aura_lingering_potion",
             () -> new CharmingAuraLingeringPotion(new Item.Properties().stacksTo(1)));
 
-    public static final RegistryObject<Item> CHARMING_AURA_ARROW = ITEMS.register("charming_aura_arrow",
+    public static final DeferredItem<Item> CHARMING_AURA_ARROW = ITEMS.register("charming_aura_arrow",
             () -> new CharmingAuraArrow(new Item.Properties()));
 
 

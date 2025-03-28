@@ -1,21 +1,19 @@
 package net.thedragonskull.blowpipemod;
 
 import net.minecraft.world.item.*;
-import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.ModLoadingContext;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.config.ModConfig;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraft.world.level.storage.loot.functions.SetPotionFunction;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.ModContainer;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.config.ModConfig;
+import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.thedragonskull.blowpipemod.block.ModBlocks;
 import net.thedragonskull.blowpipemod.block.entity.ModBlockEntities;
 import net.thedragonskull.blowpipemod.config.BlowPipeModCommonConfigs;
 import net.thedragonskull.blowpipemod.effect.ModEffects;
-import net.thedragonskull.blowpipemod.enchantment.ModEnchantments;
+import net.thedragonskull.blowpipemod.enchantment.ModEnchantmentEffects;
 import net.thedragonskull.blowpipemod.entity.ModEntities;
 import net.thedragonskull.blowpipemod.item.ModCreativeModeTabs;
 import net.thedragonskull.blowpipemod.item.ModItems;
@@ -34,8 +32,7 @@ public class BlowPipeMod {
     public static final String MOD_ID = "blowpipemod";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
-    public BlowPipeMod() {
-        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+    public BlowPipeMod(IEventBus modEventBus, ModContainer modContainer) {
 
         modEventBus.addListener(this::commonSetup);
 
@@ -45,7 +42,7 @@ public class BlowPipeMod {
         ModSounds.register(modEventBus);
         ModEntities.register(modEventBus);
         ModParticles.register(modEventBus);
-        ModEnchantments.register(modEventBus);
+        ModEnchantmentEffects.register(modEventBus);
         ModVillagers.register(modEventBus);
 
         ModEffects.register(modEventBus);
@@ -56,9 +53,9 @@ public class BlowPipeMod {
 
         ModMenuTypes.MENU_TYPES.register(modEventBus);
 
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, BlowPipeModCommonConfigs.SPEC, "blowpipemod-common.toml");
+        modContainer.registerConfig(ModConfig.Type.COMMON, BlowPipeModCommonConfigs.SPEC, "blowpipemod-common.toml");
 
-        MinecraftForge.EVENT_BUS.register(this);
+        NeoForge.EVENT_BUS.register(this);
         modEventBus.addListener(this::addCreative);
 
     }
@@ -83,7 +80,7 @@ public class BlowPipeMod {
             event.accept(ModItems.OBLIVION_DART);
 
 
-            event.getEntries().putAfter(PotionUtils.setPotion(new ItemStack(Items.TIPPED_ARROW), ModPotions.BLEED_POTION.get()),
+            event.getEntries().putAfter(SetPotionFunction.setPotion(new ItemStack(Items.TIPPED_ARROW), ModPotions.BLEED_POTION.get()),
                     new ItemStack(ModItems.CHARMING_AURA_ARROW.get()),
                     CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
         }

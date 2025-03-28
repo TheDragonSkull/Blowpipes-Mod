@@ -21,7 +21,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.thedragonskull.blowpipemod.BlowPipeMod;
 import net.thedragonskull.blowpipemod.client.Keybindings;
-import net.thedragonskull.blowpipemod.enchantment.ModEnchantments;
+import net.thedragonskull.blowpipemod.enchantment.ModEnchantmentEffects;
 import net.thedragonskull.blowpipemod.item.ModItems;
 import net.thedragonskull.blowpipemod.item.custom.BlowPipe;
 import net.thedragonskull.blowpipemod.network.C2SOpenPouchMenuPacket;
@@ -122,7 +122,7 @@ public class ClientForgeHandler {
     public static void onComputerFovModifierEvent(ComputeFovModifierEvent event) {
         if(event.getPlayer().isUsingItem() && event.getPlayer().getUseItem().getItem() instanceof BlowPipe) {
             ItemStack itemStack = event.getPlayer().getItemBySlot(EquipmentSlot.MAINHAND);
-            int blowPowerLevel = EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.FOCUS.get(), itemStack);
+            int blowPowerLevel = EnchantmentHelper.getItemEnchantmentLevel(ModEnchantmentEffects.FOCUS.get(), itemStack);
 
             if (blowPowerLevel > 0) {
                 float fovModifier = 1f;

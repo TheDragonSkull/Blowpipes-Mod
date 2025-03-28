@@ -1,29 +1,40 @@
 package net.thedragonskull.blowpipemod.enchantment;
 
-import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.data.worldgen.BootstrapContext;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.EnchantmentTags;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.item.enchantment.EnchantmentCategory;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
+import net.minecraft.world.item.enchantment.EnchantmentEffectComponents;
+import net.minecraft.world.item.enchantment.EnchantmentTarget;
 import net.thedragonskull.blowpipemod.BlowPipeMod;
+import net.thedragonskull.blowpipemod.enchantment.custom.BlowPowerEnchantmentEffect;
 
 public class ModEnchantments {
-    public static final DeferredRegister<Enchantment> ENCHANTMENTS =
-            DeferredRegister.create(ForgeRegistries.ENCHANTMENTS, BlowPipeMod.MOD_ID);
+    public static final ResourceKey<Enchantment> BLOW_POWER = ResourceKey.create(Registries.ENCHANTMENT,
+            ResourceLocation.fromNamespaceAndPath(BlowPipeMod.MOD_ID, "blow_power"));
 
-    public static RegistryObject<Enchantment> BLOW_POWER =
-            ENCHANTMENTS.register("blow_power",
-                    () -> new BlowPowerEnchantment(Enchantment.Rarity.UNCOMMON,
-                            EnchantmentCategory.WEAPON, EquipmentSlot.MAINHAND));
+    public static void bootstrap(BootstrapContext<Enchantment> context) {
+        var enchantments = context.lookup(Registries.ENCHANTMENT);
+        var items = context.lookup(Registries.ITEM);
 
-    public static RegistryObject<Enchantment> FOCUS =
-            ENCHANTMENTS.register("focus",
-                    () -> new FocusEnchantment(Enchantment.Rarity.RARE,
-                            EnchantmentCategory.WEAPON, EquipmentSlot.MAINHAND));
+        register(context, BLOW_POWER, Enchantment.enchantment(Enchantment.definition(
+                        items.getOrThrow(ItemTags.WEAPON_ENCHANTABLE),
+                        items.getOrThrow(ItemTags.SWORD_ENCHANTABLE),
+                        5,
+                        2,
+                        Enchantment.dynamicCost(5, 7),
+                        Enchantment.dynamicCost(25, 7),
+                        2,
+                        EquipmentSlotGroup.MAINHAND))
+                        .withEffect(EnchantmentEffectComponents.PROJECTILE_SPAWNED, new BlowPowerEnchantmentEffect()));
+    }
 
-    public static void register(IEventBus eventBus) {
-        ENCHANTMENTS.register(eventBus);
+    private static void register(BootstrapContext<Enchantment> registry, ResourceKey<Enchantment> key,
+                                 Enchantment.Builder builder) {
+        registry.register(key, builder.build(key.location()));
     }
 }

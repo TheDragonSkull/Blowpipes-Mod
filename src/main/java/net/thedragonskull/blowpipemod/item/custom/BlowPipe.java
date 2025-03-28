@@ -30,7 +30,7 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
-import net.thedragonskull.blowpipemod.enchantment.ModEnchantments;
+import net.thedragonskull.blowpipemod.enchantment.ModEnchantmentEffects;
 import net.thedragonskull.blowpipemod.entity.custom.*;
 import net.thedragonskull.blowpipemod.item.ModItems;
 import net.thedragonskull.blowpipemod.network.C2SHamelinTriggerPacket;
@@ -230,7 +230,7 @@ public class BlowPipe extends ProjectileWeaponItem implements IFirstPersonAnimat
 
             dartProjectile.setPos(spawnPos.x, spawnPos.y - 0.1, spawnPos.z);
 
-            int blowPowerLevel = EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.BLOW_POWER.get(), stack);
+            int blowPowerLevel = EnchantmentHelper.getItemEnchantmentLevel(ModEnchantmentEffects.BLOW_POWER.get(), stack);
             dartProjectile.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 1.5F + (1.0F * blowPowerLevel), 0F);
 
             level.addFreshEntity(dartProjectile);

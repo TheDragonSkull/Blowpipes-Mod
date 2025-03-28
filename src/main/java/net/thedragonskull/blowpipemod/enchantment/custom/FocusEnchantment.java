@@ -1,4 +1,4 @@
-package net.thedragonskull.blowpipemod.enchantment;
+package net.thedragonskull.blowpipemod.enchantment.custom;
 
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.enchantment.Enchantment;

@@ -1,41 +1,44 @@
 package net.thedragonskull.blowpipemod.sound;
 
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.registries.DeferredRegister;
 import net.thedragonskull.blowpipemod.BlowPipeMod;
+
+import java.util.function.Supplier;
 
 public class ModSounds {
     public static final DeferredRegister<SoundEvent> SOUND_EVENTS =
-            DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, BlowPipeMod.MOD_ID);
+            DeferredRegister.create(Registries.SOUND_EVENT, BlowPipeMod.MOD_ID);
 
-    private static RegistryObject<SoundEvent> registerSoundEvents(String name) {
-        return SOUND_EVENTS.register(name, () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(BlowPipeMod.MOD_ID, name)));
-    }
 
-    public static final RegistryObject<SoundEvent> BLOWPIPE_EMPTY =
+    public static final Supplier<SoundEvent> BLOWPIPE_EMPTY =
             registerSoundEvents("blowpipe_empty");
 
-    public static final RegistryObject<SoundEvent> BLOWPIPE_SHOT =
+    public static final Supplier<SoundEvent> BLOWPIPE_SHOT =
             registerSoundEvents("blowpipe_shot");
 
-    public static final RegistryObject<SoundEvent> DART_HIT =
+    public static final Supplier<SoundEvent> DART_HIT =
             registerSoundEvents("dart_hit");
 
-    public static final RegistryObject<SoundEvent> BLOWPIPE_RAT =
+    public static final Supplier<SoundEvent> BLOWPIPE_RAT =
             registerSoundEvents("blowpipe_rat");
 
-    public static final RegistryObject<SoundEvent> NIGHT_VISION =
+    public static final Supplier<SoundEvent> NIGHT_VISION =
             registerSoundEvents("night_vision");
 
-    public static final RegistryObject<SoundEvent> SWITCH =
+    public static final Supplier<SoundEvent> SWITCH =
             registerSoundEvents("switch");
 
-    public static final RegistryObject<SoundEvent> BOOM =
+    public static final Supplier<SoundEvent> BOOM =
             registerSoundEvents("boom");
+
+    private static Supplier<SoundEvent> registerSoundEvents(String name) {
+        ResourceLocation id = ResourceLocation.fromNamespaceAndPath(BlowPipeMod.MOD_ID, name);
+        return SOUND_EVENTS.register(name, () -> SoundEvent.createVariableRangeEvent(id));
+    }
 
     public static void register(IEventBus eventBus) {
         SOUND_EVENTS.register(eventBus);

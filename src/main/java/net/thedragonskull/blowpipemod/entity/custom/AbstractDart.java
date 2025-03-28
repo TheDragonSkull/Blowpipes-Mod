@@ -15,7 +15,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec2;
-import net.thedragonskull.blowpipemod.enchantment.ModEnchantments;
+import net.thedragonskull.blowpipemod.enchantment.ModEnchantmentEffects;
 import net.thedragonskull.blowpipemod.sound.ModSounds;
 import net.thedragonskull.blowpipemod.trigger.ModTriggers;
 import net.thedragonskull.blowpipemod.util.DartPouchUtil;
@@ -46,7 +46,7 @@ public abstract class AbstractDart extends AbstractArrow {
 
         if (this.getOwner() instanceof LivingEntity shooter) {
             ItemStack itemStack = shooter.getItemBySlot(EquipmentSlot.MAINHAND);
-            int blowPowerLevel = EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.BLOW_POWER.get(), itemStack);
+            int blowPowerLevel = EnchantmentHelper.getItemEnchantmentLevel(ModEnchantmentEffects.BLOW_POWER.get(), itemStack);
 
             damage += blowPowerLevel;
         }
