@@ -35,8 +35,6 @@ public class ModItems {
             () -> new BlowPipe(new Item.Properties().stacksTo(1)));
 
 
-
-
     public static final RegistryObject<Item> DART_BASE = ITEMS.register("dart_base",
             () -> new DartItem(new Item.Properties().stacksTo(16)));
 
@@ -96,7 +94,6 @@ public class ModItems {
 
     public static final RegistryObject<Item> FOLLOW_LEADER_ADV = ITEMS.register("follow_leader_adv",
             () -> new Item(new Item.Properties()));
-
 
     public static final RegistryObject<Item> CHARMING_AURA_POTION = ITEMS.register("charming_aura_potion",
             () -> new CharmingAuraPotion(new Item.Properties().stacksTo(1)));

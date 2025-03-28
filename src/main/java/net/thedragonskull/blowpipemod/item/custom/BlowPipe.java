@@ -156,7 +156,6 @@ public class BlowPipe extends ProjectileWeaponItem implements IFirstPersonAnimat
         return InteractionResultHolder.pass(stack);
     }
 
-
     @Override
     public void onUseTick(Level level, LivingEntity livingEntity, ItemStack stack, int remainingUseDuration) {
         super.onUseTick(level, livingEntity, stack, remainingUseDuration);

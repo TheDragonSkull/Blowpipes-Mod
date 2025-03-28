@@ -5,9 +5,7 @@ import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
-import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
@@ -27,11 +25,14 @@ import net.thedragonskull.blowpipemod.potion.ModPotions;
 import net.thedragonskull.blowpipemod.sound.ModSounds;
 import net.thedragonskull.blowpipemod.trigger.ModTriggers;
 import net.thedragonskull.blowpipemod.villager.ModVillagers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-// The value here should match an entry in the META-INF/mods.toml file
+
 @Mod(BlowPipeMod.MOD_ID)
 public class BlowPipeMod {
     public static final String MOD_ID = "blowpipemod";
+    public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
     public BlowPipeMod() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -136,8 +137,4 @@ public class BlowPipeMod {
         }
     }
 
-
-    @SubscribeEvent
-    public void onServerStarting(ServerStartingEvent event) {
-    }
 }

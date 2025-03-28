@@ -54,7 +54,7 @@ public class PacketHandler {
                 .consumerMainThread(S2CCharmingAuraParticlesPacket::handle)
                 .add();
 
-        INSTANCE.messageBuilder(S2CLingeringCharmingAuraPacket.class, NetworkDirection.PLAY_TO_CLIENT.ordinal() + 6)
+        INSTANCE.messageBuilder(S2CLingeringCharmingAuraPacket.class, NetworkDirection.PLAY_TO_CLIENT.ordinal() + 6) // NetworkSide.CLIENTBOUND
                 .encoder(S2CLingeringCharmingAuraPacket::encode)
                 .decoder(S2CLingeringCharmingAuraPacket::new)
                 .consumerMainThread(S2CLingeringCharmingAuraPacket::handle)
