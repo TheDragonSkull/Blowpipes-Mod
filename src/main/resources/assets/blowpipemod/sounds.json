@@ -17,12 +17,6 @@
       "blowpipemod:dart_hit"
     ]
   },
-  "bomb_fuse": {
-    "subtitle": "sounds.blowpipemod.bomb_fuse",
-    "sounds": [
-      "blowpipemod:bomb_fuse"
-    ]
-  },
   "blowpipe_rat": {
     "subtitle": "sounds.blowpipemod.blowpipe_rat",
     "sounds": [

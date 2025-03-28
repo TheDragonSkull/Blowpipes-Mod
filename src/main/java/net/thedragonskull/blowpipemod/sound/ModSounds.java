@@ -25,9 +25,6 @@ public class ModSounds {
     public static final RegistryObject<SoundEvent> DART_HIT =
             registerSoundEvents("dart_hit");
 
-    public static final RegistryObject<SoundEvent> BOMB_FUSE =
-            registerSoundEvents("bomb_fuse");
-
     public static final RegistryObject<SoundEvent> BLOWPIPE_RAT =
             registerSoundEvents("blowpipe_rat");
 

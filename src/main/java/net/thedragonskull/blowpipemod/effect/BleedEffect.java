@@ -19,9 +19,6 @@ public class BleedEffect extends MobEffect {
                 damage = 0.5F;
             }
 
-//            System.out.println("Applying damage: " + damage + " to " + entity.getName().getString());
-//            System.out.println("Mob Current HP: " + entity.getHealth() + " to " + entity.getName().getString());
-
             entity.hurt(entity.damageSources().magic(), damage);
         }
     }
