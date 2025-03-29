@@ -51,7 +51,6 @@ public class DartPouchItem extends Item implements ICurioItem {
         return provider;
     }
 
-
     //Open menu on use
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {

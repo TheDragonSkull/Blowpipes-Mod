@@ -1,7 +1,9 @@
 package net.thedragonskull.blowpipemod.client.gui;
 
+import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.LayeredDraw;
 import net.minecraft.client.gui.screens.Overlay;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.network.chat.Component;
@@ -19,133 +21,106 @@ import net.thedragonskull.blowpipemod.BlowPipeMod;
 import net.thedragonskull.blowpipemod.client.handler.ClientForgeHandler;
 import net.thedragonskull.blowpipemod.util.RangeGogglesUtil;
 
-public class GogglesScopeOverlay {
+public class GogglesScopeOverlay implements LayeredDraw.Layer {
     public static final ResourceLocation SCOPE = ResourceLocation.fromNamespaceAndPath(BlowPipeMod.MOD_ID,
             "textures/gui/scope_v2.png");
     public static final ResourceLocation SCOUTER = ResourceLocation.fromNamespaceAndPath(BlowPipeMod.MOD_ID,
             "textures/gui/scope_indicator.png");
 
+    public static final GogglesScopeOverlay SCOPE_OVERLAY = new GogglesScopeOverlay();
 
-    public static final Overlay SCOPE_OVERLAY = (((gui, poseStack, partialTick, width, height) -> {
+    @Override
+    public void render(GuiGraphics guiGraphics, DeltaTracker deltaTracker) {
         Minecraft mc = Minecraft.getInstance();
         Player player = mc.player;
 
-        if (player != null && RangeGogglesUtil.hasGogglesEquipped(player) && mc.options.getCameraType().isFirstPerson()) {
+        if (mc.options.renderDebug)
+            return;
 
-            if (mc.options.renderDebug) {
-                return;
-            }
-
-            // Scope
-            GuiGraphics guiGraphics = new GuiGraphics(mc, mc.renderBuffers().bufferSource());
-            int imgSize = 175;
-            int x = (guiGraphics.guiWidth() - imgSize) / 2;
-            int y = (guiGraphics.guiWidth() - imgSize) / 2;
-
-            guiGraphics.blit(SCOPE, x, y, 0, 0, imgSize, imgSize, imgSize, imgSize);
-
-            guiGraphics.pose().scale(0.5f,0.5f,0.5f);
-
-            // 10 Blocks
-            guiGraphics.drawString(mc.font, Component.literal("10 blocks"), (x * 2) + 269, (y * 2) + 198, 0x000000, false);
-
-            // 15 Blocks
-            guiGraphics.drawString(mc.font, Component.literal("15 blocks"), (x * 2) + 260, (y * 2) + 214, 0x000000, false);
-
-            // 20 Blocks
-            guiGraphics.drawString(mc.font, Component.literal("20 blocks"), (x * 2) + 249, (y * 2) + 236, 0x000000, false);
-
-            // 25 Blocks
-            guiGraphics.drawString(mc.font, Component.literal("25 blocks"), (x * 2) + 239, (y * 2) + 256, 0x000000, false);
-
-            // 30 Blocks
-            guiGraphics.drawString(mc.font, Component.literal("30 blocks"), (x * 2) + 230, (y * 2) + 287, 0x000000, false);
-
-            // 35 Blocks
-            guiGraphics.drawString(mc.font, Component.literal("35 blocks"), (x * 2) + 220, (y * 2) + 332, 0x000000, false);
-        }
-
-    }));
-
-    public static final Overlay SCOPE_INFO = (((gui, poseStack, partialTick) -> {
-        Minecraft mc = Minecraft.getInstance();
-        Player player = mc.player;
-
-        if (mc.options.renderDebug) {
+        if (player == null || !RangeGogglesUtil.hasGogglesEquipped(player) || !mc.options.getCameraType().isFirstPerson()) {
             return;
         }
 
-        if (player != null && RangeGogglesUtil.hasGogglesEquipped(player) && mc.options.getCameraType().isFirstPerson()) {
+        drawScope(guiGraphics);
 
-            // Ray tracing & target render
-            double maxDistance = ClientForgeHandler.isZooming ? 80.0 : 40.0;
+        drawScopeInfo(guiGraphics, deltaTracker.getGameTimeDeltaPartialTick(true), player);
+    }
 
-            Vec3 eyePosition = player.getEyePosition();
-            Vec3 lookVector = player.getViewVector(partialTick).scale(maxDistance);
-            Vec3 targetPosition = eyePosition.add(lookVector);
+    private void drawScope(GuiGraphics guiGraphics) {
+        int imgSize = 175;
+        int x = (guiGraphics.guiWidth() - imgSize) / 2;
+        int y = (guiGraphics.guiWidth() - imgSize) / 2;
 
-            BlockHitResult blockHitResult = player.level().clip(new ClipContext(
-                    eyePosition,
-                    targetPosition,
-                    ClipContext.Block.COLLIDER,
-                    ClipContext.Fluid.NONE,
-                    player
-            ));
+        guiGraphics.blit(SCOPE, x, y, 0, 0, imgSize, imgSize, imgSize, imgSize);
 
-            double blockDistance = blockHitResult.getType() != HitResult.Type.MISS
-                    ? eyePosition.distanceTo(blockHitResult.getLocation())
-                    : maxDistance;
+        guiGraphics.pose().scale(0.5f, 0.5f, 0.5f);
+        guiGraphics.drawString(Minecraft.getInstance().font, Component.literal("10 blocks"), (x * 2) + 269, (y * 2) + 198, 0x000000, false);
+        guiGraphics.drawString(Minecraft.getInstance().font, Component.literal("15 blocks"), (x * 2) + 260, (y * 2) + 214, 0x000000, false);
+        guiGraphics.drawString(Minecraft.getInstance().font, Component.literal("20 blocks"), (x * 2) + 249, (y * 2) + 236, 0x000000, false);
+        guiGraphics.drawString(Minecraft.getInstance().font, Component.literal("25 blocks"), (x * 2) + 239, (y * 2) + 256, 0x000000, false);
+        guiGraphics.drawString(Minecraft.getInstance().font, Component.literal("30 blocks"), (x * 2) + 230, (y * 2) + 287, 0x000000, false);
+        guiGraphics.drawString(Minecraft.getInstance().font, Component.literal("35 blocks"), (x * 2) + 220, (y * 2) + 332, 0x000000, false);
+    }
 
-            EntityHitResult entityHitResult = ProjectileUtil.getEntityHitResult(
-                    player.level(),
-                    player,
-                    eyePosition,
-                    targetPosition,
-                    player.getBoundingBox().expandTowards(lookVector).inflate(1.0),
-                    (entity) -> !entity.isSpectator() && entity.isPickable()
-            );
+    private void drawScopeInfo(GuiGraphics guiGraphics, float partialTick, Player player) {
+        Minecraft mc = Minecraft.getInstance();
+        double maxDistance = ClientForgeHandler.isZooming ? 80.0 : 40.0;
 
-            // Scope Info
-            if (entityHitResult != null) {
-                double entityDistance = eyePosition.distanceTo(entityHitResult.getLocation());
+        Vec3 eyePosition = player.getEyePosition();
+        Vec3 lookVector = player.getViewVector(partialTick).scale(maxDistance);
+        Vec3 targetPosition = eyePosition.add(lookVector);
 
-                if (entityDistance < blockDistance) {
-                    Entity targetEntity = entityHitResult.getEntity();
+        BlockHitResult blockHitResult = player.level().clip(new ClipContext(
+                eyePosition, targetPosition, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, player));
 
-                    if (targetEntity instanceof LivingEntity livingEntity) {
-                        String mobName = livingEntity.getName().getString();
-                        int health = (int) livingEntity.getHealth();
-                        int maxHealth = (int) livingEntity.getMaxHealth();
-                        int distance = (int) player.distanceTo(livingEntity);
+        double blockDistance = blockHitResult.getType() != HitResult.Type.MISS
+                ? eyePosition.distanceTo(blockHitResult.getLocation())
+                : maxDistance;
 
-                        GuiGraphics guiGraphics = new GuiGraphics(mc, mc.renderBuffers().bufferSource());
-                        int scouterSize = 111;
-                        int scouter_x = (guiGraphics.guiWidth() - scouterSize);
-                        int scouter_y = 0;
+        EntityHitResult entityHitResult = ProjectileUtil.getEntityHitResult(
+                player.level(), player, eyePosition, targetPosition,
+                player.getBoundingBox().expandTowards(lookVector).inflate(1.0),
+                (entity) -> !entity.isSpectator() && entity.isPickable());
 
-                        guiGraphics.blit(SCOUTER, scouter_x - 5, scouter_y - 15, 0, 0, scouterSize, scouterSize, scouterSize, scouterSize);
-                        renderEntityInGUI(guiGraphics, scouter_x + 70, scouter_y + 58, 25, livingEntity);
-
-                        guiGraphics.pose().pushPose();
-                        float scale = 0.6f;
-                        guiGraphics.pose().scale(scale, scale, scale);
-
-                        int adj_x = (int) ((scouter_x - 4) / scale);
-                        int adj_y1 = (int) ((scouter_y + 25) / scale);
-                        int adj_y2 = (int) ((scouter_y + 35) / scale);
-                        int adj_y3 = (int) ((scouter_y + 44) / scale);
-
-                        guiGraphics.drawString(mc.font, Component.literal(mobName), adj_x, adj_y1, 0xFFFFFF, false);
-                        guiGraphics.drawString(mc.font, Component.literal("Health: " + health + "/" + maxHealth), adj_x, adj_y2, 0xFFFFFF, false);
-                        guiGraphics.drawString(mc.font, Component.literal("Dist: " + distance + " blocks"), adj_x, adj_y3, 0xFFFFFF, false);
-
-
-                    }
+        if (entityHitResult != null) {
+            double entityDistance = eyePosition.distanceTo(entityHitResult.getLocation());
+            if (entityDistance < blockDistance) {
+                Entity targetEntity = entityHitResult.getEntity();
+                if (targetEntity instanceof LivingEntity livingEntity) {
+                    drawEntityInfo(guiGraphics, livingEntity, player);
                 }
             }
         }
+    }
 
-    }));
+    private void drawEntityInfo(GuiGraphics guiGraphics, LivingEntity entity, Player player) {
+        Minecraft mc = Minecraft.getInstance();
+        String mobName = entity.getName().getString();
+        int health = (int) entity.getHealth();
+        int maxHealth = (int) entity.getMaxHealth();
+        int distance = (int) player.distanceTo(entity);
+
+        int scouterSize = 111;
+        int scouter_x = (guiGraphics.guiWidth() - scouterSize);
+        int scouter_y = 0;
+
+        guiGraphics.blit(SCOUTER, scouter_x - 5, scouter_y - 15, 0, 0, scouterSize, scouterSize, scouterSize, scouterSize);
+        renderEntityInGUI(guiGraphics, scouter_x + 70, scouter_y + 58, 25, entity);
+
+        guiGraphics.pose().pushPose();
+        float scale = 0.6f;
+        guiGraphics.pose().scale(scale, scale, scale);
+
+        int adj_x = (int) ((scouter_x - 4) / scale);
+        int adj_y1 = (int) ((scouter_y + 25) / scale);
+        int adj_y2 = (int) ((scouter_y + 35) / scale);
+        int adj_y3 = (int) ((scouter_y + 44) / scale);
+
+        guiGraphics.drawString(mc.font, Component.literal(mobName), adj_x, adj_y1, 0xFFFFFF, false);
+        guiGraphics.drawString(mc.font, Component.literal("Health: " + health + "/" + maxHealth), adj_x, adj_y2, 0xFFFFFF, false);
+        guiGraphics.drawString(mc.font, Component.literal("Dist: " + distance + " blocks"), adj_x, adj_y3, 0xFFFFFF, false);
+    }
+
 
     private static void renderEntityInGUI(GuiGraphics guiGraphics, int x, int y, int size, LivingEntity entity) {
 
@@ -156,7 +131,7 @@ public class GogglesScopeOverlay {
         float scale = size / maxSize;
         scale = Math.min(scale, size * 0.8F / entityWidth);
 
-        InventoryScreen.renderEntityInInventoryFollowsAngle(guiGraphics, x, y, (int) scale, 1, 0, entity);
+        InventoryScreen.renderEntityInInventoryFollowsAngle(guiGraphics, x, y, (int) scale,
+                1, 0,0.0f, 0.0f, 0.0f, entity);
     }
-
 }

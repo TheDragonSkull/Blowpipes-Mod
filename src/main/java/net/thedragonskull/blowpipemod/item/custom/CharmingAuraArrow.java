@@ -19,12 +19,12 @@ public class CharmingAuraArrow extends ArrowItem {
     }
 
     @Override
-    public AbstractArrow createArrow(Level pLevel, ItemStack pStack, LivingEntity pShooter) {
-        return new CharmingAuraArrowEntity(pLevel, pShooter);
+    public AbstractArrow createArrow(Level level, ItemStack ammo, LivingEntity shooter, @Nullable ItemStack weapon) {
+        return new CharmingAuraArrowEntity(level, shooter);
     }
 
     @Override
-    public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltip, TooltipFlag pFlag) {
-        pTooltip.add(Component.literal("§9Charming Aura (00:02)"));
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+        tooltipComponents.add(Component.literal("§9Charming Aura (00:02)"));
     }
 }

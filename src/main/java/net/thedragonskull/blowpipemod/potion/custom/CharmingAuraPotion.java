@@ -15,7 +15,6 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.thedragonskull.blowpipemod.effect.ModEffects;
-import net.thedragonskull.blowpipemod.item.ModItems;
 
 import java.util.List;
 
@@ -34,7 +33,7 @@ public class CharmingAuraPotion extends PotionItem {
         }
 
         if (!pLevel.isClientSide) {
-            pEntityLiving.addEffect(new MobEffectInstance(ModEffects.CHARMING_AURA_EFFECT.get(),
+            pEntityLiving.addEffect(new MobEffectInstance(ModEffects.CHARMING_AURA_EFFECT,
                     EFFECT_DURATION, 0, false, false, true));
         }
 
@@ -60,12 +59,8 @@ public class CharmingAuraPotion extends PotionItem {
     }
 
     @Override
-    public void appendHoverText(ItemStack itemstack, Level level, List<Component> list, TooltipFlag flag) {
-        list.add(Component.literal("§9Charming Aura (00:30)"));
-    }
-
-    public int getUseDuration(ItemStack pStack) {
-        return 40;
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+        tooltipComponents.add(Component.literal("§9Charming Aura (00:30)"));
     }
 
     public UseAnim getUseAnimation(ItemStack pStack) {

@@ -8,16 +8,23 @@ import net.minecraft.world.entity.animal.Cat;
 import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.alchemy.PotionBrewing;
+import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.brewing.RegisterBrewingRecipesEvent;
+import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import net.thedragonskull.blowpipemod.BlowPipeMod;
 import net.thedragonskull.blowpipemod.effect.ModEffects;
 import net.thedragonskull.blowpipemod.entity.custom.LureDartProjectileEntity;
+import net.thedragonskull.blowpipemod.item.ModItems;
+import net.thedragonskull.blowpipemod.potion.ModPotions;
 import net.thedragonskull.blowpipemod.trigger.ModTriggers;
 
 import java.util.List;
@@ -76,7 +83,7 @@ public class CommonForgeEvents {
     }
 
     @SubscribeEvent
-    public static void onEntityHurt(LivingHurtEvent event) {
+    public static void onEntityHurt(LivingDamageEvent.Post event) {
         LivingEntity entity = event.getEntity();
         Entity source = event.getSource().getDirectEntity();
 
@@ -88,5 +95,30 @@ public class CommonForgeEvents {
         }
     }
 
+    @SubscribeEvent
+    public static void onBrewingRecipeRegister(RegisterBrewingRecipesEvent event) {
+        PotionBrewing.Builder builder = event.getBuilder();
+
+        builder.addMix(Potions.AWKWARD, Items.PRISMARINE_SHARD, ModPotions.BLEED_POTION);
+
+        builder.addContainerRecipe((Item) Potions.AWKWARD, Items.AMETHYST_SHARD, ModItems.CHARMING_AURA_POTION.get());
+        builder.addContainerRecipe(ModItems.CHARMING_AURA_POTION.get(), Items.GUNPOWDER, ModItems.CHARMING_AURA_SPLASH_POTION.get());
+        builder.addContainerRecipe(ModItems.CHARMING_AURA_SPLASH_POTION.get(), Items.DRAGON_BREATH, ModItems.CHARMING_AURA_LINGERING_POTION.get());
+    }
+
+/*
+
+
+    // Charming aura splash potion
+            BrewingRecipeRegistry.addRecipe(new BrewingRecipeUtil(
+            ModItems.CHARMING_AURA_POTION.get(),
+    Items.GUNPOWDER,
+            ModItems.CHARMING_AURA_SPLASH_POTION.get()));
+
+    // Charming aura lingering potion
+            BrewingRecipeRegistry.addRecipe(new BrewingRecipeUtil(
+            ModItems.CHARMING_AURA_POTION.get(),
+    Items.DRAGON_BREATH,
+            ModItems.CHARMING_AURA_LINGERING_POTION.get()));*/
 
 }

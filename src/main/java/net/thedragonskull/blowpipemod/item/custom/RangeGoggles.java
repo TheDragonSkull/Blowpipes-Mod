@@ -1,8 +1,8 @@
 package net.thedragonskull.blowpipemod.item.custom;
 
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Equipable;
 import net.minecraft.world.item.Item;
@@ -27,19 +27,18 @@ public class RangeGoggles extends Item implements ICurioItem, Equipable {
     }
 
     @Override
-    public List<Component> getSlotsTooltip(List<Component> tooltips, ItemStack stack) {
+    public List<Component> getSlotsTooltip(List<Component> tooltips, TooltipContext context, ItemStack stack) {
         tooltips.clear();
         return tooltips;
     }
 
-    // Forge
+    // NeoForge
     @Override
-    public boolean canEquip(ItemStack stack, EquipmentSlot slot, Entity entity) {
-        if (entity instanceof Player player && slot == EquipmentSlot.HEAD) {
+    public boolean canEquip(ItemStack stack, EquipmentSlot armorType, LivingEntity entity) {
+        if (entity instanceof Player player && armorType == EquipmentSlot.HEAD) {
             return !hasGogglesEquipped(player);
         }
-        return false;
-    }
+        return false;    }
 
     // Curio
     @Override

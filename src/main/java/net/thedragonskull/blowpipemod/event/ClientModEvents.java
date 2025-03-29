@@ -3,6 +3,7 @@ package net.thedragonskull.blowpipemod.event;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -28,6 +29,8 @@ import net.thedragonskull.blowpipemod.particle.custom.LureGlintParticles;
 import net.thedragonskull.blowpipemod.util.DartPouchTooltipComponent;
 import net.thedragonskull.blowpipemod.util.ModItemProperties;
 import top.theillusivec4.curios.api.client.CuriosRendererRegistry;
+
+import java.util.function.Supplier;
 
 @EventBusSubscriber(modid = BlowPipeMod.MOD_ID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ClientModEvents {
@@ -69,21 +72,20 @@ public class ClientModEvents {
         DartPouchRenderer dartPouchRenderer = new DartPouchRenderer(event.getEntityModels().bakeLayer(DartPouchModel.LAYER_LOCATION));
 
         ModItems.ITEMS.getEntries().stream()
-                .map(RegistryObject::get)
+                .map(Supplier::get)
                 .filter(item -> item instanceof DartPouchItem)
                 .forEach(item -> CuriosRendererRegistry.register(item, () -> dartPouchRenderer));
 
         ModItems.ITEMS.getEntries().stream()
-                .map(RegistryObject::get)
+                .map(Supplier::get)
                 .filter(item -> item instanceof RangeGoggles)
                 .forEach(item -> CuriosRendererRegistry.register(item, RangeGogglesRenderer::new));
     }
 
     @SubscribeEvent
     public static void onRegisterGuiOverlays(RegisterGuiLayersEvent event) {
-        event.registerAboveAll("selected_dart", SelectedDartOverlay.SELECTED_DART);
-        event.registerAboveAll("scope", GogglesScopeOverlay.SCOPE_OVERLAY);
-        event.registerAboveAll("scope_info", GogglesScopeOverlay.SCOPE_INFO);
+        event.registerAboveAll(ResourceLocation.fromNamespaceAndPath(BlowPipeMod.MOD_ID, "selected_dart"), SelectedDartOverlay.SELECTED_DART);
+        event.registerAboveAll(ResourceLocation.fromNamespaceAndPath(BlowPipeMod.MOD_ID, "scope"), GogglesScopeOverlay.SCOPE_OVERLAY);
     }
 
     @SubscribeEvent

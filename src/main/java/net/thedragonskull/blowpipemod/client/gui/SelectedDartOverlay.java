@@ -1,7 +1,9 @@
 package net.thedragonskull.blowpipemod.client.gui;
 
+import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.LayeredDraw;
 import net.minecraft.client.gui.screens.Overlay;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
@@ -15,7 +17,7 @@ import java.util.List;
 
 import static net.thedragonskull.blowpipemod.util.DartPouchUtil.getDartsFromPouch;
 
-public class SelectedDartOverlay {
+public class SelectedDartOverlay implements LayeredDraw.Layer {
     public static int currentDartIndex = 0;
 
     private static final ResourceLocation UPHEAVAL_FONT = ResourceLocation.fromNamespaceAndPath(BlowPipeMod.MOD_ID, "upheaval");
@@ -27,7 +29,10 @@ public class SelectedDartOverlay {
     public static final ResourceLocation LEATHER_BG = ResourceLocation.fromNamespaceAndPath(BlowPipeMod.MOD_ID,
             "textures/gui/selected_dart_frame_bg.png");
 
-    public static final Overlay SELECTED_DART = (((gui, poseStack, partialTick, width, height) -> {
+    public static final SelectedDartOverlay SELECTED_DART = new SelectedDartOverlay();
+
+    @Override
+    public void render(GuiGraphics guiGraphics, DeltaTracker deltaTracker) {
         Minecraft mc = Minecraft.getInstance();
         Player player = mc.player;
 
@@ -57,7 +62,7 @@ public class SelectedDartOverlay {
         int scale = 42;
         int leatherScale = 22;
 
-        GuiGraphics guiGraphics = new GuiGraphics(mc, mc.renderBuffers().bufferSource());
+        guiGraphics = new GuiGraphics(mc, mc.renderBuffers().bufferSource());
 
         //Render frame
         guiGraphics.blit(LEATHER_BG, xPos + 8, yPos + 8, 0, 0, leatherScale, leatherScale, leatherScale, leatherScale);
@@ -71,10 +76,7 @@ public class SelectedDartOverlay {
         String slotNumber = String.valueOf(currentDartIndex + 1);
         Component slotText = Component.literal("SLOT: " + slotNumber).setStyle(STYLE);
         guiGraphics.drawString(mc.font, slotText, 4, 5, 0xFFFFFF, true);
-
-    }));
-
-
+    }
 }
 
 
