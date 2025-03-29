@@ -1,6 +1,8 @@
 package net.thedragonskull.blowpipemod.menu;
 
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Inventory;
@@ -8,13 +10,23 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.items.ItemStackHandler;
+import net.neoforged.neoforge.items.SlotItemHandler;
+import net.thedragonskull.blowpipemod.capabilities.DartPouchCapabilityProvider;
+import net.thedragonskull.blowpipemod.component.ModDataComponents;
 import net.thedragonskull.blowpipemod.item.custom.DartItem;
 import org.jetbrains.annotations.NotNull;
+
+import static net.thedragonskull.blowpipemod.capabilities.DartPouchCapabilityProvider.DART_POUCH_INVENTORY;
 import static net.thedragonskull.blowpipemod.util.DartPouchUtil.findDartPouch;
 
 public class DartPouchMenu extends AbstractContainerMenu {
     private final ItemStackHandler pouchContainer;
     private final Player player;
+
+    public DartPouchMenu(int containerId, Inventory inv, FriendlyByteBuf extraData) {
+        this(containerId, inv, new ItemStackHandler(6));
+    }
 
     public DartPouchMenu(int id, Inventory playerInventory, ItemStackHandler pouchInventory) {
         super(ModMenuTypes.DART_POUCH_MENU.get(), id);
@@ -102,13 +114,13 @@ public class DartPouchMenu extends AbstractContainerMenu {
         super.removed(player);
 
         ItemStack pouch = findDartPouch(player);
-        pouch.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(cap -> {
-            if (cap instanceof ItemStackHandler handler) {
-                CompoundTag tag = pouch.getOrCreateTag();
-                tag.put("dart_pouch_inventory", handler.serializeNBT());
-                pouch.setTag(tag);
-            }
-        });
+        var cap = pouch.getCapability(DART_POUCH_INVENTORY, null);
+
+        if (cap != null) {
+            CompoundTag tag = new CompoundTag();
+            tag.put("dart_pouch_inventory", ((DartPouchCapabilityProvider) cap).serializeNBT(null));
+            pouch.set(ModDataComponents.INVENTORY.get(), tag);
+        }
 
         playPouchClose(player);
     }

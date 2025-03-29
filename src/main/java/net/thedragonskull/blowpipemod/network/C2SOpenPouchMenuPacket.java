@@ -8,6 +8,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.network.NetworkEvent;
+import net.neoforged.neoforge.items.ItemStackHandler;
 import net.thedragonskull.blowpipemod.menu.DartPouchMenu;
 import static net.thedragonskull.blowpipemod.util.DartPouchUtil.findDartPouch;
 

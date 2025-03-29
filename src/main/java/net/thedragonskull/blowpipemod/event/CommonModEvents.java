@@ -2,17 +2,21 @@ package net.thedragonskull.blowpipemod.event;
 
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.Potions;
-import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.thedragonskull.blowpipemod.BlowPipeMod;
+import net.thedragonskull.blowpipemod.capabilities.DartPouchCapabilityProvider;
 import net.thedragonskull.blowpipemod.item.ModItems;
 import net.thedragonskull.blowpipemod.network.PacketHandler;
 import net.thedragonskull.blowpipemod.potion.ModPotions;
 import net.thedragonskull.blowpipemod.util.BrewingRecipeUtil;
 
-@Mod.EventBusSubscriber(modid = BlowPipeMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+
+@EventBusSubscriber(modid = BlowPipeMod.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
 public class CommonModEvents {
 
     @SubscribeEvent
@@ -46,4 +50,12 @@ public class CommonModEvents {
         });
     }
 
+    @SubscribeEvent
+    public static void registerCapabilities(RegisterCapabilitiesEvent event) {
+        event.registerItem(
+                Capabilities.ItemHandler.ITEM,
+                (stack, ctx) -> new DartPouchCapabilityProvider(),
+                ModItems.DART_POUCH.get()
+        );
+    }
 }
