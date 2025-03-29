@@ -52,7 +52,7 @@ public class CommonForgeEvents {
     private static boolean enemyHasAllEffects(LivingEntity entity) {
         return entity.hasEffect(MobEffects.POISON) &&
                 entity.hasEffect(MobEffects.WITHER) &&
-                entity.hasEffect(ModEffects.BLEED_EFFECT.get()) &&
+                entity.hasEffect(ModEffects.BLEED_EFFECT) &&
                 entity instanceof Enemy;
     }
 

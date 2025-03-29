@@ -10,7 +10,7 @@ public class BleedEffect extends MobEffect {
     }
 
     @Override
-    public void applyEffectTick(LivingEntity entity, int amplifier) {
+    public boolean applyEffectTick(LivingEntity entity, int amplifier) {
         if (!entity.level().isClientSide) {
             float maxHealth = entity.getHealth();
             float damage = maxHealth * 0.1F;
@@ -21,10 +21,11 @@ public class BleedEffect extends MobEffect {
 
             entity.hurt(entity.damageSources().magic(), damage);
         }
+        return super.applyEffectTick(entity, amplifier);
     }
 
     @Override
-    public boolean isDurationEffectTick(int duration, int amplifier) {
+    public boolean shouldApplyEffectTickThisTick(int duration, int amplifier) {
         int interval = 20 >> amplifier;
 
         if (interval > 0) {

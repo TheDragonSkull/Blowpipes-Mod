@@ -1,0 +1,20 @@
+{
+  "description": {
+    "translate": "enchantment.blowpipemod.blow_power"
+  },
+  "supported_items": "#blowpipemod:enchantable/blowpipe",
+  "weight": 10,
+  "max_level": 2,
+  "min_cost": {
+    "base": 5,
+    "per_level_above_first": 10
+  },
+  "max_cost": {
+    "base": 20,
+    "per_level_above_first": 15
+  },
+  "anvil_cost": 2,
+  "slots": [
+    "mainhand"
+  ]
+}

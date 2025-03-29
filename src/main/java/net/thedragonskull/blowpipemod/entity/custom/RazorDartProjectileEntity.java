@@ -48,7 +48,7 @@ public class RazorDartProjectileEntity extends AbstractDart{
         super.onHitEntity(result);
         Entity entity = result.getEntity();
         if (entity instanceof LivingEntity livingEntity) {
-            livingEntity.addEffect(new MobEffectInstance(ModEffects.BLEED_EFFECT.get(), 100, 0));
+            livingEntity.addEffect(new MobEffectInstance(ModEffects.BLEED_EFFECT, 100, 0));
         }
     }
 

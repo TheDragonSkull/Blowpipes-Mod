@@ -1,35 +1,29 @@
 package net.thedragonskull.blowpipemod.trigger;
 
-import com.google.gson.JsonObject;
-import net.minecraft.advancements.critereon.*;
-import net.minecraft.resources.ResourceLocation;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.advancements.critereon.ContextAwarePredicate;
+import net.minecraft.advancements.critereon.EntityPredicate;
+import net.minecraft.advancements.critereon.SimpleCriterionTrigger;
 import net.minecraft.server.level.ServerPlayer;
-import net.thedragonskull.blowpipemod.BlowPipeMod;
+
+import java.util.Optional;
 
 public class BlowpipeHamelinTrigger extends SimpleCriterionTrigger<BlowpipeHamelinTrigger.Instance> {
-    static final ResourceLocation ID = new ResourceLocation(BlowPipeMod.MOD_ID, "blowpipe_hamelin");
-
-    @Override
-    public ResourceLocation getId() {
-        return ID;
-    }
-
-    @Override
-    protected BlowpipeHamelinTrigger.Instance createInstance(JsonObject json, ContextAwarePredicate playerPredicate, DeserializationContext context) {
-        return new BlowpipeHamelinTrigger.Instance(playerPredicate);
-    }
 
     public void trigger(ServerPlayer player) {
         this.trigger(player, instance -> true);
     }
 
-    public static class Instance extends AbstractCriterionTriggerInstance {
-        public Instance(ContextAwarePredicate playerPredicate) {
-            super(BlowpipeHamelinTrigger.ID, playerPredicate);
-        }
-
-        public static BlowpipeHamelinTrigger.Instance blowpipeSound() {
-            return new BlowpipeHamelinTrigger.Instance(ContextAwarePredicate.ANY);
-        }
+    @Override
+    public Codec<Instance> codec() {
+        return BlowpipeHamelinTrigger.Instance.CODEC;
     }
+
+    public record Instance(Optional<ContextAwarePredicate> player) implements SimpleCriterionTrigger.SimpleInstance {
+        public static final Codec<BlowpipeHamelinTrigger.Instance> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+                EntityPredicate.ADVANCEMENT_CODEC.optionalFieldOf("player").forGetter(BlowpipeHamelinTrigger.Instance::player)
+        ).apply(instance, BlowpipeHamelinTrigger.Instance::new));
+    }
+
 }

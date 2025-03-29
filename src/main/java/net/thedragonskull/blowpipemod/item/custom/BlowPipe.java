@@ -16,6 +16,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.layers.CustomHeadLayer;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
@@ -242,6 +243,11 @@ public class BlowPipe extends ProjectileWeaponItem implements IFirstPersonAnimat
             stack.getOrCreateTag().remove("Dart");
             stack.getOrCreateTag().remove("dart_type");
         }
+    }
+
+    public static int getEnchantmentLevel(ItemStack stack) {
+        if (stack.isEmpty()) return 0;
+        return stack.getEnchantmentLevel(BuiltInRegistries.ENCHANTMENT_EFFECT_COMPONENT_TYPE.get(MY_ENCHANTMENT_ID));
     }
 
     @Override

@@ -34,8 +34,6 @@ public class BlowPipeMod {
 
     public BlowPipeMod(IEventBus modEventBus, ModContainer modContainer) {
 
-        modEventBus.addListener(this::commonSetup);
-
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
         ModBlockEntities.register(modEventBus);
@@ -58,9 +56,6 @@ public class BlowPipeMod {
         NeoForge.EVENT_BUS.register(this);
         modEventBus.addListener(this::addCreative);
 
-    }
-
-    private void commonSetup(final FMLCommonSetupEvent event) {
     }
 
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
