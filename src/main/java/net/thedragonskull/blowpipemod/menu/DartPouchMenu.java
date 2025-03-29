@@ -8,9 +8,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.items.ItemStackHandler;
-import net.minecraftforge.items.SlotItemHandler;
 import net.thedragonskull.blowpipemod.item.custom.DartItem;
 import org.jetbrains.annotations.NotNull;
 import static net.thedragonskull.blowpipemod.util.DartPouchUtil.findDartPouch;
@@ -103,7 +100,6 @@ public class DartPouchMenu extends AbstractContainerMenu {
     @Override
     public void removed(Player player) {
         super.removed(player);
-        System.out.println("[DEBUG] Menú cerrado por: " + player.getName().getString());
 
         ItemStack pouch = findDartPouch(player);
         pouch.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(cap -> {
@@ -116,6 +112,8 @@ public class DartPouchMenu extends AbstractContainerMenu {
 
         playPouchClose(player);
     }
+
+
 
     private void playPouchClose(Entity pEntity) {
         pEntity.playSound(SoundEvents.BUNDLE_DROP_CONTENTS, 0.8F, 0.8F + pEntity.level().getRandom().nextFloat() * 0.4F);

@@ -11,7 +11,7 @@ import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.thedragonskull.blowpipemod.block.ModBlocks;
 import net.thedragonskull.blowpipemod.block.entity.ModBlockEntities;
-import net.thedragonskull.blowpipemod.config.BlowPipeModCommonConfigs;
+import net.thedragonskull.blowpipemod.config.BlowPipeModConfigs;
 import net.thedragonskull.blowpipemod.effect.ModEffects;
 import net.thedragonskull.blowpipemod.enchantment.ModEnchantmentEffects;
 import net.thedragonskull.blowpipemod.entity.ModEntities;
@@ -51,7 +51,7 @@ public class BlowPipeMod {
 
         ModMenuTypes.MENU_TYPES.register(modEventBus);
 
-        modContainer.registerConfig(ModConfig.Type.COMMON, BlowPipeModCommonConfigs.SPEC, "blowpipemod-common.toml");
+        modContainer.registerConfig(ModConfig.Type.COMMON, BlowPipeModConfigs.CONFIG_SPEC, "blowpipemod-common.toml");
 
         NeoForge.EVENT_BUS.register(this);
         modEventBus.addListener(this::addCreative);

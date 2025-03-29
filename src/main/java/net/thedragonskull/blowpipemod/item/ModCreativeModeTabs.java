@@ -5,53 +5,55 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.registries.DeferredRegister;
 import net.thedragonskull.blowpipemod.BlowPipeMod;
 import net.thedragonskull.blowpipemod.block.ModBlocks;
+
+import java.util.function.Supplier;
 
 public class ModCreativeModeTabs {
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS =
             DeferredRegister.create(Registries.CREATIVE_MODE_TAB, BlowPipeMod.MOD_ID);
 
-    public static final RegistryObject<CreativeModeTab> BLOWPIPES_TAB = CREATIVE_MODE_TABS.register("blowpipe_tab",
-            () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModItems.BLOWPIPE.get()))
+    public static final Supplier<CreativeModeTab> BLOWPIPES_TAB = CREATIVE_MODE_TABS.register("blowpipe_tab",
+            () -> CreativeModeTab.builder()
+                    .icon(() -> new ItemStack(ModItems.BLOWPIPE.get()))
                     .title(Component.translatable("creativetab.blowpipe_tab"))
                     .displayItems((pParameters, pOutput) -> {
 
-                        pOutput.accept(ModItems.DART_POUCH.get());
+                        pOutput.accept(ModItems.DART_POUCH);
 
                         for (DyeColor color : DyeColor.values()) {
-                            pOutput.accept(ModItems.COLORED_DART_POUCHES.get(color).get());
+                            pOutput.accept(ModItems.COLORED_DART_POUCHES.get(color));
                         }
 
-                        pOutput.accept(ModItems.BLOWPIPE.get());
-                        pOutput.accept(ModItems.BAMBOO_BLOWPIPE.get());
-                        pOutput.accept(ModItems.DARK_BAMBOO_BLOWPIPE.get());
+                        pOutput.accept(ModItems.BLOWPIPE);
+                        pOutput.accept(ModItems.BAMBOO_BLOWPIPE);
+                        pOutput.accept(ModItems.DARK_BAMBOO_BLOWPIPE);
 
-                        pOutput.accept(ModItems.DART_BASE.get());
-                        pOutput.accept(ModItems.IRON_HEAD_DART.get());
-                        pOutput.accept(ModItems.POISON_DART.get());
-                        pOutput.accept(ModItems.POWDER_DART.get());
-                        pOutput.accept(ModItems.LURE_DART.get());
-                        pOutput.accept(ModItems.RAZOR_DART.get());
-                        pOutput.accept(ModItems.ANNIHILATION_DART.get());
-                        pOutput.accept(ModItems.OBLIVION_DART.get());
+                        pOutput.accept(ModItems.DART_BASE);
+                        pOutput.accept(ModItems.IRON_HEAD_DART);
+                        pOutput.accept(ModItems.POISON_DART);
+                        pOutput.accept(ModItems.POWDER_DART);
+                        pOutput.accept(ModItems.LURE_DART);
+                        pOutput.accept(ModItems.RAZOR_DART);
+                        pOutput.accept(ModItems.ANNIHILATION_DART);
+                        pOutput.accept(ModItems.OBLIVION_DART);
 
-                        pOutput.accept(ModItems.NETHERITE_ROD.get());
+                        pOutput.accept(ModItems.NETHERITE_ROD);
 
-                        pOutput.accept(ModItems.RANGE_GOGGLES.get());
+                        pOutput.accept(ModItems.RANGE_GOGGLES);
 
-                        pOutput.accept(ModBlocks.DART_TABLE.get());
-                        pOutput.accept(ModBlocks.BLOWPIPE_GROUND_STAND.get());
-                        pOutput.accept(ModBlocks.BLOWPIPE_WALL_STAND.get());
-                        pOutput.accept(ModBlocks.DART_STAND.get());
+                        pOutput.accept(ModBlocks.DART_TABLE);
+                        pOutput.accept(ModBlocks.BLOWPIPE_GROUND_STAND);
+                        pOutput.accept(ModBlocks.BLOWPIPE_WALL_STAND);
+                        pOutput.accept(ModBlocks.DART_STAND);
 
-                        pOutput.accept(ModItems.CHARMING_AURA_POTION.get());
-                        pOutput.accept(ModItems.CHARMING_AURA_SPLASH_POTION.get());
-                        pOutput.accept(ModItems.CHARMING_AURA_LINGERING_POTION.get());
-                        pOutput.accept(ModItems.CHARMING_AURA_ARROW.get());
+                        pOutput.accept(ModItems.CHARMING_AURA_POTION);
+                        pOutput.accept(ModItems.CHARMING_AURA_SPLASH_POTION);
+                        pOutput.accept(ModItems.CHARMING_AURA_LINGERING_POTION);
+                        pOutput.accept(ModItems.CHARMING_AURA_ARROW);
 
                     })
                     .build());
