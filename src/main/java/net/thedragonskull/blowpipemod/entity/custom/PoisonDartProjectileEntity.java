@@ -28,7 +28,7 @@ public class PoisonDartProjectileEntity extends AbstractDart {
     }
 
     @Override
-    protected ItemStack getPickupItem() {
+    protected ItemStack getDefaultPickupItem() {
         return ModItems.POISON_DART.get().getDefaultInstance();
     }
 

@@ -7,6 +7,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.thedragonskull.blowpipemod.entity.ModEntities;
 import net.thedragonskull.blowpipemod.item.ModItems;
+import org.jetbrains.annotations.NotNull;
 
 public class IronHeadDartProjectileEntity extends AbstractDart {
 
@@ -24,7 +25,7 @@ public class IronHeadDartProjectileEntity extends AbstractDart {
     }
 
     @Override
-    protected ItemStack getPickupItem() {
+    protected @NotNull ItemStack getDefaultPickupItem() {
         return ModItems.IRON_HEAD_DART.get().getDefaultInstance();
     }
 

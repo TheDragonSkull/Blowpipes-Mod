@@ -45,7 +45,7 @@ public class PowderDartProjectileEntity extends AbstractDart{
     }
 
     @Override
-    protected ItemStack getPickupItem() {
+    protected ItemStack getDefaultPickupItem() {
         return ItemStack.EMPTY;
     }
 
@@ -119,7 +119,7 @@ public class PowderDartProjectileEntity extends AbstractDart{
                 creeper.ignite();
             } else {
                 explode();
-                result.getEntity().setSecondsOnFire(5);
+                result.getEntity().setRemainingFireTicks(100);
             }
         }
     }

@@ -4,9 +4,9 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.AABB;
-import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.thedragonskull.blowpipemod.BlowPipeMod;
 import net.thedragonskull.blowpipemod.effect.ModEffects;
 import net.thedragonskull.blowpipemod.item.ModItems;
@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-@Mod.EventBusSubscriber(modid = BlowPipeMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
+@EventBusSubscriber(modid = BlowPipeMod.MOD_ID, bus = EventBusSubscriber.Bus.GAME)
 public class FollowLeaderTriggerEventHandler {
     private static final int REQUIRED_ANIMALS = 10;
     private static final int REQUIRED_TIME = 15 * 20; // 15 seconds in ticks
@@ -24,12 +24,12 @@ public class FollowLeaderTriggerEventHandler {
     private static final Map<UUID, PlayerTrackingData> trackingData = new HashMap<>();
 
     @SubscribeEvent
-    public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
-        if (!(event.player instanceof ServerPlayer player) || event.phase != TickEvent.Phase.END) return;
+    public static void onPlayerTick(PlayerTickEvent event) {
+        if (!(event.getEntity() instanceof ServerPlayer player)) return;
 
         PlayerTrackingData data = trackingData.computeIfAbsent(player.getUUID(), PlayerTrackingData::new);
 
-        if (!player.hasEffect(ModEffects.CHARMING_AURA_EFFECT.get())) {
+        if (!player.hasEffect(ModEffects.CHARMING_AURA_EFFECT)) {
             data.reset();
             return;
         }

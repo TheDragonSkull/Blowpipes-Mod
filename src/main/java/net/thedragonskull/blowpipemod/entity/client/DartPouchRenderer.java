@@ -18,8 +18,8 @@ import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.client.ICurioRenderer;
 
 public class DartPouchRenderer implements ICurioRenderer {
-    private static final ResourceLocation BASE_TEXTURE = new ResourceLocation(BlowPipeMod.MOD_ID, "textures/entity/dart_pouch_bw.png");
-    private static final ResourceLocation OVERLAY_TEXTURE = new ResourceLocation(BlowPipeMod.MOD_ID, "textures/entity/dart_pouch_dart.png");
+    private static final ResourceLocation BASE_TEXTURE = ResourceLocation.fromNamespaceAndPath(BlowPipeMod.MOD_ID, "textures/entity/dart_pouch_bw.png");
+    private static final ResourceLocation OVERLAY_TEXTURE = ResourceLocation.fromNamespaceAndPath(BlowPipeMod.MOD_ID, "textures/entity/dart_pouch_dart.png");
 
     private final ModelPart pouch;
 
@@ -46,12 +46,12 @@ public class DartPouchRenderer implements ICurioRenderer {
             float blue = (dyeColor & 255) / 255.0F;
 
             VertexConsumer baseTexture = renderTypeBuffer.getBuffer(RenderType.entityTranslucent(BASE_TEXTURE));
-            pouch.render(matrixStack, baseTexture, light, OverlayTexture.NO_OVERLAY, red, green, blue, 1.0F);
+            pouch.render(matrixStack, baseTexture, light, OverlayTexture.NO_OVERLAY);
         }
 
 
             VertexConsumer overlayTexture = renderTypeBuffer.getBuffer(RenderType.entityTranslucent(OVERLAY_TEXTURE));
-            pouch.render(matrixStack, overlayTexture, light, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
+            pouch.render(matrixStack, overlayTexture, light, OverlayTexture.NO_OVERLAY);
 
 
         matrixStack.popPose();

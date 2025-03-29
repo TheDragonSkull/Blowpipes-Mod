@@ -28,13 +28,13 @@ authors="${mod_authors}"
 [[dependencies.blowpipemod]]
     modId="moonlight"
     mandatory=true
-    versionRange="[moonlight-1.20-2.13.58-forge,)"
+    versionRange="[moonlight-1.21-2.17.37-neoforge,)"
     ordering="NONE"
     side="BOTH"
 
 [[dependencies.blowpipemod]]
     modId="curios"
     mandatory=true
-    versionRange="[5.11.1+1.20.1,)"
+    versionRange="[9.4.0+1.21.1,)"
     ordering="NONE"
     side="BOTH"

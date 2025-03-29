@@ -12,7 +12,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.thedragonskull.blowpipemod.BlowPipeMod;
 
 public class DartPouchModel extends EntityModel<AbstractClientPlayer> {
-    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(BlowPipeMod.MOD_ID, "textures/entity/dart_pouch.png"), "main");
+    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(BlowPipeMod.MOD_ID, "textures/entity/dart_pouch.png"), "main");
     private final ModelPart pouch;
 
     public DartPouchModel(ModelPart pouch) {
@@ -36,7 +36,7 @@ public class DartPouchModel extends EntityModel<AbstractClientPlayer> {
     }
 
     @Override
-    public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-        pouch.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+    public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, int color) {
+        pouch.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
     }
 }

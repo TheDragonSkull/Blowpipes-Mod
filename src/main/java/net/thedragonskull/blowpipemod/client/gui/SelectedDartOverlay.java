@@ -2,12 +2,12 @@ package net.thedragonskull.blowpipemod.client.gui;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.screens.Overlay;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.client.gui.overlay.IGuiOverlay;
 import net.thedragonskull.blowpipemod.BlowPipeMod;
 import net.thedragonskull.blowpipemod.util.DartPouchUtil;
 
@@ -18,16 +18,16 @@ import static net.thedragonskull.blowpipemod.util.DartPouchUtil.getDartsFromPouc
 public class SelectedDartOverlay {
     public static int currentDartIndex = 0;
 
-    private static final ResourceLocation UPHEAVAL_FONT = new ResourceLocation(BlowPipeMod.MOD_ID, "upheaval");
+    private static final ResourceLocation UPHEAVAL_FONT = ResourceLocation.fromNamespaceAndPath(BlowPipeMod.MOD_ID, "upheaval");
     private static final Style STYLE = Style.EMPTY.withFont(UPHEAVAL_FONT);
 
-    public static final ResourceLocation SELECTED_DART_FRAME = new ResourceLocation(BlowPipeMod.MOD_ID,
+    public static final ResourceLocation SELECTED_DART_FRAME = ResourceLocation.fromNamespaceAndPath(BlowPipeMod.MOD_ID,
             "textures/gui/selected_dart_frame_square.png");
 
-    public static final ResourceLocation LEATHER_BG = new ResourceLocation(BlowPipeMod.MOD_ID,
+    public static final ResourceLocation LEATHER_BG = ResourceLocation.fromNamespaceAndPath(BlowPipeMod.MOD_ID,
             "textures/gui/selected_dart_frame_bg.png");
 
-    public static final IGuiOverlay SELECTED_DART = (((gui, poseStack, partialTick, width, height) -> {
+    public static final Overlay SELECTED_DART = (((gui, poseStack, partialTick, width, height) -> {
         Minecraft mc = Minecraft.getInstance();
         Player player = mc.player;
 

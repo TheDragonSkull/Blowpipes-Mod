@@ -35,7 +35,7 @@ public class LureDartProjectileEntity extends AbstractDart{
     }
 
     @Override
-    protected ItemStack getPickupItem() {
+    protected ItemStack getDefaultPickupItem() {
         return ItemStack.EMPTY;
     }
 
@@ -45,7 +45,7 @@ public class LureDartProjectileEntity extends AbstractDart{
         Entity entity = result.getEntity();
 
         if (entity instanceof LivingEntity livingEntity) {
-            livingEntity.addEffect(new MobEffectInstance(ModEffects.CHARMING_AURA_EFFECT.get(), 100, 0, false, false, true));
+            livingEntity.addEffect(new MobEffectInstance(ModEffects.CHARMING_AURA_EFFECT, 100, 0, false, false, true));
         }
     }
 

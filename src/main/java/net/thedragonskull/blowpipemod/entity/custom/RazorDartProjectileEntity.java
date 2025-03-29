@@ -30,7 +30,7 @@ public class RazorDartProjectileEntity extends AbstractDart{
     }
 
     @Override
-    protected ItemStack getPickupItem() {
+    protected ItemStack getDefaultPickupItem() {
         return ItemStack.EMPTY;
     }
 

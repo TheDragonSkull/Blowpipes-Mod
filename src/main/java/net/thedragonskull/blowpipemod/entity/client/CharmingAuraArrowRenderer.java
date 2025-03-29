@@ -7,7 +7,7 @@ import net.thedragonskull.blowpipemod.BlowPipeMod;
 import net.thedragonskull.blowpipemod.entity.custom.CharmingAuraArrowEntity;
 
 public class CharmingAuraArrowRenderer extends ArrowRenderer<CharmingAuraArrowEntity> {
-    public static final ResourceLocation CHARMING_AURA_ARROW_LOCATION = new ResourceLocation(BlowPipeMod.MOD_ID, "textures/entity/arrows/charming_aura_arrow_entity.png");
+    public static final ResourceLocation CHARMING_AURA_ARROW_LOCATION = ResourceLocation.fromNamespaceAndPath(BlowPipeMod.MOD_ID, "textures/entity/arrows/charming_aura_arrow_entity.png");
 
     public CharmingAuraArrowRenderer(EntityRendererProvider.Context pContext) {
         super(pContext);

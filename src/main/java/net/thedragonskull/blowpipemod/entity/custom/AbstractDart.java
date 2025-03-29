@@ -16,6 +16,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec2;
 import net.thedragonskull.blowpipemod.enchantment.ModEnchantmentEffects;
+import net.thedragonskull.blowpipemod.item.ModItems;
 import net.thedragonskull.blowpipemod.sound.ModSounds;
 import net.thedragonskull.blowpipemod.trigger.ModTriggers;
 import net.thedragonskull.blowpipemod.util.DartPouchUtil;
@@ -29,7 +30,7 @@ public abstract class AbstractDart extends AbstractArrow {
     }
 
     public AbstractDart(EntityType<? extends AbstractDart> entityType, Level level, LivingEntity shooter) {
-        super(entityType, shooter, level);
+        super(entityType, shooter, level, null, new ItemStack(ModItems.BLOWPIPE.get()));
     }
 
     @Override
@@ -46,7 +47,7 @@ public abstract class AbstractDart extends AbstractArrow {
 
         if (this.getOwner() instanceof LivingEntity shooter) {
             ItemStack itemStack = shooter.getItemBySlot(EquipmentSlot.MAINHAND);
-            int blowPowerLevel = EnchantmentHelper.getItemEnchantmentLevel(ModEnchantmentEffects.BLOW_POWER.get(), itemStack);
+            int blowPowerLevel = EnchantmentHelper.getItemEnchantmentLevel(ModEnchantmentEffects.BLOW_POWER, itemStack);
 
             damage += blowPowerLevel;
         }
@@ -101,7 +102,7 @@ public abstract class AbstractDart extends AbstractArrow {
     protected abstract float getDamage();
 
     @Override
-    protected abstract @NotNull ItemStack getPickupItem();
+    protected abstract @NotNull ItemStack getDefaultPickupItem();
 
     @Override
     public void playerTouch(@NotNull Player player) {

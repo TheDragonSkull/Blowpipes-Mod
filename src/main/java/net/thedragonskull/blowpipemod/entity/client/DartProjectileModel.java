@@ -12,7 +12,7 @@ import net.thedragonskull.blowpipemod.BlowPipeMod;
 import net.thedragonskull.blowpipemod.entity.custom.DartProjectileEntity;
 
 public class DartProjectileModel extends EntityModel<DartProjectileEntity> {
-    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(BlowPipeMod.MOD_ID, "dart"), "main");
+    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(BlowPipeMod.MOD_ID, "dart"), "main");
     private final ModelPart dart;
     private final ModelPart point;
 
@@ -50,7 +50,7 @@ public class DartProjectileModel extends EntityModel<DartProjectileEntity> {
     }
 
     @Override
-    public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-        dart.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+    public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, int color) {
+        dart.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
     }
 }

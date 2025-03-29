@@ -3,12 +3,11 @@ package net.thedragonskull.blowpipemod.event;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.entity.EntityRenderers;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.*;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.neoforge.client.event.*;
 import net.thedragonskull.blowpipemod.BlowPipeMod;
 import net.thedragonskull.blowpipemod.block.entity.ModBlockEntities;
 import net.thedragonskull.blowpipemod.block.entity.renderer.BlowpipeGroundStandBlockEntityRenderer;
@@ -30,7 +29,7 @@ import net.thedragonskull.blowpipemod.util.DartPouchTooltipComponent;
 import net.thedragonskull.blowpipemod.util.ModItemProperties;
 import top.theillusivec4.curios.api.client.CuriosRendererRegistry;
 
-@Mod.EventBusSubscriber(modid = BlowPipeMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+@EventBusSubscriber(modid = BlowPipeMod.MOD_ID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ClientModEvents {
 
     @SubscribeEvent
@@ -46,8 +45,6 @@ public class ClientModEvents {
             EntityRenderers.register(ModEntities.RAZOR_DART.get(), RazorDartProjectileRenderer::new);
             EntityRenderers.register(ModEntities.ANNIHILATION_DART.get(), AnnihilationDartProjectileRenderer::new);
             EntityRenderers.register(ModEntities.OBLIVION_DART.get(), OblivionDartProjectileRenderer::new);
-
-            MenuScreens.register(ModMenuTypes.DART_POUCH_MENU.get(), DartPouchScreen::new);
         });
     }
 
@@ -83,7 +80,7 @@ public class ClientModEvents {
     }
 
     @SubscribeEvent
-    public static void onRegisterGuiOverlays(RegisterGuiOverlaysEvent event) {
+    public static void onRegisterGuiOverlays(RegisterGuiLayersEvent event) {
         event.registerAboveAll("selected_dart", SelectedDartOverlay.SELECTED_DART);
         event.registerAboveAll("scope", GogglesScopeOverlay.SCOPE_OVERLAY);
         event.registerAboveAll("scope_info", GogglesScopeOverlay.SCOPE_INFO);

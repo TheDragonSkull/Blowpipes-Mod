@@ -18,7 +18,7 @@ public class CharmingAuraArrowEntity extends AbstractArrow {
     }
 
     public CharmingAuraArrowEntity(Level pLevel, LivingEntity pShooter) {
-        super(ModEntities.CHARMING_AURA_ARROW_ENTITY.get(), pShooter, pLevel);
+        super(ModEntities.CHARMING_AURA_ARROW_ENTITY.get(), pShooter, pLevel, new ItemStack(ModItems.CHARMING_AURA_ARROW.get()), null);
     }
 
     @Override
@@ -35,14 +35,14 @@ public class CharmingAuraArrowEntity extends AbstractArrow {
     }
 
     @Override
-    protected ItemStack getPickupItem() {
+    protected ItemStack getDefaultPickupItem() {
         return new ItemStack(ModItems.CHARMING_AURA_ARROW.get());
     }
 
     @Override
     protected void doPostHurtEffects(LivingEntity target) {
         super.doPostHurtEffects(target);
-        MobEffectInstance mobEffectInstance = new MobEffectInstance(ModEffects.CHARMING_AURA_EFFECT.get(),
+        MobEffectInstance mobEffectInstance = new MobEffectInstance(ModEffects.CHARMING_AURA_EFFECT,
                 50, 0, false, false, true);
         target.addEffect(mobEffectInstance, this.getEffectSource());
     }

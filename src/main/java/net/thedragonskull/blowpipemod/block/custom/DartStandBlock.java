@@ -1,9 +1,11 @@
 package net.thedragonskull.blowpipemod.block.custom;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -29,21 +31,21 @@ public class DartStandBlock extends BaseEntityBlock {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final VoxelShape SHAPE_N_S = Block.box(6, 0, 7, 10, 3, 9);
     public static final VoxelShape SHAPE_E_W = Block.box(7, 0, 6, 9, 3, 10);
+    public static final MapCodec<DartStandBlock> CODEC = simpleCodec(DartStandBlock::new);
 
     public DartStandBlock(Properties pProperties) {
         super(pProperties);
     }
 
     @Override
-    public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
-        if (!pLevel.isClientSide) {
-            BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
+    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
+        if (!level.isClientSide) {
+            BlockEntity blockEntity = level.getBlockEntity(pos);
             if (blockEntity instanceof DartStandBlockEntity stand) {
-                stand.interact(pPlayer, pHand);
+                stand.interact(player, InteractionHand.MAIN_HAND);
             }
         }
-        return InteractionResult.SUCCESS;
-    }
+        return InteractionResult.SUCCESS;    }
 
     @Override
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
@@ -73,6 +75,11 @@ public class DartStandBlock extends BaseEntityBlock {
     @Override
     public float getShadeBrightness(BlockState pState, BlockGetter pLevel, BlockPos pPos) {
         return 1.0F;
+    }
+
+    @Override
+    protected MapCodec<? extends BaseEntityBlock> codec() {
+        return CODEC;
     }
 
     @Override

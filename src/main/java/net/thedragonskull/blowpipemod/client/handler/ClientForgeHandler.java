@@ -2,6 +2,7 @@ package net.thedragonskull.blowpipemod.client.handler;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.LayeredDraw;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.sounds.SoundEvents;
@@ -11,14 +12,11 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.ComputeFovModifierEvent;
-import net.minecraftforge.client.event.InputEvent;
-import net.minecraftforge.client.event.RenderGuiOverlayEvent;
-import net.minecraftforge.client.event.RenderHandEvent;
-import net.minecraftforge.client.gui.overlay.VanillaGuiOverlay;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.client.event.*;
+import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 import net.thedragonskull.blowpipemod.BlowPipeMod;
 import net.thedragonskull.blowpipemod.client.Keybindings;
 import net.thedragonskull.blowpipemod.enchantment.ModEnchantmentEffects;
@@ -34,7 +32,7 @@ import static net.thedragonskull.blowpipemod.util.DartPouchUtil.findDartPouch;
 import static net.thedragonskull.blowpipemod.util.DartPouchUtil.updateDartIndex;
 import static net.thedragonskull.blowpipemod.util.RangeGogglesUtil.hasGogglesEquipped;
 
-@Mod.EventBusSubscriber(modid = BlowPipeMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
+@EventBusSubscriber(modid = BlowPipeMod.MOD_ID, bus = EventBusSubscriber.Bus.GAME, value = Dist.CLIENT)
 public class ClientForgeHandler {
 
     public static boolean isZooming = false;
@@ -103,12 +101,12 @@ public class ClientForgeHandler {
         if (player != null && hasGogglesEquipped(player)) {
             boolean isCtrlPressed = Screen.hasControlDown();
             if (isCtrlPressed) {
-                if (event.getScrollDelta() > 0) {
+                if (event.getScrollDeltaY() > 0) {
                     isZooming = true;
                     player.playSound(SoundEvents.SPYGLASS_USE);
                     event.setCanceled(true);
                 }
-                else if (event.getScrollDelta() < 0) {
+                else if (event.getScrollDeltaY() < 0) {
                     isZooming = false;
                     player.playSound(SoundEvents.SPYGLASS_USE);
                     event.setCanceled(true);
@@ -158,12 +156,12 @@ public class ClientForgeHandler {
     }
 
     @SubscribeEvent
-    public static void onRenderOverlay(RenderGuiOverlayEvent.Pre event) {
+    public static void onRenderOverlay(RenderGuiLayerEvent.Pre event) {
         Minecraft mc = Minecraft.getInstance();
         Player player = mc.player;
 
         if (player != null && RangeGogglesUtil.hasGogglesEquipped(player)) {
-            if (event.getOverlay() == VanillaGuiOverlay.CROSSHAIR.type()) {
+            if (event.getName().equals(VanillaGuiLayers.CROSSHAIR)) {
                 event.setCanceled(true);
             }
         }

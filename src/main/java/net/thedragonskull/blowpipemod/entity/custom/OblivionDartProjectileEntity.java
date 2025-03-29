@@ -37,7 +37,7 @@ public class OblivionDartProjectileEntity extends AbstractDart{
     }
 
     @Override
-    protected ItemStack getPickupItem() {
+    protected ItemStack getDefaultPickupItem() {
         return ModItems.OBLIVION_DART.get().getDefaultInstance();
     }
 

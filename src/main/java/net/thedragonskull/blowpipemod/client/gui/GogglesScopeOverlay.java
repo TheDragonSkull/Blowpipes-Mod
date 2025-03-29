@@ -2,6 +2,7 @@ package net.thedragonskull.blowpipemod.client.gui;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.screens.Overlay;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -14,19 +15,18 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.client.gui.overlay.IGuiOverlay;
 import net.thedragonskull.blowpipemod.BlowPipeMod;
 import net.thedragonskull.blowpipemod.client.handler.ClientForgeHandler;
 import net.thedragonskull.blowpipemod.util.RangeGogglesUtil;
 
 public class GogglesScopeOverlay {
-    public static final ResourceLocation SCOPE = new ResourceLocation(BlowPipeMod.MOD_ID,
+    public static final ResourceLocation SCOPE = ResourceLocation.fromNamespaceAndPath(BlowPipeMod.MOD_ID,
             "textures/gui/scope_v2.png");
-    public static final ResourceLocation SCOUTER = new ResourceLocation(BlowPipeMod.MOD_ID,
+    public static final ResourceLocation SCOUTER = ResourceLocation.fromNamespaceAndPath(BlowPipeMod.MOD_ID,
             "textures/gui/scope_indicator.png");
 
 
-    public static final IGuiOverlay SCOPE_OVERLAY = (((gui, poseStack, partialTick, width, height) -> {
+    public static final Overlay SCOPE_OVERLAY = (((gui, poseStack, partialTick, width, height) -> {
         Minecraft mc = Minecraft.getInstance();
         Player player = mc.player;
 
@@ -39,8 +39,8 @@ public class GogglesScopeOverlay {
             // Scope
             GuiGraphics guiGraphics = new GuiGraphics(mc, mc.renderBuffers().bufferSource());
             int imgSize = 175;
-            int x = (width - imgSize) / 2;
-            int y = (height - imgSize) / 2;
+            int x = (guiGraphics.guiWidth() - imgSize) / 2;
+            int y = (guiGraphics.guiWidth() - imgSize) / 2;
 
             guiGraphics.blit(SCOPE, x, y, 0, 0, imgSize, imgSize, imgSize, imgSize);
 
@@ -67,7 +67,7 @@ public class GogglesScopeOverlay {
 
     }));
 
-    public static final IGuiOverlay SCOPE_INFO = (((gui, poseStack, partialTick, width, height) -> {
+    public static final Overlay SCOPE_INFO = (((gui, poseStack, partialTick) -> {
         Minecraft mc = Minecraft.getInstance();
         Player player = mc.player;
 
@@ -80,7 +80,7 @@ public class GogglesScopeOverlay {
             // Ray tracing & target render
             double maxDistance = ClientForgeHandler.isZooming ? 80.0 : 40.0;
 
-            Vec3 eyePosition = player.getEyePosition(partialTick);
+            Vec3 eyePosition = player.getEyePosition();
             Vec3 lookVector = player.getViewVector(partialTick).scale(maxDistance);
             Vec3 targetPosition = eyePosition.add(lookVector);
 
@@ -120,7 +120,7 @@ public class GogglesScopeOverlay {
 
                         GuiGraphics guiGraphics = new GuiGraphics(mc, mc.renderBuffers().bufferSource());
                         int scouterSize = 111;
-                        int scouter_x = (width - scouterSize);
+                        int scouter_x = (guiGraphics.guiWidth() - scouterSize);
                         int scouter_y = 0;
 
                         guiGraphics.blit(SCOUTER, scouter_x - 5, scouter_y - 15, 0, 0, scouterSize, scouterSize, scouterSize, scouterSize);

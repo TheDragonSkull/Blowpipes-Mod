@@ -1,7 +1,7 @@
 package net.thedragonskull.blowpipemod.block.entity;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
@@ -13,15 +13,12 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.items.ItemStackHandler;
+import net.neoforged.neoforge.items.ItemStackHandler;
 import net.thedragonskull.blowpipemod.item.custom.BlowPipe;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class BlowpipeGroundStandBlockEntity extends BlockEntity {
-    private final ItemStackHandler itemHandler = new ItemStackHandler(1) {
+    private final ItemStackHandler inventory = new ItemStackHandler(1) {
         @Override
         protected void onContentsChanged(int slot) {
             setChanged();
@@ -44,27 +41,27 @@ public class BlowpipeGroundStandBlockEntity extends BlockEntity {
             return;
 
             // Put blowpipe
-        if (itemHandler.getStackInSlot(0).isEmpty() && isBlowpipe(heldItem)) {
+        if (inventory.getStackInSlot(0).isEmpty() && isBlowpipe(heldItem)) {
             ItemStack stack = heldItem.copy();
             stack.setCount(1);
-            itemHandler.setStackInSlot(0, stack);
+            inventory.setStackInSlot(0, stack);
             heldItem.shrink(1);
             level.playSound(null, this.getBlockPos(),
                     SoundEvents.BAMBOO_WOOD_BUTTON_CLICK_ON, SoundSource.BLOCKS);
 
             // Retrieve blowpipe
-        } else if (!itemHandler.getStackInSlot(0).isEmpty() && heldItem.isEmpty()) {
-            player.getInventory().setItem(selectedSlot, itemHandler.getStackInSlot(0));
-            itemHandler.setStackInSlot(0, ItemStack.EMPTY);
+        } else if (!inventory.getStackInSlot(0).isEmpty() && heldItem.isEmpty()) {
+            player.getInventory().setItem(selectedSlot, inventory.getStackInSlot(0));
+            inventory.setStackInSlot(0, ItemStack.EMPTY);
             level.playSound(null, this.getBlockPos(),
                     SoundEvents.BAMBOO_WOOD_BUTTON_CLICK_OFF, SoundSource.BLOCKS);
 
             // Replace blowpipe
-        } else if (!itemHandler.getStackInSlot(0).isEmpty() && heldItem.getItem() instanceof BlowPipe) {
-            player.getInventory().setItem(selectedSlot, itemHandler.getStackInSlot(0));
+        } else if (!inventory.getStackInSlot(0).isEmpty() && heldItem.getItem() instanceof BlowPipe) {
+            player.getInventory().setItem(selectedSlot, inventory.getStackInSlot(0));
             ItemStack stack = heldItem.copy();
             stack.setCount(1);
-            itemHandler.setStackInSlot(0, stack);
+            inventory.setStackInSlot(0, stack);
             heldItem.shrink(1);
             level.playSound(null, this.getBlockPos(),
                     SoundEvents.BAMBOO_WOOD_BUTTON_CLICK_ON, SoundSource.BLOCKS);
@@ -77,32 +74,22 @@ public class BlowpipeGroundStandBlockEntity extends BlockEntity {
     }
 
     public ItemStack getStoredBlowpipe() {
-        return itemHandler.getStackInSlot(0);
+        return inventory.getStackInSlot(0);
     }
 
     public void tick() {
     }
 
     @Override
-    public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
-        return super.getCapability(cap, side);
+    protected void saveAdditional(CompoundTag pTag, HolderLookup.Provider pRegistries) {
+        super.saveAdditional(pTag, pRegistries);
+        pTag.put("StoredBlowpipe", inventory.serializeNBT(pRegistries));
     }
 
     @Override
-    public void onLoad() {
-        super.onLoad();
-    }
-
-    @Override
-    public void load(CompoundTag pTag) {
-        super.load(pTag);
-        itemHandler.deserializeNBT(pTag.getCompound("StoredBlowpipe"));
-    }
-
-    @Override
-    protected void saveAdditional(CompoundTag pTag) {
-        pTag.put("StoredBlowpipe", itemHandler.serializeNBT());
-        super.saveAdditional(pTag);
+    public void loadAdditional(CompoundTag pTag, HolderLookup.Provider pRegistries) {
+        super.loadAdditional(pTag, pRegistries);
+        inventory.deserializeNBT(pRegistries, pTag.getCompound("StoredBlowpipe"));
     }
 
     @Nullable
@@ -112,7 +99,7 @@ public class BlowpipeGroundStandBlockEntity extends BlockEntity {
     }
 
     @Override
-    public CompoundTag getUpdateTag() {
-        return saveWithoutMetadata();
+    public CompoundTag getUpdateTag(HolderLookup.Provider pRegistries) {
+        return saveWithoutMetadata(pRegistries);
     }
 }

@@ -1,5 +1,6 @@
 package net.thedragonskull.blowpipemod.block.custom;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
@@ -29,6 +30,8 @@ import org.jetbrains.annotations.Nullable;
 
 public class BlowpipeWallStandBlock extends BaseEntityBlock {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
+    public static final MapCodec<BlowpipeWallStandBlock> CODEC = simpleCodec(BlowpipeWallStandBlock::new);
+
 
     private static final VoxelShape SHAPE_NORTH = Block.box(3.5, 0, 12, 12.5, 16, 16);
     private static final VoxelShape SHAPE_SOUTH = Block.box(3.5, 0, 0, 12.5, 16, 4);
@@ -40,7 +43,13 @@ public class BlowpipeWallStandBlock extends BaseEntityBlock {
     }
 
     @Override
-    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+    protected MapCodec<? extends BaseEntityBlock> codec() {
+        return CODEC;
+    }
+
+    @Override
+    public InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
+        InteractionHand hand = InteractionHand.MAIN_HAND;
 
         if (level.isClientSide)
             return InteractionResult.SUCCESS;

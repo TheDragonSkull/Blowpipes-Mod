@@ -1,5 +1,6 @@
 package net.thedragonskull.blowpipemod.block.custom;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
@@ -29,17 +30,24 @@ public class BlowpipeGroundStandBlock extends BaseEntityBlock {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final VoxelShape SHAPE_N_S = Block.box(2, 0, 5, 14, 6, 11);
     public static final VoxelShape SHAPE_E_W = Block.box(5, 0, 2, 11, 6, 14);
+    public static final MapCodec<BlowpipeGroundStandBlock> CODEC = simpleCodec(BlowpipeGroundStandBlock::new);
+
 
     public BlowpipeGroundStandBlock(Properties pProperties) {
         super(pProperties);
     }
 
     @Override
-    public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
+    protected MapCodec<? extends BaseEntityBlock> codec() {
+        return CODEC;
+    }
+
+    @Override
+    public InteractionResult useWithoutItem(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, BlockHitResult pHit) {
         if (!pLevel.isClientSide) {
             BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
             if (blockEntity instanceof BlowpipeGroundStandBlockEntity stand) {
-                stand.interact(pPlayer, pHand);
+                stand.interact(pPlayer, InteractionHand.MAIN_HAND);
             }
         }
         return InteractionResult.SUCCESS;

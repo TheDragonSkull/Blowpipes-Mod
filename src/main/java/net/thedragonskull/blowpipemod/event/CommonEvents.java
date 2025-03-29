@@ -7,20 +7,21 @@ import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.trading.ItemCost;
 import net.minecraft.world.item.trading.MerchantOffer;
-import net.minecraftforge.event.village.VillagerTradesEvent;
-import net.minecraftforge.event.village.WandererTradesEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.village.VillagerTradesEvent;
+import net.neoforged.neoforge.event.village.WandererTradesEvent;
 import net.thedragonskull.blowpipemod.BlowPipeMod;
 import net.thedragonskull.blowpipemod.item.ModItems;
 import net.thedragonskull.blowpipemod.villager.ModVillagers;
 
 import java.util.List;
+import java.util.Optional;
 
-@Mod.EventBusSubscriber(modid = BlowPipeMod.MOD_ID)
+@EventBusSubscriber(modid = BlowPipeMod.MOD_ID)
 public class CommonEvents {
-
 
     @SubscribeEvent
     public static void addCustomTrades(VillagerTradesEvent event) {
@@ -55,13 +56,9 @@ public class CommonEvents {
                         ItemStack dyeStack = new ItemStack(dyeItem, 1);
 
                         return new MerchantOffer(
-                                new ItemStack(Items.RABBIT_HIDE, 7),
-                                dyeStack,
-                                coloredPouch,
-                                10,
-                                5,
-                                0.2f
-                        );
+                                new ItemCost(Items.RABBIT_HIDE, 7),
+                                Optional.of(new ItemCost(dyeStack.getItem())
+                                ), coloredPouch, 10, 5, 0.2f);
                     });
                 }
             }
@@ -73,7 +70,7 @@ public class CommonEvents {
             // Level 1
             trades.get(1).add((pTrader, pRandom) ->
                     new MerchantOffer(
-                            new ItemStack(Items.EMERALD, 2),
+                            new ItemCost(Items.EMERALD, 2),
                             new ItemStack(ModItems.DART_BASE.get(), 4),
                             10, 2, 0.05f
                     )
@@ -81,7 +78,7 @@ public class CommonEvents {
 
             trades.get(1).add((pTrader, pRandom) ->
                     new MerchantOffer(
-                            new ItemStack(Items.EMERALD, 2),
+                            new ItemCost(Items.EMERALD, 2),
                             new ItemStack(ModItems.IRON_HEAD_DART.get(), 1),
                             10,
                             2,
@@ -91,7 +88,7 @@ public class CommonEvents {
 
             trades.get(1).add((pTrader, pRandom) ->
                     new MerchantOffer(
-                            new ItemStack(Items.EMERALD, 2),
+                            new ItemCost(Items.EMERALD, 2),
                             new ItemStack(ModItems.BLOWPIPE.get(), 1),
                             100,
                             3,
@@ -102,7 +99,7 @@ public class CommonEvents {
             // Level 2
             trades.get(2).add((pTrader, pRandom) ->
                     new MerchantOffer(
-                            new ItemStack(Items.EMERALD, 4),
+                            new ItemCost(Items.EMERALD, 4),
                             new ItemStack(ModItems.DART_POUCH.get(), 1),
                             100,
                             5,
@@ -112,7 +109,7 @@ public class CommonEvents {
 
             trades.get(2).add((pTrader, pRandom) ->
                     new MerchantOffer(
-                            new ItemStack(Items.EMERALD, 2),
+                            new ItemCost(Items.EMERALD, 2),
                             new ItemStack(ModItems.POISON_DART.get(), 1),
                             100,
                             4,
@@ -123,7 +120,7 @@ public class CommonEvents {
             // Level 3
             trades.get(3).add((pTrader, pRandom) ->
                     new MerchantOffer(
-                            new ItemStack(Items.EMERALD, 2),
+                            new ItemCost(Items.EMERALD, 2),
                             new ItemStack(ModItems.LURE_DART.get(), 1),
                             100,
                             5,
@@ -133,7 +130,7 @@ public class CommonEvents {
 
             trades.get(3).add((pTrader, pRandom) ->
                     new MerchantOffer(
-                            new ItemStack(Items.EMERALD, 3),
+                            new ItemCost(Items.EMERALD, 3),
                             new ItemStack(ModItems.POWDER_DART.get(), 1),
                             100,
                             4,
@@ -143,7 +140,7 @@ public class CommonEvents {
 
             trades.get(3).add((pTrader, pRandom) ->
                     new MerchantOffer(
-                            new ItemStack(Items.EMERALD, 4),
+                            new ItemCost(Items.EMERALD, 4),
                             new ItemStack(ModItems.BAMBOO_BLOWPIPE.get(), 1),
                             100,
                             4,
@@ -154,7 +151,7 @@ public class CommonEvents {
             // Level 4
             trades.get(4).add((pTrader, pRandom) ->
                     new MerchantOffer(
-                            new ItemStack(Items.EMERALD, 3),
+                            new ItemCost(Items.EMERALD, 3),
                             new ItemStack(ModItems.RAZOR_DART.get(), 1),
                             100,
                             5,
@@ -165,7 +162,7 @@ public class CommonEvents {
             // Level 5
             trades.get(5).add((pTrader, pRandom) ->
                     new MerchantOffer(
-                            new ItemStack(Items.EMERALD, 30), //TODO: change for monster trophy
+                            new ItemCost(Items.EMERALD, 30), //TODO: change for monster trophy
                             new ItemStack(ModItems.RANGE_GOGGLES.get(), 1),
                             1,
                             50,
@@ -175,8 +172,8 @@ public class CommonEvents {
 
             trades.get(5).add((pTrader, pRandom) ->
                     new MerchantOffer(
-                            new ItemStack(ModItems.ANNIHILATION_DART.get(), 1),
-                            new ItemStack(Items.DRAGON_BREATH, 1),
+                            new ItemCost(ModItems.ANNIHILATION_DART.get(), 1),
+                            Optional.of(new ItemCost(Items.DRAGON_BREATH, 1)),
                             new ItemStack(ModItems.OBLIVION_DART.get(), 1),
                             1,
                             100,
@@ -194,7 +191,7 @@ public class CommonEvents {
         List<VillagerTrades.ItemListing> rareTrades = event.getRareTrades();
         
         genericTrades.add((pTrader, pRandom) -> new MerchantOffer(
-                new ItemStack(Items.EMERALD, 6),
+                new ItemCost(Items.EMERALD, 6),
                 new ItemStack(ModItems.DART_POUCH.get(), 1),
                 3, 2, 0.2f));
 
@@ -203,7 +200,7 @@ public class CommonEvents {
             ItemStack coloredPouch = new ItemStack(ModItems.COLORED_DART_POUCHES.get(randomColor).get());
 
             return new MerchantOffer(
-                new ItemStack(Items.EMERALD, 8),
+                new ItemCost(Items.EMERALD, 8),
                 new ItemStack(coloredPouch.getItem()),
                 3, 2, 0.2f
             );
@@ -214,7 +211,7 @@ public class CommonEvents {
             ItemStack coloredPouch = new ItemStack(ModItems.COLORED_DART_POUCHES.get(randomColor).get());
 
             return new MerchantOffer(
-                    new ItemStack(Items.EMERALD, 8),
+                    new ItemCost(Items.EMERALD, 8),
                     new ItemStack(coloredPouch.getItem()),
                     3, 2, 0.2f
             );
@@ -224,7 +221,7 @@ public class CommonEvents {
             ItemStack goggles = new ItemStack(ModItems.RANGE_GOGGLES.get());
 
             return new MerchantOffer(
-                    new ItemStack(Items.EMERALD, 48),
+                    new ItemCost(Items.EMERALD, 48),
                     new ItemStack(goggles.getItem()),
                     1, 50, 0.5f
             );

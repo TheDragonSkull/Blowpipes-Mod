@@ -42,7 +42,7 @@ public class DartProjectileRenderer extends EntityRenderer<DartProjectileEntity>
 
         VertexConsumer vertexconsumer = ItemRenderer.getFoilBufferDirect(
                 buffer, this.model.renderType(this.getTextureLocation(pEntity)),false, false);
-        this.model.renderToBuffer(poseStack, vertexconsumer, packedLight, OverlayTexture.NO_OVERLAY, 1,1,1,1);
+        this.model.renderToBuffer(poseStack, vertexconsumer, packedLight, OverlayTexture.NO_OVERLAY);
         poseStack.popPose();
         super.render(pEntity, entityYaw, partialTicks, poseStack, buffer, packedLight);
     }
@@ -50,6 +50,6 @@ public class DartProjectileRenderer extends EntityRenderer<DartProjectileEntity>
 
     @Override
     public @NotNull ResourceLocation getTextureLocation(@NotNull DartProjectileEntity pEntity) {
-        return new ResourceLocation(BlowPipeMod.MOD_ID, "textures/entity/darts/dart_base.png");
+        return ResourceLocation.fromNamespaceAndPath(BlowPipeMod.MOD_ID, "textures/entity/darts/dart_base.png");
     }
 }

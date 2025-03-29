@@ -33,8 +33,9 @@ public class AnnihilationDartProjectileEntity extends AbstractDart{
         return 1.0F;
     }
 
+
     @Override
-    protected ItemStack getPickupItem() {
+    protected ItemStack getDefaultPickupItem() {
         return ModItems.ANNIHILATION_DART.get().getDefaultInstance();
     }
 

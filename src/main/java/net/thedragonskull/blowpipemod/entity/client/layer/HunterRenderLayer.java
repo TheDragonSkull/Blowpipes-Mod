@@ -73,7 +73,7 @@ public class HunterRenderLayer extends RenderLayer<Villager, VillagerModel<Villa
             poseStack.translate(0.1D, 0D, -0.2D);
             poseStack.mulPose(Axis.YP.rotationDegrees(-90));
 
-            VertexConsumer vertexConsumer = pBuffer.getBuffer(RenderType.entityCutout(new ResourceLocation(BlowPipeMod.MOD_ID, "textures/entity/dart_pouch.png")));
+            VertexConsumer vertexConsumer = pBuffer.getBuffer(RenderType.entityCutout(ResourceLocation.fromNamespaceAndPath(BlowPipeMod.MOD_ID, "textures/entity/dart_pouch.png")));
             pouch.render(poseStack, vertexConsumer, pPackedLight, OverlayTexture.NO_OVERLAY);
 
             poseStack.popPose();

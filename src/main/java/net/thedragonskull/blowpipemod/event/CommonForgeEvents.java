@@ -12,25 +12,23 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
-import net.minecraftforge.event.entity.living.LivingEvent;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import net.thedragonskull.blowpipemod.BlowPipeMod;
 import net.thedragonskull.blowpipemod.effect.ModEffects;
 import net.thedragonskull.blowpipemod.entity.custom.LureDartProjectileEntity;
-import net.thedragonskull.blowpipemod.item.ModItems;
 import net.thedragonskull.blowpipemod.trigger.ModTriggers;
 
 import java.util.List;
 
-@Mod.EventBusSubscriber(modid = BlowPipeMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
+@EventBusSubscriber(modid = BlowPipeMod.MOD_ID, bus = EventBusSubscriber.Bus.GAME)
 public class CommonForgeEvents {
     private static boolean isLureDartDMGSource = false;
 
     @SubscribeEvent
-    public static void onLivingUpdate(LivingEvent.LivingTickEvent event) {
-        LivingEntity entity = event.getEntity();
+    public static void onLivingUpdate(EntityTickEvent event) {
+        LivingEntity entity = (LivingEntity) event.getEntity();
         Level level = entity.level();
 
         if (!level.isClientSide && enemyHasAllEffects(entity)) {
@@ -59,7 +57,7 @@ public class CommonForgeEvents {
     private static boolean catChasingCreeper(LivingEntity entity) {
 
         if (entity instanceof Creeper creeper) {
-            if (creeper.hasEffect(ModEffects.CHARMING_AURA_EFFECT.get())) {
+            if (creeper.hasEffect(ModEffects.CHARMING_AURA_EFFECT)) {
                 AABB box = creeper.getBoundingBox().inflate(5);
                 List<Cat> catsInArea = entity.level().getEntitiesOfClass(Cat.class, box);
 
