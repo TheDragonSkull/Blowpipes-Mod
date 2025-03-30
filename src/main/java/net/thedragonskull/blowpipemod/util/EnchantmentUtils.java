@@ -1,15 +1,19 @@
 package net.thedragonskull.blowpipemod.util;
 
+import net.minecraft.core.Holder;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.ItemEnchantments;
+
+import java.util.Optional;
 
 public class EnchantmentUtils {
 
-    public static int getEnchantmentLevel(RegistryAccess registryAccess, ItemStack stack, String enchantmentId) {
+/*    public static int getEnchantmentLevel(RegistryAccess registryAccess, ItemStack stack, String enchantmentId) {
         if (stack.isEmpty()) return 0;
 
         // Obtiene los encantamientos usando DataComponents
@@ -22,5 +26,5 @@ public class EnchantmentUtils {
         if (enchantmentHolder.isEmpty()) return 0; // Si el encantamiento no existe, retorna 0
 
         return enchantments.getLevel(enchantmentHolder.get()); // Obtiene el nivel del encantamiento
-    }
+    }*/
 }

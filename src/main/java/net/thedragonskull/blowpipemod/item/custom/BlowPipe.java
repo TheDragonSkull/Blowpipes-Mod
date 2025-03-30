@@ -27,10 +27,12 @@ import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import net.thedragonskull.blowpipemod.component.ModDataComponents;
 import net.thedragonskull.blowpipemod.enchantment.ModEnchantmentEffects;
 import net.thedragonskull.blowpipemod.entity.custom.*;
 import net.thedragonskull.blowpipemod.item.ModItems;
@@ -68,7 +70,7 @@ public class BlowPipe extends ProjectileWeaponItem implements IFirstPersonAnimat
     }
 
     @Override
-    public int getUseDuration(ItemStack pStack) {
+    public int getUseDuration(ItemStack stack, LivingEntity entity) {
         return USE_DURATION;
     }
 
@@ -83,7 +85,7 @@ public class BlowPipe extends ProjectileWeaponItem implements IFirstPersonAnimat
     @Override
     public void animateItemFirstPerson(Player entity, ItemStack stack, InteractionHand hand, HumanoidArm arm, PoseStack poseStack, float partialTicks, float pitch, float attackAnim, float handHeight) {
         if (entity.isUsingItem() && entity.getUseItemRemainingTicks() > 0 && entity.getUsedItemHand() == hand) {
-            float timeLeft = stack.getUseDuration() - (entity.getUseItemRemainingTicks() - partialTicks + 1.0F);
+            float timeLeft = stack.getUseDuration(entity) - (entity.getUseItemRemainingTicks() - partialTicks + 1.0F);
             float f12 = Mth.clamp(timeLeft / 5.0F, 0.0F, 1.0F);
 
             //Translation
@@ -190,59 +192,60 @@ public class BlowPipe extends ProjectileWeaponItem implements IFirstPersonAnimat
                             }
                         }
                     } else {
-                        shootDart(level, player, stack);
+                        var dartDataComponent = stack.get(ModDataComponents.DART.get());
+                        if (dartDataComponent != null) {
+                            ItemStack dartStack = dartDataComponent;
+
+                            AbstractDart dartProjectile;
+
+                            if (dartStack.is(ModItems.POISON_DART.get())) {
+                                dartProjectile = new PoisonDartProjectileEntity(level, player);
+                            } else if (dartStack.is(ModItems.POWDER_DART.get())) {
+                                dartProjectile = new PowderDartProjectileEntity(level, player);
+                            } else if (dartStack.is(ModItems.LURE_DART.get())) {
+                                dartProjectile = new LureDartProjectileEntity(level, player);
+                            } else if (dartStack.is(ModItems.IRON_HEAD_DART.get())) {
+                                dartProjectile = new IronHeadDartProjectileEntity(level, player);
+                            } else if (dartStack.is(ModItems.RAZOR_DART.get())) {
+                                dartProjectile = new RazorDartProjectileEntity(level, player);
+                            } else if (dartStack.is(ModItems.ANNIHILATION_DART.get())) {
+                                dartProjectile = new AnnihilationDartProjectileEntity(level, player);
+                            } else if (dartStack.is(ModItems.OBLIVION_DART.get())) {
+                                dartProjectile = new OblivionDartProjectileEntity(level, player);
+                            } else {
+                                dartProjectile = new DartProjectileEntity(level, player);
+                            }
+
+                            Vec3 eyePos = player.getEyePosition();
+                            Vec3 viewVector = player.getViewVector(1.0F);
+                            Vec3 offset = viewVector.scale(0.5);
+                            Vec3 spawnPos = eyePos.add(offset);
+
+                            dartProjectile.setPos(spawnPos.x, spawnPos.y - 0.1, spawnPos.z);
+
+                            float blowPowerLevel = 1.0F; //todo EnchantmentHelper.getItemEnchantmentLevel(ModEnchantmentEffects.BLOW_POWER, stack);
+                            dartProjectile.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 1.5F + (blowPowerLevel), 0F);
+
+                            level.addFreshEntity(dartProjectile);
+                            level.playSound(null, player.getX(), player.getY(), player.getZ(), ModSounds.BLOWPIPE_SHOT.get(), SoundSource.PLAYERS, 1.0F, 1.0F);
+                            player.getCooldowns().addCooldown(this, 30);
+
+                            //Reset blowpipe
+                            stack.set(ModDataComponents.LOADED.get(), false);
+                            stack.remove(ModDataComponents.DART.get());
+                            stack.remove(ModDataComponents.DART_TYPE.get());
+
+                            shootProjectile(player, dartProjectile, 0, 1.5F, 0.0F, 0.0F, null);
+
+                        }
                     }
                 }
             }
         }
     }
 
-    private void shootDart(Level level, Player player, ItemStack stack) {
-        CompoundTag tag = stack.getTag();
-
-        if (tag != null && tag.contains("Dart", Tag.TAG_COMPOUND)) {
-            CompoundTag dartTag = tag.getCompound("Dart");
-            ItemStack dartStack = ItemStack.of(dartTag);
-
-            AbstractDart dartProjectile;
-
-            if (dartStack.is(ModItems.POISON_DART.get())) {
-                dartProjectile = new PoisonDartProjectileEntity(level, player);
-            } else if (dartStack.is(ModItems.POWDER_DART.get())) {
-                dartProjectile = new PowderDartProjectileEntity(level, player);
-            } else if (dartStack.is(ModItems.LURE_DART.get())) {
-                dartProjectile = new LureDartProjectileEntity(level, player);
-            } else if (dartStack.is(ModItems.IRON_HEAD_DART.get())) {
-                dartProjectile = new IronHeadDartProjectileEntity(level, player);
-            } else if (dartStack.is(ModItems.RAZOR_DART.get())) {
-                dartProjectile = new RazorDartProjectileEntity(level, player);
-            } else if (dartStack.is(ModItems.ANNIHILATION_DART.get())) {
-                dartProjectile = new AnnihilationDartProjectileEntity(level, player);
-            } else if (dartStack.is(ModItems.OBLIVION_DART.get())) {
-                dartProjectile = new OblivionDartProjectileEntity(level, player);
-            } else {
-                dartProjectile = new DartProjectileEntity(level, player);
-            }
-
-            Vec3 eyePos = player.getEyePosition();
-            Vec3 viewVector = player.getViewVector(1.0F);
-            Vec3 offset = viewVector.scale(0.5);
-            Vec3 spawnPos = eyePos.add(offset);
-
-            dartProjectile.setPos(spawnPos.x, spawnPos.y - 0.1, spawnPos.z);
-
-            int blowPowerLevel = EnchantmentHelper.getItemEnchantmentLevel(ModEnchantmentEffects.BLOW_POWER.get(), stack);
-            dartProjectile.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 1.5F + (1.0F * blowPowerLevel), 0F);
-
-            level.addFreshEntity(dartProjectile);
-            level.playSound(null, player.getX(), player.getY(), player.getZ(), ModSounds.BLOWPIPE_SHOT.get(), SoundSource.PLAYERS, 1.0F, 1.0F);
-            player.getCooldowns().addCooldown(this, 30);
-
-            //Reset blowpipe
-            stack.getOrCreateTag().putBoolean("loaded", false);
-            stack.getOrCreateTag().remove("Dart");
-            stack.getOrCreateTag().remove("dart_type");
-        }
+    @Override
+    protected void shootProjectile(LivingEntity shooter, Projectile projectile, int index, float velocity, float inaccuracy, float angle, @Nullable LivingEntity target) {
     }
 
     public static int getEnchantmentLevel(ItemStack stack) {
@@ -259,8 +262,8 @@ public class BlowPipe extends ProjectileWeaponItem implements IFirstPersonAnimat
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, @Nullable Level world, List<Component> tooltip, TooltipFlag flag) {
-        super.appendHoverText(stack, world, tooltip, flag);
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag tooltipFlag) {
+        super.appendHoverText(stack, context, tooltip, tooltipFlag);
 
         ItemStack loadedDart = BlowpipeUtil.getLoadedDart(stack);
 
@@ -270,9 +273,5 @@ public class BlowPipe extends ProjectileWeaponItem implements IFirstPersonAnimat
         } else {
             tooltip.add(Component.literal("Empty")
                     .withStyle(ChatFormatting.GRAY));
-        }
-    }
-
-
-
+        }    }
 }

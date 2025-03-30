@@ -14,6 +14,8 @@ public record BlowPowerEnchantmentEffect() implements EnchantmentEntityEffect {
     public void apply(ServerLevel level, int enchantmentLevel, EnchantedItemInUse item, Entity entity, Vec3 origin) {
     }
 
+
+
     @Override
     public MapCodec<? extends EnchantmentEntityEffect> codec() {
         return CODEC;

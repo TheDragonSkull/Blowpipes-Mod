@@ -47,9 +47,9 @@ public abstract class AbstractDart extends AbstractArrow {
 
         if (this.getOwner() instanceof LivingEntity shooter) {
             ItemStack itemStack = shooter.getItemBySlot(EquipmentSlot.MAINHAND);
-            int blowPowerLevel = EnchantmentHelper.getItemEnchantmentLevel(ModEnchantmentEffects.BLOW_POWER, itemStack);
+            //int blowPowerLevel = EnchantmentHelper.getEnchantmentLevel(ModEnchantmentEffects.BLOW_POWER.get(), itemStack);
 
-            damage += blowPowerLevel;
+            //damage += blowPowerLevel; todo
         }
 
         if (owner == null) {

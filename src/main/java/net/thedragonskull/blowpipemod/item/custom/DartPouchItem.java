@@ -32,6 +32,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static net.thedragonskull.blowpipemod.capabilities.DartPouchCapabilityProvider.DART_POUCH_INVENTORY;
+
 public class DartPouchItem extends Item implements ICurioItem {
     private final DyeColor color;
 
@@ -41,31 +43,23 @@ public class DartPouchItem extends Item implements ICurioItem {
     }
 
     @Override
-    public @Nullable ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundTag nbt) {
-        DartPouchCapabilityProvider provider = new DartPouchCapabilityProvider(stack);
-
-        if (stack.hasTag() && stack.getTag().contains("dart_pouch_inventory")) {
-            provider.deserializeNBT(stack.getTag());
-        }
-
-        return provider;
+    public boolean hasCurioCapability(ItemStack stack) {
+        return true;
     }
 
     //Open menu on use
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
+        var cap = stack.getCapability(DART_POUCH_INVENTORY, null);
 
         if (!level.isClientSide) {
-            stack.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(cap -> {
-                if (cap instanceof ItemStackHandler handler) {
-                    NetworkHooks.openScreen(
-                            (ServerPlayer) player,
-                            new SimpleMenuProvider(
-                                    (id, inventoryPlayer, p) -> new DartPouchMenu(id, inventoryPlayer, handler),
-                                    Component.translatable("container.dart_pouch")), buf -> {});
-                }
-            });
+            if (cap != null && player instanceof ServerPlayer serverPlayer) {
+                serverPlayer.openMenu(
+                        new SimpleMenuProvider(
+                                (id, inventoryPlayer, p) -> new DartPouchMenu(id, inventoryPlayer),
+                                Component.translatable("container.dart_pouch")));
+            }
         }
 
         playPouchOpen(player);
@@ -78,29 +72,27 @@ public class DartPouchItem extends Item implements ICurioItem {
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, Level level, List<Component> tooltip, TooltipFlag flag) {
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag tooltipFlag) {
         if (Screen.hasShiftDown()) {
-            stack.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(cap -> {
-                if (cap instanceof ItemStackHandler handler) {
-                    tooltip.add(Component.literal("Content:").withStyle(ChatFormatting.GOLD));
+            var cap = stack.getCapability(DART_POUCH_INVENTORY, null);
+            if (cap != null && cap instanceof ItemStackHandler handler) {
+                tooltip.add(Component.literal("Content:").withStyle(ChatFormatting.GOLD));
 
-                    for (int i = 0; i < handler.getSlots(); i++) {
-                        ItemStack storedItem = handler.getStackInSlot(i);
-                        System.out.println("  - Slot " + i + ": " + storedItem);
-                        if (!storedItem.isEmpty()) {
-                            tooltip.add(Component.literal("Slot " + (i + 1) + ": " + storedItem.getCount() + "x ")
-                                    .append(storedItem.getHoverName())
-                                    .withStyle(ChatFormatting.GRAY));
-                        }
+                for (int i = 0; i < handler.getSlots(); i++) {
+                    ItemStack storedItem = handler.getStackInSlot(i);
+                    System.out.println("  - Slot " + i + ": " + storedItem);
+                    if (!storedItem.isEmpty()) {
+                        tooltip.add(Component.literal("Slot " + (i + 1) + ": " + storedItem.getCount() + "x ")
+                                .append(storedItem.getHoverName())
+                                .withStyle(ChatFormatting.GRAY));
                     }
                 }
-            });
+            }
         } else {
             tooltip.add(Component.literal("Press Shift for details").withStyle(ChatFormatting.GRAY));
         }
-        super.appendHoverText(stack, level, tooltip, flag);
+        super.appendHoverText(stack, context, tooltip, tooltipFlag);
     }
-
 
     @Override
     public Optional<TooltipComponent> getTooltipImage(ItemStack stack) {
@@ -122,24 +114,20 @@ public class DartPouchItem extends Item implements ICurioItem {
     @Override
     public CompoundTag writeSyncData(SlotContext slotContext, ItemStack stack) {
         CompoundTag tag = new CompoundTag();
+        var cap = stack.getCapability(DART_POUCH_INVENTORY, null);
 
-        stack.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(cap -> {
-            if (cap instanceof ItemStackHandler handler) {
-                tag.put("dart_pouch_inventory", handler.serializeNBT());
-            }
-        });
+        if (cap != null && cap instanceof ItemStackHandler handler) {
+            tag.put("dart_pouch_inventory", handler.serializeNBT(null));
+        }
 
         return tag;
     }
 
     @Override
     public void readSyncData(SlotContext slotContext, CompoundTag compound, ItemStack stack) {
-        if (compound.contains("dart_pouch_inventory")) {
-            stack.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(cap -> {
-                if (cap instanceof ItemStackHandler handler) {
-                    handler.deserializeNBT(compound.getCompound("dart_pouch_inventory"));
-                }
-            });
+        var cap = stack.getCapability(DART_POUCH_INVENTORY, null);
+        if (cap != null && compound.contains("dart_pouch_inventory")) {
+            ((ItemStackHandler) cap).deserializeNBT(null, compound.getCompound("dart_pouch_inventory")); //todo Cambiar `null` si se requiere un provider válido
         }
     }
 

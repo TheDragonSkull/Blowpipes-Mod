@@ -21,8 +21,8 @@ public class CharmingAuraSplashPotion extends ThrowablePotionItem {
     }
 
     @Override
-    public void appendHoverText(ItemStack itemstack, Level level, List<Component> list, TooltipFlag flag) {
-        list.add(Component.literal("§9Charming Aura (00:10)"));
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+        tooltipComponents.add(Component.literal("§9Charming Aura (00:10)"));
     }
 
     @Override

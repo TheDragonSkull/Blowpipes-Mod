@@ -1,10 +1,10 @@
 package net.thedragonskull.blowpipemod.util;
 
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.thedragonskull.blowpipemod.component.ModDataComponents;
 import net.thedragonskull.blowpipemod.item.ModItems;
 
 public class BlowpipeUtil {
@@ -42,9 +42,9 @@ public class BlowpipeUtil {
      * Gets the currently loaded dart in the blowpipe
      */
     public static ItemStack getLoadedDart(ItemStack stack) {
-        CompoundTag compoundTag = stack.getTag();
-        if (compoundTag != null && compoundTag.contains("Dart")) {
-            return ItemStack.of(compoundTag.getCompound("Dart"));
+        var dartDataComponent = stack.get(ModDataComponents.DART.get());
+        if (dartDataComponent != null) {
+            return dartDataComponent;
         }
         return ItemStack.EMPTY;
     }
@@ -53,27 +53,24 @@ public class BlowpipeUtil {
      * Verifies if the blowpipe is loaded
      */
     public static boolean isLoaded(ItemStack stack) {
-        CompoundTag compoundtag = stack.getTag();
-        return compoundtag != null && compoundtag.getBoolean("loaded");
+        var loadedDataComponent = stack.get(ModDataComponents.LOADED.get());
+        return loadedDataComponent != null && loadedDataComponent;
     }
 
     /**
      * Sets the state of the blowpipe as loaded with a dart type
      */
     public static void setLoaded(ItemStack stack, boolean loaded, ItemStack dart) {
-        CompoundTag compoundtag = stack.getOrCreateTag();
-        compoundtag.putBoolean("loaded", loaded);
+        stack.set(ModDataComponents.LOADED.get(), true);
 
         if (loaded && dart != null && !dart.isEmpty()) {
-            CompoundTag dartTag = new CompoundTag();
-            dart.save(dartTag);
-            compoundtag.put("Dart", dartTag);
+            stack.set(ModDataComponents.DART.get(), dart);
 
             float dartType = getDartType(dart);
-            compoundtag.putFloat("dart_type", dartType);
+            stack.set(ModDataComponents.DART_TYPE.get(), dartType);
         } else {
-            compoundtag.remove("Dart");
-            compoundtag.remove("dart_type");
+            stack.remove(ModDataComponents.DART.get());
+            stack.remove(ModDataComponents.DART_TYPE.get());
         }
     }
 

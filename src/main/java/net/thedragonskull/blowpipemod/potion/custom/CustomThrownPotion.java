@@ -54,7 +54,7 @@ public class CustomThrownPotion extends ThrownPotion {
                 if (livingentity.isAffectedByPotions()) {
                     double d0 = this.distanceToSqr(livingentity);
                     if (d0 < 16.0D) {
-                        MobEffectInstance charmingAuraEffect = new MobEffectInstance(ModEffects.CHARMING_AURA_EFFECT.get(),
+                        MobEffectInstance charmingAuraEffect = new MobEffectInstance(ModEffects.CHARMING_AURA_EFFECT,
                                 200, 0, false,false, true);
                         livingentity.addEffect(charmingAuraEffect, entity);
 
@@ -77,7 +77,7 @@ public class CustomThrownPotion extends ThrownPotion {
         areaeffectcloud.setWaitTime(10);
         areaeffectcloud.setRadiusPerTick(-areaeffectcloud.getRadius() / (float)areaeffectcloud.getDuration());
 
-        areaeffectcloud.addEffect(new MobEffectInstance(ModEffects.CHARMING_AURA_EFFECT.get(), 200, 0, false, false, true));
+        areaeffectcloud.addEffect(new MobEffectInstance(ModEffects.CHARMING_AURA_EFFECT, 200, 0, false, false, true));
         areaeffectcloud.setParticle(ModParticles.LURE_GLINT_PARTICLES.get());
 
         this.level().addFreshEntity(areaeffectcloud);

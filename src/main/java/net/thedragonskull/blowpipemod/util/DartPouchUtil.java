@@ -2,10 +2,7 @@ package net.thedragonskull.blowpipemod.util;
 
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.items.ItemStackHandler;
 import net.thedragonskull.blowpipemod.client.gui.SelectedDartOverlay;
-import net.thedragonskull.blowpipemod.item.ModItems;
 import net.thedragonskull.blowpipemod.item.custom.DartItem;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.type.inventory.ICurioStacksHandler;
@@ -13,6 +10,7 @@ import top.theillusivec4.curios.api.type.inventory.ICurioStacksHandler;
 import java.util.ArrayList;
 import java.util.List;
 
+import static net.thedragonskull.blowpipemod.capabilities.DartPouchCapabilityProvider.DART_POUCH_INVENTORY;
 import static net.thedragonskull.blowpipemod.client.gui.SelectedDartOverlay.currentDartIndex;
 
 public class DartPouchUtil {
@@ -45,19 +43,19 @@ public class DartPouchUtil {
         }
 
         ItemStack pouchStack = findDartPouch(player);
+        var cap = pouchStack.getCapability(DART_POUCH_INVENTORY, null);
+
         if (!pouchStack.isEmpty()) {
-            return pouchStack.getCapability(ForgeCapabilities.ITEM_HANDLER).map(cap -> {
-                if (cap instanceof ItemStackHandler handler) {
-                    int index = SelectedDartOverlay.currentDartIndex;
-                    if (index >= 0 && index < handler.getSlots()) {
-                        ItemStack pouchDart = handler.getStackInSlot(index);
-                        if (isDart(pouchDart)) {
-                            return pouchDart;
-                        }
+            if (cap != null) {
+                int index = SelectedDartOverlay.currentDartIndex;
+                if (index >= 0 && index < cap.getSlots()) {
+                    ItemStack pouchDart = cap.getStackInSlot(index);
+                    if (isDart(pouchDart)) {
+                        return pouchDart;
                     }
                 }
-                return ItemStack.EMPTY;
-            }).orElse(ItemStack.EMPTY);
+            }
+            return ItemStack.EMPTY;
         }
 
         return ItemStack.EMPTY;
@@ -66,16 +64,15 @@ public class DartPouchUtil {
     //Get all the darts in the pouch
     public static List<ItemStack> getDartsFromPouch(ItemStack pouchStack) {
         List<ItemStack> darts = new ArrayList<>();
+        var cap = pouchStack.getCapability(DART_POUCH_INVENTORY, null);
 
-        pouchStack.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(cap -> {
-            if (cap instanceof ItemStackHandler handler) {
-                for (int i = 0; i < handler.getSlots(); i++) {
-                    ItemStack storedItem = handler.getStackInSlot(i);
-                    darts.add(storedItem);
+        if (cap != null) {
+            for (int i = 0; i < cap.getSlots(); i++) {
+                ItemStack storedItem = cap.getStackInSlot(i);
+                darts.add(storedItem);
 
-                }
             }
-        });
+        }
 
         return darts;
     }
@@ -83,20 +80,19 @@ public class DartPouchUtil {
     //Adds a dart to the pouch
     public static boolean addDartToPouch(ItemStack pouchStack, ItemStack dart) {
         if (pouchStack.isEmpty() || dart.isEmpty()) return false;
+        var cap = pouchStack.getCapability(DART_POUCH_INVENTORY, null);
 
-        return pouchStack.getCapability(ForgeCapabilities.ITEM_HANDLER).map(cap -> {
-            if (cap instanceof ItemStackHandler handler) {
-                for (int i = 0; i < handler.getSlots(); i++) {
-                    ItemStack storedDart = handler.getStackInSlot(i);
+        if (cap != null) {
+            for (int i = 0; i < cap.getSlots(); i++) {
+                ItemStack storedDart = cap.getStackInSlot(i);
 
-                    if (ItemStack.isSameItem(storedDart, dart) && storedDart.getCount() < storedDart.getMaxStackSize()) {
-                        storedDart.grow(1);
-                        return true;
-                    }
+                if (ItemStack.isSameItem(storedDart, dart) && storedDart.getCount() < storedDart.getMaxStackSize()) {
+                    storedDart.grow(1);
+                    return true;
                 }
             }
-            return false;
-        }).orElse(false);
+        }
+        return false;
     }
 
 

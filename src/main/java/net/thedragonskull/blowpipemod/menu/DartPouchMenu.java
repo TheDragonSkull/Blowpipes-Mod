@@ -24,7 +24,7 @@ public class DartPouchMenu extends AbstractContainerMenu {
     private final ItemStackHandler pouchContainer;
     private final Player player;
 
-    public DartPouchMenu(int containerId, Inventory inv, FriendlyByteBuf extraData) {
+    public DartPouchMenu(int containerId, Inventory inv) {
         this(containerId, inv, new ItemStackHandler(6));
     }
 

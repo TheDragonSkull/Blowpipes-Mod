@@ -26,7 +26,7 @@ public class CommonModEvents {
     public static void registerCapabilities(RegisterCapabilitiesEvent event) {
         event.registerItem(
                 Capabilities.ItemHandler.ITEM,
-                (stack, ctx) -> new DartPouchCapabilityProvider(stack),
+                (stack, ctx) -> new DartPouchCapabilityProvider(),
                 ModItems.DART_POUCH.get()
         );
     }

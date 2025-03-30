@@ -18,7 +18,7 @@ import static net.thedragonskull.blowpipemod.client.handler.ClientForgeHandler.i
 public class NightVisionMixin {
 
     @Unique
-    private static final ResourceLocation NIGHT_VISION_SHADER = new ResourceLocation(BlowPipeMod.MOD_ID,"shaders/post/nightvision.json");
+    private static final ResourceLocation NIGHT_VISION_SHADER = ResourceLocation.fromNamespaceAndPath(BlowPipeMod.MOD_ID,"shaders/post/nightvision.json");
 
     @Inject(method = "tick", at = @At("HEAD"))
     public void onRenderLevel(CallbackInfo ci) {

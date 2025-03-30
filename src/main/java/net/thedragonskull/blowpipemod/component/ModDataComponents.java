@@ -1,9 +1,10 @@
 package net.thedragonskull.blowpipemod.component;
 
+import com.mojang.serialization.Codec;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.items.ItemStackHandler;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.thedragonskull.blowpipemod.BlowPipeMod;
@@ -14,8 +15,17 @@ public class ModDataComponents {
     public static final DeferredRegister<DataComponentType<?>> DATA_COMPONENT_TYPES =
             DeferredRegister.createDataComponents(BlowPipeMod.MOD_ID);
 
-    public static final DeferredHolder<DataComponentType<?>, DataComponentType<CompoundTag>> INVENTORY = register("inventory",
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<CompoundTag>> INVENTORY = register("dart_pouch_inventory",
             builder -> builder.persistent(CompoundTag.CODEC));
+
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Boolean>> LOADED = register("loaded",
+            builder -> builder.persistent(Codec.BOOL));
+
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<ItemStack>> DART = register("Dart",
+            builder -> builder.persistent(ItemStack.CODEC));
+
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Float>> DART_TYPE = register("dart_type",
+            builder -> builder.persistent(Codec.FLOAT));
 
 
     private static <T> DeferredHolder<DataComponentType<?>, DataComponentType<T>> register(String name,
