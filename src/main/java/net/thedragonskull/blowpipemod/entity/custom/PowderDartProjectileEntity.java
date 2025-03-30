@@ -113,7 +113,7 @@ public class PowderDartProjectileEntity extends AbstractDart{
         if (!this.isExtinguished && !result.getEntity().isUnderWater()) {
             if (result.getEntity() instanceof Creeper creeper) {
                 if (creeper.isPowered() && this.getOwner() instanceof ServerPlayer serverPlayer) {
-                    ModTriggers.CHARGED_CREEPER.trigger(serverPlayer);
+                    ModTriggers.CHARGED_CREEPER.get().trigger(serverPlayer);
                 }
 
                 creeper.ignite();

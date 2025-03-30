@@ -1,9 +1,12 @@
 package net.thedragonskull.blowpipemod.trigger;
 
 import com.google.gson.JsonObject;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.advancements.critereon.AbstractCriterionTriggerInstance;
 import net.minecraft.advancements.critereon.ContextAwarePredicate;
 import net.minecraft.advancements.critereon.DeserializationContext;
+import net.minecraft.advancements.critereon.EntityPredicate;
 import net.minecraft.advancements.critereon.SimpleCriterionTrigger;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -14,17 +17,13 @@ import net.thedragonskull.blowpipemod.BlowPipeMod;
 import net.thedragonskull.blowpipemod.client.handler.ClientForgeHandler;
 import net.thedragonskull.blowpipemod.util.RangeGogglesUtil;
 
+import java.util.Optional;
+
 public class NightSnipeTrigger extends SimpleCriterionTrigger<NightSnipeTrigger.Instance> {
-    static final ResourceLocation ID = new ResourceLocation(BlowPipeMod.MOD_ID, "blowpipe_night_snipe");
 
     @Override
-    public ResourceLocation getId() {
-        return ID;
-    }
-
-    @Override
-    protected NightSnipeTrigger.Instance createInstance(JsonObject json, ContextAwarePredicate playerPredicate, DeserializationContext context) {
-        return new NightSnipeTrigger.Instance(playerPredicate);
+    public Codec<NightSnipeTrigger.Instance> codec() {
+        return NightSnipeTrigger.Instance.CODEC;
     }
 
     public void trigger(ServerPlayer player, LivingEntity target, double distance) {
@@ -41,9 +40,9 @@ public class NightSnipeTrigger extends SimpleCriterionTrigger<NightSnipeTrigger.
         }
     }
 
-    public static class Instance extends AbstractCriterionTriggerInstance {
-        public Instance(ContextAwarePredicate playerPredicate) {
-            super(NightSnipeTrigger.ID, playerPredicate);
-        }
+    public record Instance(Optional<ContextAwarePredicate> player) implements SimpleCriterionTrigger.SimpleInstance {
+        public static final Codec<NightSnipeTrigger.Instance> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+                EntityPredicate.ADVANCEMENT_CODEC.optionalFieldOf("player").forGetter(NightSnipeTrigger.Instance::player)
+        ).apply(instance, NightSnipeTrigger.Instance::new));
     }
 }

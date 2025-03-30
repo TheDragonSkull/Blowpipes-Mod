@@ -57,14 +57,14 @@ public class OblivionDartProjectileEntity extends AbstractDart{
             if (entity instanceof WitherBoss wither) {
                 if (wither.getInvulnerableTicks() > 0) {
                     if (this.getOwner() instanceof ServerPlayer player) {
-                        ModTriggers.EVAPORATE_WITHER.trigger(player);
+                        ModTriggers.EVAPORATE_WITHER.get().trigger(player);
                     }
                 }
             }
 
             if (livingEntity instanceof ServerPlayer player) {
                 if (this.getOwner() instanceof ServerPlayer shooter && shooter == player) {
-                    ModTriggers.OBLIVION_SUICIDE.trigger(player);
+                    ModTriggers.OBLIVION_SUICIDE.get().trigger(player);
                 }
             }
 

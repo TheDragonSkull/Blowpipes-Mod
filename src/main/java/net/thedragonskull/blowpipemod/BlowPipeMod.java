@@ -48,7 +48,7 @@ public class BlowPipeMod {
         ModPotions.register(modEventBus);
         ModDataComponents.register(modEventBus);
 
-        ModTriggers.register();
+        ModTriggers.register(modEventBus);
         ModCreativeModeTabs.register(modEventBus);
 
         ModMenuTypes.MENU_TYPES.register(modEventBus);

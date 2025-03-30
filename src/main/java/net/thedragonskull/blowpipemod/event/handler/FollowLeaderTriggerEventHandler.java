@@ -46,7 +46,7 @@ public class FollowLeaderTriggerEventHandler {
 
         // Check if advancement conditions are met
         if (data.getTime() >= REQUIRED_TIME) {
-            ModTriggers.FOLLOW_LEADER.trigger(player);
+            ModTriggers.FOLLOW_LEADER.get().trigger(player);
             data.reset();
             player.addItem(new ItemStack(ModItems.LURE_DART.get(), 16));
         }

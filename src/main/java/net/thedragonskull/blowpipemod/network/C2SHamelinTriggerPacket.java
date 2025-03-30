@@ -4,9 +4,6 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.thedragonskull.blowpipemod.trigger.ModTriggers;
 
-import java.util.function.Supplier;
-
-import static net.thedragonskull.blowpipemod.trigger.ModTriggers.BLOWPIPE_HAMELIN;
 
 public class C2SHamelinTriggerPacket {
 
@@ -23,7 +20,7 @@ public class C2SHamelinTriggerPacket {
         ctx.get().enqueueWork(() -> {
             ServerPlayer serverPlayer = ctx.get().getSender();
             if (serverPlayer != null) {
-                BLOWPIPE_HAMELIN.get().trigger(serverPlayer);
+                ModTriggers.BLOWPIPE_HAMELIN.get().trigger(serverPlayer);
             }
         });
         ctx.get().setPacketHandled(true);

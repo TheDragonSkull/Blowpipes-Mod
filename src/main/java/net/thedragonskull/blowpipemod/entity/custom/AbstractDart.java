@@ -39,7 +39,7 @@ public abstract class AbstractDart extends AbstractArrow {
 
         if (entity instanceof Mob monster && this.getOwner() instanceof ServerPlayer player) {
             double distance = player.distanceTo(monster);
-            ModTriggers.NIGHT_SNIPE.trigger(player, monster, distance);
+            ModTriggers.NIGHT_SNIPE.get().trigger(player, monster, distance);
         }
 
         float damage = this.getDamage();

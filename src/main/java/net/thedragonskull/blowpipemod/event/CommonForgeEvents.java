@@ -40,13 +40,13 @@ public class CommonForgeEvents {
 
         if (!level.isClientSide && enemyHasAllEffects(entity)) {
             if (level.getNearestPlayer(entity, 50) instanceof ServerPlayer player) {
-                ModTriggers.TRIPLE_EFFECT.trigger(player);
+                ModTriggers.TRIPLE_EFFECT.get().trigger(player);
             }
         }
 
         if (!level.isClientSide && catChasingCreeper(entity) && isLureDartDMGSource) {
             if (level.getNearestPlayer(entity, 50) instanceof ServerPlayer player) {
-                ModTriggers.CAT_CREEPER.trigger(player);
+                ModTriggers.CAT_CREEPER.get().trigger(player);
                 player.addItem(new ItemStack(Items.SALMON, 5));
                 isLureDartDMGSource = false;
             }
