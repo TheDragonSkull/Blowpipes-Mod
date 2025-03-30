@@ -1,53 +1,29 @@
 package net.thedragonskull.blowpipemod.network;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.core.particles.ItemParticleOption;
-import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.level.Level;
-import net.minecraftforge.network.NetworkEvent;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.minecraft.resources.ResourceLocation;
+import net.thedragonskull.blowpipemod.BlowPipeMod;
 
-import java.util.function.Supplier;
+import javax.annotation.Nonnull;
 
-public class S2CLingeringCharmingAuraPacket {
-    private final double x, y, z;
+public record S2CLingeringCharmingAuraPacket(double x, double z, double y) implements CustomPacketPayload {
 
-    public S2CLingeringCharmingAuraPacket(double x, double y, double z) {
-        this.x = x;
-        this.y = y;
-        this.z = z;
-    }
+    public static final CustomPacketPayload.Type<S2CLingeringCharmingAuraPacket> TYPE =
+            new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath(BlowPipeMod.MOD_ID, "lingering_charming_aura_packet"));
 
-    public S2CLingeringCharmingAuraPacket(FriendlyByteBuf buffer) {
-        this.x = buffer.readDouble();
-        this.y = buffer.readDouble();
-        this.z = buffer.readDouble();
-    }
+    public static final StreamCodec<RegistryFriendlyByteBuf, S2CLingeringCharmingAuraPacket> STREAM_CODEC =
+            StreamCodec.composite(
+                    ByteBufCodecs.DOUBLE, S2CLingeringCharmingAuraPacket::x,
+                    ByteBufCodecs.DOUBLE, S2CLingeringCharmingAuraPacket::z,
+                    ByteBufCodecs.DOUBLE, S2CLingeringCharmingAuraPacket::y,
+                    S2CLingeringCharmingAuraPacket::new);
 
-    public void encode(FriendlyByteBuf buffer) {
-        buffer.writeDouble(x);
-        buffer.writeDouble(y);
-        buffer.writeDouble(z);
-    }
-
-    public void handle(Supplier<NetworkEvent.Context> contextSupplier) {
-        NetworkEvent.Context context = contextSupplier.get();
-        context.enqueueWork(() -> {
-            Level level = Minecraft.getInstance().level;
-            if (level != null) {
-                for (int i = 0; i < 8; ++i) {
-                    level.addParticle(new ItemParticleOption(ParticleTypes.ITEM, new ItemStack(Items.SPLASH_POTION)), x, y, z,
-                            (Math.random() - 0.5) * 0.15,
-                            Math.random() * 0.2,
-                            (Math.random() - 0.5) * 0.15);
-                }
-                level.playLocalSound(x, y, z, SoundEvents.SPLASH_POTION_BREAK, SoundSource.NEUTRAL, 1.0F, 1.0F, false);
-            }
-        });
-        context.setPacketHandled(true);
+    @Nonnull
+    @Override
+    public CustomPacketPayload.Type<? extends CustomPacketPayload> type() {
+        return TYPE;
     }
 }

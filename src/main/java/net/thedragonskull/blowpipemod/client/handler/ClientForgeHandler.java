@@ -2,7 +2,6 @@ package net.thedragonskull.blowpipemod.client.handler;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.LayeredDraw;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.sounds.SoundEvents;
@@ -11,21 +10,21 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.client.event.*;
+import net.neoforged.neoforge.client.event.ComputeFovModifierEvent;
+import net.neoforged.neoforge.client.event.InputEvent;
+import net.neoforged.neoforge.client.event.RenderGuiLayerEvent;
+import net.neoforged.neoforge.client.event.RenderHandEvent;
 import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 import net.neoforged.neoforge.network.PacketDistributor;
 import net.thedragonskull.blowpipemod.BlowPipeMod;
 import net.thedragonskull.blowpipemod.client.Keybindings;
-import net.thedragonskull.blowpipemod.enchantment.ModEnchantmentEffects;
 import net.thedragonskull.blowpipemod.item.ModItems;
 import net.thedragonskull.blowpipemod.item.custom.BlowPipe;
 import net.thedragonskull.blowpipemod.network.C2SOpenPouchMenuPacket;
 import net.thedragonskull.blowpipemod.network.C2SReloadBlowpipePacket;
-import net.thedragonskull.blowpipemod.network.PacketHandler;
 import net.thedragonskull.blowpipemod.sound.ModSounds;
 import net.thedragonskull.blowpipemod.util.RangeGogglesUtil;
 
@@ -51,7 +50,7 @@ public class ClientForgeHandler {
             }
 
             if (Keybindings.INSTANCE.openDartPouchKey.consumeClick()) {
-                //PacketHandler.sendToServer(new C2SOpenPouchMenuPacket());
+                PacketDistributor.sendToServer(new C2SOpenPouchMenuPacket());
 
                 if (!pouchStack.isEmpty()) {
                     playPouchOpen(mc.player);

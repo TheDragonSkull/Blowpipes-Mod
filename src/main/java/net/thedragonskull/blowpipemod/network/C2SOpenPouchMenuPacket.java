@@ -1,49 +1,23 @@
 package net.thedragonskull.blowpipemod.network;
 
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.network.chat.Component;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.SimpleMenuProvider;
-import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.items.ItemStackHandler;
-import net.minecraftforge.network.NetworkEvent;
-import net.neoforged.neoforge.items.ItemStackHandler;
-import net.thedragonskull.blowpipemod.menu.DartPouchMenu;
-import static net.thedragonskull.blowpipemod.util.DartPouchUtil.findDartPouch;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.minecraft.resources.ResourceLocation;
+import net.thedragonskull.blowpipemod.BlowPipeMod;
 
-import java.util.function.Supplier;
+public record C2SOpenPouchMenuPacket() implements CustomPacketPayload {
 
-public class C2SOpenPouchMenuPacket {
+    public static final CustomPacketPayload.Type<C2SOpenPouchMenuPacket> TYPE =
+            new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath(BlowPipeMod.MOD_ID, "open_pouch_packet"));
 
-    public C2SOpenPouchMenuPacket() {
-    }
+    public static final StreamCodec<RegistryFriendlyByteBuf, C2SOpenPouchMenuPacket> STREAM_CODEC = StreamCodec.unit(
+            new C2SOpenPouchMenuPacket()
+    );
 
-    public C2SOpenPouchMenuPacket(FriendlyByteBuf buf) {
-    }
-
-    public void encode(FriendlyByteBuf buffer) {
-    }
-
-    public static void handle(C2SOpenPouchMenuPacket packet, Supplier<NetworkEvent.Context> ctx) {
-        ctx.get().enqueueWork(() -> {
-            ServerPlayer player = ctx.get().getSender();
-            if (player == null) return;
-
-            ItemStack pouchStack = findDartPouch(player);
-            if (pouchStack.isEmpty()) return;
-
-            pouchStack.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(cap -> {
-                if (cap instanceof ItemStackHandler pouchInventory) {
-                    player.openMenu(new SimpleMenuProvider(
-                            (id, inv, p) -> new DartPouchMenu(id, inv, pouchInventory),
-                            Component.literal("Dart Pouch")
-                    ));
-                }
-            });
-
-        });
-        ctx.get().setPacketHandled(true);
+    @Override
+    public CustomPacketPayload.Type<? extends CustomPacketPayload> type() {
+        return TYPE;
     }
 
 

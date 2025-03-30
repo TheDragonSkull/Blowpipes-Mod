@@ -58,7 +58,7 @@ public class DartPouchItem extends Item implements ICurioItem {
                 serverPlayer.openMenu(
                         new SimpleMenuProvider(
                                 (id, inventoryPlayer, p) -> new DartPouchMenu(id, inventoryPlayer),
-                                Component.translatable("container.dart_pouch")));
+                                Component.literal("Dart Pouch")));
             }
         }
 

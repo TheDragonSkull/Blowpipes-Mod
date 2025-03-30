@@ -1,52 +1,29 @@
 package net.thedragonskull.blowpipemod.network;
 
-import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.network.NetworkEvent;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.minecraft.resources.ResourceLocation;
+import net.thedragonskull.blowpipemod.BlowPipeMod;
+import org.joml.Vector3f;
 
-import java.util.function.Supplier;
+public record C2SAnnihilationDartParticlesPacket(Vector3f entityPos, double entityHeight) implements CustomPacketPayload{
 
-public class C2SAnnihilationDartParticlesPacket {
-    private final Vec3 entityPos;
-    private final double entityHeight;
+    public static final CustomPacketPayload.Type<C2SAnnihilationDartParticlesPacket> TYPE =
+            new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath(BlowPipeMod.MOD_ID, "annihilation_dart_particles_packet"));
 
+    public static final StreamCodec<RegistryFriendlyByteBuf, C2SAnnihilationDartParticlesPacket> STREAM_CODEC = StreamCodec.composite(
+            ByteBufCodecs.VECTOR3F,
+            C2SAnnihilationDartParticlesPacket::entityPos,
+            ByteBufCodecs.DOUBLE,
+            C2SAnnihilationDartParticlesPacket::entityHeight,
+            C2SAnnihilationDartParticlesPacket::new
+    );
 
-    public C2SAnnihilationDartParticlesPacket(Vec3 entityPos, double entityHeight) {
-        this.entityPos = entityPos;
-        this.entityHeight = entityHeight;
-    }
-
-    public C2SAnnihilationDartParticlesPacket(FriendlyByteBuf buf) {
-        this.entityPos = new Vec3(buf.readDouble(), buf.readDouble(), buf.readDouble());
-        this.entityHeight = buf.readDouble();
-    }
-
-    public void encode(FriendlyByteBuf buf) {
-        buf.writeDouble(this.entityPos.x);
-        buf.writeDouble(this.entityPos.y);
-        buf.writeDouble(this.entityPos.z);
-
-        buf.writeDouble(this.entityHeight);
-    }
-
-    public static void handle(C2SAnnihilationDartParticlesPacket msg, Supplier<NetworkEvent.Context> ctx) {
-        ctx.get().enqueueWork(() -> {
-            ServerPlayer player = ctx.get().getSender();
-
-            if (player == null)
-                return;
-
-            ServerLevel level = player.serverLevel();
-            double centerY = msg.entityPos.y + msg.entityHeight / 2.0;
-
-            level.sendParticles(ParticleTypes.SMOKE, msg.entityPos.x, centerY, msg.entityPos.z,
-                    500, 0.5, 0.5, 0.5, 0.1);
-
-        });
-        ctx.get().setPacketHandled(true);
+    @Override
+    public CustomPacketPayload.Type<? extends CustomPacketPayload> type() {
+        return TYPE;
     }
 
 }

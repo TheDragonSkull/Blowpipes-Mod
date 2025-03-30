@@ -1,43 +1,29 @@
 package net.thedragonskull.blowpipemod.network;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraftforge.network.NetworkEvent;
-import net.thedragonskull.blowpipemod.particle.ModParticles;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.minecraft.resources.ResourceLocation;
+import net.thedragonskull.blowpipemod.BlowPipeMod;
 
-import java.util.function.Supplier;
+import javax.annotation.Nonnull;
 
-public class S2CCharmingAuraParticlesPacket {
-    private final int entityId;
 
-    public S2CCharmingAuraParticlesPacket(int entityId) {
-        this.entityId = entityId;
-    }
+public record S2CCharmingAuraParticlesPacket(int entityId) implements CustomPacketPayload {
 
-    public S2CCharmingAuraParticlesPacket(FriendlyByteBuf buf) {
-        this.entityId = buf.readInt();
-    }
+    public static final Type<S2CCharmingAuraParticlesPacket> TYPE =
+            new Type<>(ResourceLocation.fromNamespaceAndPath(BlowPipeMod.MOD_ID, "charming_aura_particles_packet"));
 
-    public void encode(FriendlyByteBuf buf) {
-        buf.writeInt(this.entityId);
-    }
+    public static final StreamCodec<RegistryFriendlyByteBuf, S2CCharmingAuraParticlesPacket> STREAM_CODEC =
+            StreamCodec.composite(
+                    ByteBufCodecs.INT,
+                    S2CCharmingAuraParticlesPacket::entityId,
+                    S2CCharmingAuraParticlesPacket::new);
 
-    public static void handle(S2CCharmingAuraParticlesPacket msg, Supplier<NetworkEvent.Context> ctx) {
-        ctx.get().enqueueWork(() -> {
-            Minecraft mc = Minecraft.getInstance();
-            if (mc.level != null) {
-                Entity entity = mc.level.getEntity(msg.entityId);
-                if (entity instanceof LivingEntity livingEntity) {
-                    mc.level.addParticle(ModParticles.LURE_GLINT_PARTICLES.get(),
-                            livingEntity.getRandomX(1.0D),
-                            livingEntity.getRandomY(),
-                            livingEntity.getRandomZ(1.0D),
-                            0, 0, 0);
-                }
-            }
-        });
-        ctx.get().setPacketHandled(true);
+    @Nonnull
+    @Override
+    public Type<? extends CustomPacketPayload> type() {
+        return TYPE;
     }
 }

@@ -14,8 +14,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.network.PacketDistributor;
 import net.thedragonskull.blowpipemod.entity.ModEntities;
 import net.thedragonskull.blowpipemod.item.ModItems;
+import net.thedragonskull.blowpipemod.network.C2SAnnihilationDartParticlesPacket;
 import net.thedragonskull.blowpipemod.network.C2SOblivionDartParticlesPacket;
 import net.thedragonskull.blowpipemod.network.PacketHandler;
 import net.thedragonskull.blowpipemod.sound.ModSounds;
@@ -78,7 +80,7 @@ public class OblivionDartProjectileEntity extends AbstractDart{
 
             Vec3 entityPos = entity.position();
             double entityHeight = entity.getBbHeight();
-            PacketHandler.sendToServer(new C2SOblivionDartParticlesPacket(entityPos, entityHeight));
+            PacketDistributor.sendToServer(new C2SOblivionDartParticlesPacket(entityPos.toVector3f(), entityHeight));
 
             this.level().playSound(null, this.getX(), this.getY(), this.getZ(),
                     ModSounds.BOOM.get(), SoundSource.PLAYERS, 1.0F, 1.0F);

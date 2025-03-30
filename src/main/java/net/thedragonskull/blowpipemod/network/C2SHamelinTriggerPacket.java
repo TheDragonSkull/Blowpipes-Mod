@@ -7,7 +7,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.thedragonskull.blowpipemod.BlowPipeMod;
 
 
-public class C2SHamelinTriggerPacket implements CustomPacketPayload{
+public record C2SHamelinTriggerPacket() implements CustomPacketPayload{
 
     public static final CustomPacketPayload.Type<C2SHamelinTriggerPacket> TYPE =
             new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath(BlowPipeMod.MOD_ID, "hamelin_trigger_packet"));

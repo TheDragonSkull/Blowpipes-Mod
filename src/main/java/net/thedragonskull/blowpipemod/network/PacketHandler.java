@@ -17,13 +17,45 @@ public class PacketHandler {
         registrar.playToServer(
                 C2SReloadBlowpipePacket.TYPE,
                 C2SReloadBlowpipePacket.STREAM_CODEC,
-                BlowpipeServerPayloadHandler.getInstance()::handlerReloadBlowpipe
+                BlowpipeServerPayloadHandler.getInstance()::handleReloadBlowpipe
         );
 
         registrar.playToServer(
                 C2SHamelinTriggerPacket.TYPE,
                 C2SHamelinTriggerPacket.STREAM_CODEC,
-                BlowpipeServerPayloadHandler.getInstance()::handlerHamelinTrigger
+                BlowpipeServerPayloadHandler.getInstance()::handleHamelinTrigger
+        );
+
+        registrar.playToServer(
+                C2SOpenPouchMenuPacket.TYPE,
+                C2SOpenPouchMenuPacket.STREAM_CODEC,
+                BlowpipeServerPayloadHandler.getInstance()::handleOpenPouch
+        );
+
+        registrar.playToServer(
+                C2SAnnihilationDartParticlesPacket.TYPE,
+                C2SAnnihilationDartParticlesPacket.STREAM_CODEC,
+                BlowpipeServerPayloadHandler.getInstance()::handleAnnihilationDartParticles
+        );
+
+        registrar.playToServer(
+                C2SOblivionDartParticlesPacket.TYPE,
+                C2SOblivionDartParticlesPacket.STREAM_CODEC,
+                BlowpipeServerPayloadHandler.getInstance()::handleOblivionDartParticles
+        );
+
+
+        // Server
+        registrar.playToClient(
+                S2CCharmingAuraParticlesPacket.TYPE,
+                S2CCharmingAuraParticlesPacket.STREAM_CODEC,
+                BlowpipeClientPayloadHandler.getInstance()::handleCharmingAuraParticles
+        );
+
+        registrar.playToClient(
+                S2CLingeringCharmingAuraPacket.TYPE,
+                S2CLingeringCharmingAuraPacket.STREAM_CODEC,
+                BlowpipeClientPayloadHandler.getInstance()::handleLingeringCharmingAura
         );
     }
 
