@@ -5,6 +5,7 @@ import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
+import net.neoforged.neoforge.network.PacketDistributor;
 import net.thedragonskull.blowpipemod.network.PacketHandler;
 import net.thedragonskull.blowpipemod.network.S2CCharmingAuraParticlesPacket;
 
@@ -22,7 +23,7 @@ public class CharmingAuraEffect extends MobEffect {
         super.applyEffectTick(pLivingEntity, pAmplifier);
 
         if (!pLivingEntity.level().isClientSide) {
-            PacketHandler.sendToAllPlayer(new S2CCharmingAuraParticlesPacket(pLivingEntity.getId()));
+            PacketDistributor.sendToAllPlayers(new S2CCharmingAuraParticlesPacket(pLivingEntity.getId()));
         }
 
         List<Mob> nearbyEntities = pLivingEntity.level().getEntitiesOfClass(

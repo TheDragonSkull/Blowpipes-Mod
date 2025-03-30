@@ -10,6 +10,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
+import net.neoforged.neoforge.network.PacketDistributor;
 import net.thedragonskull.blowpipemod.effect.ModEffects;
 import net.thedragonskull.blowpipemod.item.ModItems;
 import net.thedragonskull.blowpipemod.network.PacketHandler;
@@ -58,7 +59,7 @@ public class CustomThrownPotion extends ThrownPotion {
                                 200, 0, false,false, true);
                         livingentity.addEffect(charmingAuraEffect, entity);
 
-                        PacketHandler.sendToAllPlayer(new S2CCharmingAuraParticlesPacket(livingentity.getId()));
+                        PacketDistributor.sendToAllPlayers(new S2CCharmingAuraParticlesPacket(entity.getId()));
                     }
                 }
             }
@@ -82,6 +83,6 @@ public class CustomThrownPotion extends ThrownPotion {
 
         this.level().addFreshEntity(areaeffectcloud);
 
-        PacketHandler.sendToServer(new S2CLingeringCharmingAuraPacket(this.getX(), this.getY(), this.getZ()));
+        PacketDistributor.sendToAllPlayers(new S2CLingeringCharmingAuraPacket(this.getX(), this.getY(), this.getZ()));
     }
 }

@@ -34,7 +34,7 @@ public class GogglesScopeOverlay implements LayeredDraw.Layer {
         Minecraft mc = Minecraft.getInstance();
         Player player = mc.player;
 
-        if (mc.options.renderDebug)
+        if (mc.getDebugOverlay().showDebugScreen())
             return;
 
         if (player == null || !RangeGogglesUtil.hasGogglesEquipped(player) || !mc.options.getCameraType().isFirstPerson()) {

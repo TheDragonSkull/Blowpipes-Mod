@@ -39,7 +39,7 @@ public class SelectedDartOverlay implements LayeredDraw.Layer {
         if (player == null) {
             return;
         }
-        if (mc.options.renderDebug) {
+        if (mc.getDebugOverlay().showDebugScreen()) {
             return;
         }
 
