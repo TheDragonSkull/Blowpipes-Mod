@@ -34,8 +34,9 @@ public class CommonForgeEvents {
     private static boolean isLureDartDMGSource = false;
 
     @SubscribeEvent
-    public static void onLivingUpdate(EntityTickEvent event) {
-        LivingEntity entity = (LivingEntity) event.getEntity();
+    public static void onLivingUpdate(EntityTickEvent.Post event) {
+        if (!(event.getEntity() instanceof LivingEntity entity)) return;
+
         Level level = entity.level();
 
         if (!level.isClientSide && enemyHasAllEffects(entity)) {
@@ -101,9 +102,9 @@ public class CommonForgeEvents {
 
         builder.addMix(Potions.AWKWARD, Items.PRISMARINE_SHARD, ModPotions.BLEED_POTION);
 
-        builder.addContainerRecipe((Item) Potions.AWKWARD, Items.AMETHYST_SHARD, ModItems.CHARMING_AURA_POTION.get());
-        builder.addContainerRecipe(ModItems.CHARMING_AURA_POTION.get(), Items.GUNPOWDER, ModItems.CHARMING_AURA_SPLASH_POTION.get());
-        builder.addContainerRecipe(ModItems.CHARMING_AURA_SPLASH_POTION.get(), Items.DRAGON_BREATH, ModItems.CHARMING_AURA_LINGERING_POTION.get());
+/*        builder.addContainerRecipe((Item) Potions.AWKWARD, Items.AMETHYST_SHARD, ModItems.CHARMING_AURA_POTION.value()); todo
+        builder.addContainerRecipe(ModItems.CHARMING_AURA_POTION.get(), Items.GUNPOWDER, ModItems.CHARMING_AURA_SPLASH_POTION.value());
+        builder.addContainerRecipe(ModItems.CHARMING_AURA_SPLASH_POTION.get(), Items.DRAGON_BREATH, ModItems.CHARMING_AURA_LINGERING_POTION.value());*/
     }
 
 /*

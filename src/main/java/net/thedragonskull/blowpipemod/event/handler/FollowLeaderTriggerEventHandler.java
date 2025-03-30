@@ -24,7 +24,7 @@ public class FollowLeaderTriggerEventHandler {
     private static final Map<UUID, PlayerTrackingData> trackingData = new HashMap<>();
 
     @SubscribeEvent
-    public static void onPlayerTick(PlayerTickEvent event) {
+    public static void onPlayerTick(PlayerTickEvent.Post event) {
         if (!(event.getEntity() instanceof ServerPlayer player)) return;
 
         PlayerTrackingData data = trackingData.computeIfAbsent(player.getUUID(), PlayerTrackingData::new);

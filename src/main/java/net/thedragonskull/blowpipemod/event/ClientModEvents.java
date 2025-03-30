@@ -1,7 +1,6 @@
 package net.thedragonskull.blowpipemod.event;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;
@@ -17,13 +16,11 @@ import net.thedragonskull.blowpipemod.block.entity.renderer.DartStandBlockEntity
 import net.thedragonskull.blowpipemod.client.Keybindings;
 import net.thedragonskull.blowpipemod.client.gui.GogglesScopeOverlay;
 import net.thedragonskull.blowpipemod.client.gui.SelectedDartOverlay;
-import net.thedragonskull.blowpipemod.client.screen.DartPouchScreen;
 import net.thedragonskull.blowpipemod.entity.ModEntities;
 import net.thedragonskull.blowpipemod.entity.client.*;
 import net.thedragonskull.blowpipemod.item.ModItems;
 import net.thedragonskull.blowpipemod.item.custom.DartPouchItem;
 import net.thedragonskull.blowpipemod.item.custom.RangeGoggles;
-import net.thedragonskull.blowpipemod.menu.ModMenuTypes;
 import net.thedragonskull.blowpipemod.particle.ModParticles;
 import net.thedragonskull.blowpipemod.particle.custom.LureGlintParticles;
 import net.thedragonskull.blowpipemod.util.DartPouchTooltipComponent;

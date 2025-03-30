@@ -22,7 +22,7 @@ public class ModDataComponents {
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Boolean>> LOADED = register("loaded",
             builder -> builder.persistent(Codec.BOOL));
 
-    public static final DeferredHolder<DataComponentType<?>, DataComponentType<ItemStack>> DART = register("Dart",
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<ItemStack>> DART = register("dart",
             builder -> builder.persistent(ItemStack.CODEC));
 
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Float>> DART_TYPE = register("dart_type",

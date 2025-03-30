@@ -1,40 +1,40 @@
 
 modLoader="javafml"
-loaderVersion="[47,)"
+loaderVersion="${loader_version_range}"
 license="MIT"
 
 [[mods]]
-modId="${mod_id}"
-version="${mod_version}"
-displayName="${mod_name}"
-description='''${mod_description}'''
+modId="blowpipemod"
+version="1.2.0"
+displayName="TheDragon's Blowpipes Mod"
+description='''A mod that adds blowguns and some darts. Three of the darts have been heavily inspired by the darts from the game "Sea of Thieves".'''
 logoFile = "logo.png"
-authors="${mod_authors}"
+authors="TheDragonSkull"
 
-[[dependencies.${mod_id}]]
+[[dependencies.blowpipemod]]
     modId="neoforge"
     type="required"
     versionRange="${neo_version_range}"
     ordering="NONE"
     side="BOTH"
 
-[[dependencies.${mod_id}]]
+[[dependencies.blowpipemod]]
     modId="minecraft"
-    mandatory=true
-    versionRange="${minecraft_version_range}"
+    type="required"
+    versionRange="1.21.1"
     ordering="NONE"
     side="BOTH"
 
-[[dependencies.${mod_id}]]
+[[dependencies.blowpipemod]]
     modId="moonlight"
-    mandatory=true
+    type="required"
     versionRange="[moonlight-1.21-2.17.37-neoforge,)"
     ordering="NONE"
     side="BOTH"
 
-[[dependencies.${mod_id}]]
+[[dependencies.blowpipemod]]
     modId="curios"
-    mandatory=true
+    type="required"
     versionRange="[9.4.0+1.21.1,)"
     ordering="NONE"
     side="BOTH"

@@ -55,9 +55,7 @@ public class BlowPipeMod {
 
         modContainer.registerConfig(ModConfig.Type.COMMON, BlowPipeModConfigs.CONFIG_SPEC, "blowpipemod-common.toml");
 
-        NeoForge.EVENT_BUS.register(this);
         modEventBus.addListener(this::addCreative);
-
     }
 
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
