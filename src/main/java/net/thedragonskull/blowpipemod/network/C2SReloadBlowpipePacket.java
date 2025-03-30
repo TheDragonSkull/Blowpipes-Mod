@@ -1,13 +1,19 @@
 package net.thedragonskull.blowpipemod.network;
 
+import io.netty.buffer.ByteBuf;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.network.NetworkEvent;
+import net.thedragonskull.blowpipemod.BlowPipeMod;
 import net.thedragonskull.blowpipemod.item.custom.BlowPipe;
 import net.thedragonskull.blowpipemod.util.BlowpipeUtil;
 import net.thedragonskull.blowpipemod.util.DartPouchUtil;
@@ -16,16 +22,23 @@ import java.util.function.Supplier;
 
 import static net.thedragonskull.blowpipemod.util.ModMessageUtil.sendMessage;
 
-public class C2SReloadBlowpipePacket {
-    public static ItemStack darts;
+public record C2SReloadBlowpipePacket() implements CustomPacketPayload {
 
-    public C2SReloadBlowpipePacket() {
+    public static final CustomPacketPayload.Type<C2SReloadBlowpipePacket> TYPE =
+            new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath(BlowPipeMod.MOD_ID, "reload_blowpipe_packet"));
+
+    public static final StreamCodec<RegistryFriendlyByteBuf, C2SReloadBlowpipePacket> STREAM_CODEC = StreamCodec.unit(
+            new C2SReloadBlowpipePacket()
+    );
+
+    @Override
+    public CustomPacketPayload.Type<? extends CustomPacketPayload> type() {
+        return TYPE;
     }
 
-    public C2SReloadBlowpipePacket(FriendlyByteBuf buf) {
-    }
+}
 
-    public void encode(FriendlyByteBuf buf) {
+/*    public void encode(FriendlyByteBuf buf) {
     }
 
     public void handle(Supplier<NetworkEvent.Context> contextSupplier) {
@@ -84,6 +97,4 @@ public class C2SReloadBlowpipePacket {
             }
         });
         context.setPacketHandled(true);
-    }
-
-}
+    }*/

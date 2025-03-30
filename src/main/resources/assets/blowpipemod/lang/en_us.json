@@ -70,6 +70,8 @@
 
   "container.dart_pouch": "Dart Pouch",
 
+  "blowpipemod.networking.failed": "BlowPipeMod networking failed",
+
   "curios.identifier.01_range_goggles": "Rangefinder Binoculars Slot",
   "curios.identifier.dart_pouch": "Dart Pouch Slot"
 }

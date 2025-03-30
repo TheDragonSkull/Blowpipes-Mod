@@ -17,6 +17,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
+import net.neoforged.neoforge.network.PacketDistributor;
 import net.thedragonskull.blowpipemod.BlowPipeMod;
 import net.thedragonskull.blowpipemod.client.Keybindings;
 import net.thedragonskull.blowpipemod.enchantment.ModEnchantmentEffects;
@@ -46,11 +47,11 @@ public class ClientForgeHandler {
 
         if (mc.player != null) {
             if (Keybindings.INSTANCE.reloadKey.isDown()) {
-                PacketHandler.sendToServer(new C2SReloadBlowpipePacket());
+                PacketDistributor.sendToServer(new C2SReloadBlowpipePacket());
             }
 
             if (Keybindings.INSTANCE.openDartPouchKey.consumeClick()) {
-                PacketHandler.sendToServer(new C2SOpenPouchMenuPacket());
+                //PacketHandler.sendToServer(new C2SOpenPouchMenuPacket());
 
                 if (!pouchStack.isEmpty()) {
                     playPouchOpen(mc.player);
@@ -120,7 +121,7 @@ public class ClientForgeHandler {
     public static void onComputerFovModifierEvent(ComputeFovModifierEvent event) {
         if(event.getPlayer().isUsingItem() && event.getPlayer().getUseItem().getItem() instanceof BlowPipe) {
             ItemStack itemStack = event.getPlayer().getItemBySlot(EquipmentSlot.MAINHAND);
-            int blowPowerLevel = EnchantmentHelper.getItemEnchantmentLevel(ModEnchantmentEffects.FOCUS.get(), itemStack);
+            int blowPowerLevel = 1; //EnchantmentHelper.getItemEnchantmentLevel(ModEnchantmentEffects.FOCUS.get(), itemStack); todo;
 
             if (blowPowerLevel > 0) {
                 float fovModifier = 1f;

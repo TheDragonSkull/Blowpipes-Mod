@@ -1,11 +1,36 @@
 package net.thedragonskull.blowpipemod.network;
 
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerPlayer;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
+import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import net.thedragonskull.blowpipemod.BlowPipeMod;
 
+@EventBusSubscriber(modid = BlowPipeMod.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
 public class PacketHandler {
-    private static final String PROTOCOL_VERSION = "1";
+
+    @SubscribeEvent
+    public static void register(final RegisterPayloadHandlersEvent event) {
+        final PayloadRegistrar registrar = event.registrar("1");
+
+        // Client
+        registrar.playToServer(
+                C2SReloadBlowpipePacket.TYPE,
+                C2SReloadBlowpipePacket.STREAM_CODEC,
+                BlowpipeServerPayloadHandler.getInstance()::handlerReloadBlowpipe
+        );
+
+        registrar.playToServer(
+                C2SHamelinTriggerPacket.TYPE,
+                C2SHamelinTriggerPacket.STREAM_CODEC,
+                BlowpipeServerPayloadHandler.getInstance()::handlerHamelinTrigger
+        );
+    }
+
+
+
+
+/*    private static final String PROTOCOL_VERSION = "1";
     public static final SimpleChannel INSTANCE = NetworkRegistry.newSimpleChannel(
             new ResourceLocation(BlowPipeMod.MOD_ID, "main"),
             () -> PROTOCOL_VERSION,
@@ -70,5 +95,5 @@ public class PacketHandler {
 
     public static void sendToAllPlayer(Object msg) {
         INSTANCE.send(PacketDistributor.ALL.noArg(), msg);
-    }
+    }*/
 }

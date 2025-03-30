@@ -2,6 +2,7 @@ package net.thedragonskull.blowpipemod.component;
 
 import com.mojang.serialization.Codec;
 import net.minecraft.core.component.DataComponentType;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.IEventBus;
@@ -13,7 +14,7 @@ import java.util.function.UnaryOperator;
 
 public class ModDataComponents {
     public static final DeferredRegister<DataComponentType<?>> DATA_COMPONENT_TYPES =
-            DeferredRegister.createDataComponents(BlowPipeMod.MOD_ID);
+            DeferredRegister.createDataComponents(Registries.DATA_COMPONENT_TYPE, BlowPipeMod.MOD_ID);
 
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<CompoundTag>> INVENTORY = register("dart_pouch_inventory",
             builder -> builder.persistent(CompoundTag.CODEC));

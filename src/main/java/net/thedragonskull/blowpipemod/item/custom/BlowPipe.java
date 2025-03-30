@@ -32,6 +32,7 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.network.PacketDistributor;
 import net.thedragonskull.blowpipemod.component.ModDataComponents;
 import net.thedragonskull.blowpipemod.enchantment.ModEnchantmentEffects;
 import net.thedragonskull.blowpipemod.entity.custom.*;
@@ -183,7 +184,7 @@ public class BlowPipe extends ProjectileWeaponItem implements IFirstPersonAnimat
                                 player.getCooldowns().addCooldown(this, 20);
 
                                 //Activate a secret advancement
-                                PacketHandler.sendToServer(new C2SHamelinTriggerPacket());
+                                PacketDistributor.sendToServer(new C2SHamelinTriggerPacket());
 
                             } else {
                                 SimpleSoundInstance emptySoundInstance = new SimpleSoundInstance(ModSounds.BLOWPIPE_EMPTY.get(), SoundSource.PLAYERS, 1.0F, 1.0F, SoundInstance.createUnseededRandom(),0,0,0);
@@ -246,11 +247,6 @@ public class BlowPipe extends ProjectileWeaponItem implements IFirstPersonAnimat
 
     @Override
     protected void shootProjectile(LivingEntity shooter, Projectile projectile, int index, float velocity, float inaccuracy, float angle, @Nullable LivingEntity target) {
-    }
-
-    public static int getEnchantmentLevel(ItemStack stack) {
-        if (stack.isEmpty()) return 0;
-        return stack.getEnchantmentLevel(BuiltInRegistries.ENCHANTMENT_EFFECT_COMPONENT_TYPE.get(MY_ENCHANTMENT_ID));
     }
 
     @Override
