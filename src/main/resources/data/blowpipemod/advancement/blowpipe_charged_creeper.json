@@ -1,7 +1,8 @@
 {
   "display": {
     "icon": {
-      "item": "blowpipemod:powder_dart"
+      "count": 1,
+      "id": "blowpipemod:powder_dart"
     },
     "title": "Two can play at that game",
     "description": "Ignite a charged creeper with a black powder dart",

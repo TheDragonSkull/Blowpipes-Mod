@@ -1,7 +1,8 @@
 {
   "display": {
     "icon": {
-      "item": "blowpipemod:rat_adv"
+      "count": 1,
+      "id": "blowpipemod:rat_adv"
     },
     "title": "Pied Piper of Hamelin",
     "description": "The rats will dance!",
@@ -10,7 +11,7 @@
     "announce_to_chat": true,
     "hidden": true
   },
-  "parent": "blowpipemod:blowpipemod",
+  "parent": "blowpipemod:root",
   "criteria": {
     "blowpipe_sound": {
       "trigger": "blowpipemod:blowpipe_hamelin"

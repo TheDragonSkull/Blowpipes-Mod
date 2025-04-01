@@ -1,23 +1,26 @@
 {
   "display": {
     "icon": {
-      "item": "blowpipemod:dart_base"
+      "count": 1,
+      "id": "blowpipemod:range_goggles"
     },
-    "title": "Small but sharp",
-    "description": "Craft a dart",
+    "title": "Advanced technology",
+    "description": "Get the binoculars from the Hunter",
     "frame": "task",
     "show_toast": true,
     "announce_to_chat": true,
-    "hidden": false
+    "hidden": true
   },
-  "parent": "blowpipemod:blowpipemod",
+  "parent": "blowpipemod:root",
   "criteria": {
-    "crafted_dart": {
+    "trade_goggles": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "tag": "blowpipemod:darts"
+            "items": [
+              "blowpipemod:range_goggles"
+            ]
           }
         ]
       }

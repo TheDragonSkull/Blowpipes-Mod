@@ -1,7 +1,8 @@
 {
   "display": {
     "icon": {
-      "item": "blowpipemod:razor_dart"
+      "count": 1,
+      "id": "blowpipemod:razor_dart"
     },
     "title": "A deadly cocktail",
     "description": "Make an enemy have Poison, Wither, and Bleed effects at the same time",

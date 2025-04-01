@@ -1,4 +1,4 @@
-package net.thedragonskull.blowpipemod.client.screen;
+package net.thedragonskull.blowpipemod.screen.custom;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.ChatFormatting;
@@ -16,7 +16,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.thedragonskull.blowpipemod.BlowPipeMod;
 import net.thedragonskull.blowpipemod.client.Keybindings;
-import net.thedragonskull.blowpipemod.menu.DartPouchMenu;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;

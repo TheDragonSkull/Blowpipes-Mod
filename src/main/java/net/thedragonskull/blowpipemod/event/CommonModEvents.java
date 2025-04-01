@@ -5,6 +5,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
+import net.neoforged.neoforge.items.ItemStackHandler;
 import net.thedragonskull.blowpipemod.BlowPipeMod;
 import net.thedragonskull.blowpipemod.capabilities.DartPouchCapabilityProvider;
 import net.thedragonskull.blowpipemod.item.ModItems;
@@ -24,8 +25,8 @@ public class CommonModEvents {
     public static void registerCapabilities(RegisterCapabilitiesEvent event) {
         event.registerItem(
                 Capabilities.ItemHandler.ITEM,
-                (stack, ctx) -> new DartPouchCapabilityProvider(),
-                ModItems.DART_POUCH.get()
+                (stack, ctx) -> new ItemStackHandler(6),
+                ModItems.INV_TEST_ITEM
         );
     }
 }

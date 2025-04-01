@@ -1,0 +1,32 @@
+{
+  "criteria": {
+    "blowpipe": {
+      "conditions": {
+        "items": [
+          {
+            "items": "blowpipemod:blowpipe"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "frame": "task",
+    "announce_to_chat": true,
+    "background": "blowpipemod:textures/gui/adv_bg.png",
+    "description": "Blow the enemies away!",
+    "icon": {
+      "count": 1,
+      "id": "blowpipemod:blowpipe"
+    },
+    "show_toast": true,
+    "title": "Blowpipe"
+  },
+  "requirements": [
+    [
+      "blowpipe"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

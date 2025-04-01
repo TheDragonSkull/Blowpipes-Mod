@@ -1,7 +1,8 @@
 {
   "display": {
     "icon": {
-      "item": "minecraft:player_head"
+      "count": 1,
+      "id": "minecraft:player_head"
     },
     "title": "Self-control is overrated",
     "description": "\"Einstein said human stupidity is infinite… you just proved it.\"\nKill yourself with the Oblivion Dart.",

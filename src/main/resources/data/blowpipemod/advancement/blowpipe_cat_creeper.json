@@ -1,7 +1,8 @@
 {
   "display": {
     "icon": {
-      "item": "blowpipemod:lure_dart"
+      "count": 1,
+      "id": "blowpipemod:lure_dart"
     },
     "title": "Curiosity blew up the cat",
     "description": "Make a cat chase a creeper after shooting it with a lure dart",

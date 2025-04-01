@@ -1,7 +1,8 @@
 {
   "display": {
     "icon": {
-      "item": "blowpipemod:oblivion_dart"
+      "count": 1,
+      "id": "blowpipemod:oblivion_dart"
     },
     "title": "Myth Buster",
     "description": "Evaporate a wither in his invulnerable phase with the oblivion dart",

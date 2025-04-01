@@ -5,6 +5,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.capabilities.ICapabilityProvider;
 import net.neoforged.neoforge.capabilities.ItemCapability;
 import net.neoforged.neoforge.common.util.INBTSerializable;
 import net.neoforged.neoforge.items.IItemHandler;
@@ -15,11 +16,10 @@ import org.jetbrains.annotations.Nullable;
 public class DartPouchCapabilityProvider implements IItemHandler, INBTSerializable<CompoundTag> {
     private final ItemStackHandler inventory = new ItemStackHandler(6);
 
-    public static final ItemCapability<IItemHandler,@Nullable Direction> DART_POUCH_INVENTORY =
-            ItemCapability.create(
+    public static final ItemCapability<IItemHandler, Void> DART_POUCH_INVENTORY =
+            ItemCapability.createVoid(
                 ResourceLocation.fromNamespaceAndPath(BlowPipeMod.MOD_ID, "dart_pouch_inventory"),
-                    IItemHandler.class,
-                    Direction.class
+                    IItemHandler.class
             );
 
     @Override

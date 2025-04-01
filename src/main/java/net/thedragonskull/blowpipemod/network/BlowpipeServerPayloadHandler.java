@@ -8,7 +8,7 @@ import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
-import net.thedragonskull.blowpipemod.menu.DartPouchMenu;
+import net.thedragonskull.blowpipemod.screen.custom.DartPouchMenu;
 import net.thedragonskull.blowpipemod.trigger.ModTriggers;
 import net.thedragonskull.blowpipemod.util.BlowpipeUtil;
 import net.thedragonskull.blowpipemod.util.ReloadBlowpipeUtil;
@@ -64,15 +64,14 @@ public class BlowpipeServerPayloadHandler {
             }
 
             ItemStack pouchStack = findDartPouch(player);
-            if (pouchStack.isEmpty()) return;
+            if (pouchStack.isEmpty())
+                return;
 
-            var cap = pouchStack.getCapability(DART_POUCH_INVENTORY, null);
-            if (cap != null) {
-                serverPlayer.openMenu(
-                        new SimpleMenuProvider(
-                                (id, inventoryPlayer, p) -> new DartPouchMenu(id, inventoryPlayer),
-                                Component.literal("Dart Pouch")));
-            }
+            serverPlayer.openMenu(
+                    new SimpleMenuProvider(
+                            (id, inventoryPlayer, p) -> new DartPouchMenu(id, inventoryPlayer),
+                            Component.literal("Dart Pouch")));
+
         });
     }
 

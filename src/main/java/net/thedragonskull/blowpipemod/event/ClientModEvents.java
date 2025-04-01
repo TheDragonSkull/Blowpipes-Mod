@@ -23,6 +23,9 @@ import net.thedragonskull.blowpipemod.item.custom.DartPouchItem;
 import net.thedragonskull.blowpipemod.item.custom.RangeGoggles;
 import net.thedragonskull.blowpipemod.particle.ModParticles;
 import net.thedragonskull.blowpipemod.particle.custom.LureGlintParticles;
+import net.thedragonskull.blowpipemod.screen.ModMenuTypes;
+import net.thedragonskull.blowpipemod.screen.custom.DartPouchScreen;
+import net.thedragonskull.blowpipemod.screen.custom.TestScreen;
 import net.thedragonskull.blowpipemod.util.DartPouchTooltipComponent;
 import net.thedragonskull.blowpipemod.util.ModItemProperties;
 import top.theillusivec4.curios.api.client.CuriosRendererRegistry;
@@ -46,6 +49,12 @@ public class ClientModEvents {
             EntityRenderers.register(ModEntities.ANNIHILATION_DART.get(), AnnihilationDartProjectileRenderer::new);
             EntityRenderers.register(ModEntities.OBLIVION_DART.get(), OblivionDartProjectileRenderer::new);
         });
+    }
+
+    @SubscribeEvent
+    public static void registerScreens(RegisterMenuScreensEvent event) {
+        event.register(ModMenuTypes.DART_POUCH_MENU.get(), DartPouchScreen::new);
+        event.register(ModMenuTypes.TEST_MENU.get(), TestScreen::new);
     }
 
     @SubscribeEvent

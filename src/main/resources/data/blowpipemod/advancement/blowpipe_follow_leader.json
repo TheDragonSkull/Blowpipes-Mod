@@ -1,7 +1,8 @@
 {
   "display": {
     "icon": {
-      "item": "blowpipemod:follow_leader_adv"
+      "count": 1,
+      "id": "blowpipemod:follow_leader_adv"
     },
     "title": "Follow the leader!",
     "description": "Make at least 10 animals follow a player with the Charming Aura effect for 15 seconds",

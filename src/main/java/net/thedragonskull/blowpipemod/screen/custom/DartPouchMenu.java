@@ -1,8 +1,6 @@
-package net.thedragonskull.blowpipemod.menu;
+package net.thedragonskull.blowpipemod.screen.custom;
 
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Inventory;
@@ -15,32 +13,37 @@ import net.neoforged.neoforge.items.SlotItemHandler;
 import net.thedragonskull.blowpipemod.capabilities.DartPouchCapabilityProvider;
 import net.thedragonskull.blowpipemod.component.ModDataComponents;
 import net.thedragonskull.blowpipemod.item.custom.DartItem;
+import net.thedragonskull.blowpipemod.item.custom.DartPouchItem;
+import net.thedragonskull.blowpipemod.screen.ModMenuTypes;
 import org.jetbrains.annotations.NotNull;
 
 import static net.thedragonskull.blowpipemod.capabilities.DartPouchCapabilityProvider.DART_POUCH_INVENTORY;
 import static net.thedragonskull.blowpipemod.util.DartPouchUtil.findDartPouch;
 
 public class DartPouchMenu extends AbstractContainerMenu {
-    private final ItemStackHandler pouchContainer;
-    private final Player player;
+    private final ItemStackHandler pouchInventory;
 
     public DartPouchMenu(int containerId, Inventory inv) {
-        this(containerId, inv, new ItemStackHandler(6));
+        this(containerId, inv, ItemStack.EMPTY);
     }
 
-    public DartPouchMenu(int id, Inventory playerInventory, ItemStackHandler pouchInventory) {
+    public DartPouchMenu(int id, Inventory playerInventory, ItemStack pouchStack) {
         super(ModMenuTypes.DART_POUCH_MENU.get(), id);
-        this.pouchContainer = pouchInventory;
-        this.player = playerInventory.player;
 
-        createDartPouchInventory(pouchInventory);
+        if (pouchStack.getItem() instanceof DartPouchItem pouchItem) {
+            this.pouchInventory = pouchItem.itemHandler;
+        } else {
+            this.pouchInventory = new ItemStackHandler(6);
+        }
+
+        createDartPouchInventory();
         createPlayerInventory(playerInventory);
         createPlayerHotbar(playerInventory);
+
     }
 
-
     //Only can store darts
-    private void createDartPouchInventory(ItemStackHandler pouchInventory) {
+    private void createDartPouchInventory() {
         for (int row = 0; row < 2; row++) {
             for (int column = 0; column < 3; column++) {
                 this.addSlot(new SlotItemHandler(pouchInventory, row * 3 + column, 62 + (column * 18), 33 + (row * 18)) {
@@ -119,16 +122,15 @@ public class DartPouchMenu extends AbstractContainerMenu {
         if (cap != null) {
             CompoundTag tag = new CompoundTag();
             tag.put("dart_pouch_inventory", ((DartPouchCapabilityProvider) cap).serializeNBT(null));
-            pouch.set(ModDataComponents.INVENTORY.get(), tag);
+//            pouch.set(ModDataComponents.DART_POUCH_CONTENTS.get(), tag);
         }
 
         playPouchClose(player);
     }
 
-
-
     private void playPouchClose(Entity pEntity) {
         pEntity.playSound(SoundEvents.BUNDLE_DROP_CONTENTS, 0.8F, 0.8F + pEntity.level().getRandom().nextFloat() * 0.4F);
     }
+
 
 }

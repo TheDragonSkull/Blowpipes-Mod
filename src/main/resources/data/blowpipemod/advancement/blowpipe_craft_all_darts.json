@@ -1,7 +1,8 @@
 {
   "display": {
     "icon": {
-      "item": "blowpipemod:iron_head_dart"
+      "count": 1,
+      "id": "blowpipemod:iron_head_dart"
     },
     "title": "Dartastic!",
     "description": "Craft every dart",

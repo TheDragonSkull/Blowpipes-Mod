@@ -1,20 +1,20 @@
 package net.thedragonskull.blowpipemod.item;
 
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.BundleContents;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.thedragonskull.blowpipemod.BlowPipeMod;
-import net.thedragonskull.blowpipemod.item.custom.BlowPipe;
-import net.thedragonskull.blowpipemod.item.custom.DartItem;
-import net.thedragonskull.blowpipemod.item.custom.DartPouchItem;
-import net.thedragonskull.blowpipemod.item.custom.RangeGoggles;
+import net.thedragonskull.blowpipemod.component.ModDataComponents;
+import net.thedragonskull.blowpipemod.component.custom.DartPouchContents;
+import net.thedragonskull.blowpipemod.item.custom.*;
 import net.thedragonskull.blowpipemod.potion.custom.CharmingAuraLingeringPotion;
 import net.thedragonskull.blowpipemod.potion.custom.CharmingAuraPotion;
 import net.thedragonskull.blowpipemod.potion.custom.CharmingAuraSplashPotion;
-import net.thedragonskull.blowpipemod.item.custom.CharmingAuraArrow;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -87,6 +87,9 @@ public class ModItems {
 
 
     //MISC
+
+    public static final DeferredItem<Item> INV_TEST_ITEM = ITEMS.register("inv_test_item",
+            () -> new InvTestItem(new Item.Properties()));
 
     public static final DeferredItem<Item> RAT_ADV = ITEMS.register("rat_adv",
             () -> new Item(new Item.Properties()));

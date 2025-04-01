@@ -1,25 +1,24 @@
 {
   "display": {
     "icon": {
-      "item": "blowpipemod:charming_aura_potion"
+      "count": 1,
+      "id": "blowpipemod:dart_base"
     },
-    "title": "Are they friends?",
-    "description": "Brew a charming aura potion",
+    "title": "Small but sharp",
+    "description": "Craft a dart",
     "frame": "task",
     "show_toast": true,
     "announce_to_chat": true,
     "hidden": false
   },
-  "parent": "blowpipemod:blowpipemod",
+  "parent": "blowpipemod:root",
   "criteria": {
-    "blowpipe_charming_potion": {
+    "crafted_dart": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "items": [
-              "blowpipemod:charming_aura_potion"
-            ]
+            "tag": "blowpipemod:darts"
           }
         ]
       }

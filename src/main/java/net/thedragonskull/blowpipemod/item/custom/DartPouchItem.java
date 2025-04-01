@@ -1,13 +1,15 @@
 package net.thedragonskull.blowpipemod.item.custom;
 
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.*;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
@@ -16,25 +18,25 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
-import net.neoforged.neoforge.capabilities.ICapabilityProvider;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import net.neoforged.neoforge.items.ItemStackHandler;
-import net.thedragonskull.blowpipemod.capabilities.DartPouchCapabilityProvider;
-import net.thedragonskull.blowpipemod.menu.DartPouchMenu;
+import net.thedragonskull.blowpipemod.screen.custom.DartPouchMenu;
 import net.thedragonskull.blowpipemod.util.DartPouchTooltipComponent;
 import net.thedragonskull.blowpipemod.util.DartPouchUtil;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurioItem;
 
-import java.security.Provider;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Consumer;
 
 import static net.thedragonskull.blowpipemod.capabilities.DartPouchCapabilityProvider.DART_POUCH_INVENTORY;
 
 public class DartPouchItem extends Item implements ICurioItem {
+    public final ItemStackHandler itemHandler = new ItemStackHandler(6);
     private final DyeColor color;
 
     public DartPouchItem(@Nullable DyeColor color, Properties properties) {
@@ -42,22 +44,17 @@ public class DartPouchItem extends Item implements ICurioItem {
         this.color = color;
     }
 
-    @Override
-    public boolean hasCurioCapability(ItemStack stack) {
-        return true;
-    }
-
     //Open menu on use
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
-        var cap = stack.getCapability(DART_POUCH_INVENTORY, null);
+        stack.getCapability(Capabilities.ItemHandler.ITEM);
 
         if (!level.isClientSide) {
-            if (cap != null && player instanceof ServerPlayer serverPlayer) {
+            if (player instanceof ServerPlayer serverPlayer) {
                 serverPlayer.openMenu(
                         new SimpleMenuProvider(
-                                (id, inventoryPlayer, p) -> new DartPouchMenu(id, inventoryPlayer),
+                                (id, inventoryPlayer, p) -> new DartPouchMenu(id, inventoryPlayer, stack),
                                 Component.literal("Dart Pouch")));
             }
         }
@@ -66,6 +63,7 @@ public class DartPouchItem extends Item implements ICurioItem {
 
         return InteractionResultHolder.sidedSuccess(stack, level.isClientSide());
     }
+
 
     private void playPouchOpen(Entity pEntity) {
         pEntity.playSound(SoundEvents.BUNDLE_INSERT, 0.8F, 0.8F + pEntity.level().getRandom().nextFloat() * 0.4F);
@@ -101,9 +99,8 @@ public class DartPouchItem extends Item implements ICurioItem {
     }
 
     @Override
-    public List<Component> getSlotsTooltip(List<Component> tooltips, ItemStack stack) {
-        tooltips.clear();
-        return tooltips;
+    public List<Component> getSlotsTooltip(List<Component> tooltips, TooltipContext context, ItemStack stack) {
+        return new ArrayList<>();
     }
 
     @Override
@@ -114,21 +111,15 @@ public class DartPouchItem extends Item implements ICurioItem {
     @Override
     public CompoundTag writeSyncData(SlotContext slotContext, ItemStack stack) {
         CompoundTag tag = new CompoundTag();
-        var cap = stack.getCapability(DART_POUCH_INVENTORY, null);
-
-        if (cap != null && cap instanceof ItemStackHandler handler) {
-            tag.put("dart_pouch_inventory", handler.serializeNBT(null));
-        }
-
+        HolderLookup.Provider provider = slotContext.entity().level().registryAccess();
+        tag.put("dart_pouch_inventory", itemHandler.serializeNBT(provider)); //todo not null
         return tag;
     }
 
     @Override
     public void readSyncData(SlotContext slotContext, CompoundTag compound, ItemStack stack) {
-        var cap = stack.getCapability(DART_POUCH_INVENTORY, null);
-        if (cap != null && compound.contains("dart_pouch_inventory")) {
-            ((ItemStackHandler) cap).deserializeNBT(null, compound.getCompound("dart_pouch_inventory")); //todo Cambiar `null` si se requiere un provider válido
-        }
+        HolderLookup.Provider provider = slotContext.entity().level().registryAccess();
+        itemHandler.deserializeNBT(provider, compound.getCompound("dart_pouch_inventory"));
     }
 
     public DyeColor getColor() {

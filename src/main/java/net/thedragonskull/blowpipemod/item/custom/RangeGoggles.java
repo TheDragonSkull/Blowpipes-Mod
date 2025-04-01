@@ -11,6 +11,7 @@ import org.jetbrains.annotations.NotNull;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurioItem;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static net.thedragonskull.blowpipemod.util.RangeGogglesUtil.hasGogglesEquipped;
@@ -28,8 +29,7 @@ public class RangeGoggles extends Item implements ICurioItem, Equipable {
 
     @Override
     public List<Component> getSlotsTooltip(List<Component> tooltips, TooltipContext context, ItemStack stack) {
-        tooltips.clear();
-        return tooltips;
+        return new ArrayList<>();
     }
 
     // NeoForge
@@ -38,7 +38,8 @@ public class RangeGoggles extends Item implements ICurioItem, Equipable {
         if (entity instanceof Player player && armorType == EquipmentSlot.HEAD) {
             return !hasGogglesEquipped(player);
         }
-        return false;    }
+        return false;
+    }
 
     // Curio
     @Override

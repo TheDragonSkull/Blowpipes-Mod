@@ -1,24 +1,25 @@
 {
   "display": {
     "icon": {
-      "item": "blowpipemod:range_goggles"
+      "count": 1,
+      "id": "blowpipemod:charming_aura_potion"
     },
-    "title": "Advanced technology",
-    "description": "Get the binoculars from the Hunter",
+    "title": "Are they friends?",
+    "description": "Brew a charming aura potion",
     "frame": "task",
     "show_toast": true,
     "announce_to_chat": true,
-    "hidden": true
+    "hidden": false
   },
-  "parent": "blowpipemod:blowpipemod",
+  "parent": "blowpipemod:root",
   "criteria": {
-    "trade_goggles": {
+    "blowpipe_charming_potion": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "blowpipemod:range_goggles"
+              "blowpipemod:charming_aura_potion"
             ]
           }
         ]
