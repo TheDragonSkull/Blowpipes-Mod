@@ -40,7 +40,7 @@ public class CommonModEvents {
 
             // Charming aura lingering potion
             BrewingRecipeRegistry.addRecipe(new BrewingRecipeUtil(
-                    ModItems.CHARMING_AURA_POTION.get(),
+                    ModItems.CHARMING_AURA_SPLASH_POTION.get(),
                     Items.DRAGON_BREATH,
                     ModItems.CHARMING_AURA_LINGERING_POTION.get()));
         });
